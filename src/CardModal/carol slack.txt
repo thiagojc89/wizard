@@ -1,0 +1,6092 @@
+
+Thiago 10:59 AM
+Good morning Carol, how are you?
+Carol Schmitz 11:00 AM
+Good morning! Nice to meet you. I'm actually feeling sick today so I'm at the doctor
+I don't know if I'll make it to the office because I don't want to spread it around
+But I'm looking forward to meeting you in person soon. How have your first few days been?
+Thiago 11:02 AM
+nice to meet you too, I hope you feel better soon =]
+no worries at all ok.
+i just wanted to say hi :slightly_smiling_face:
+I’m feeling like in a rollercoaster  of informations. hahahahahaha
+Right now I’m analyzing the IngredientEmails. trying to understand how things is working.
+Carol Schmitz 11:08 AM
+ok, well I set those up so if you have any questions I'm happy to help
+Thiago 11:11 AM
+Great, there will be a lot of questions hahahahaha, but I will keep diving into it =].
+Carol Schmitz 11:11 AM
+perfect :slightly_smiling_face:
+Carol Schmitz 11:41 AM
+Hi Thiago, when you have a minute, could you visit this site and let me know if it loads? http://32.238.178.25:8000/
+Thiago 11:43 AM
+Hi Carol, yes absolutely =], just one second :wink:
+Carol Schmitz 11:45 AM
+no rush at all
+Thiago 11:50 AM
+yeah I could get access
+This site can't be reached
+tried also with postman and get the same result
+Carol Schmitz 11:51 AM
+you couldn't get access?
+Thiago 11:53 AM
+image.png 
+image.png
+
+
+I mean… I didn’t get any response from this link
+Carol Schmitz 11:55 AM
+ok thanks
+Thiago 11:56 AM
+no problem =]
+let me know if you need another try.
+Carol Schmitz 11:56 AM
+http://104.198.23.198:5002/
+since you offered...
+Thiago 11:57 AM
+hahaha this one I got something back
+Carol Schmitz 11:57 AM
+ok thanks
+:+1:
+1
+
+I'm getting the same thing
+wanted to check around to make sure it's not only me since i'm on a different laptop today
+Thiago 12:00 PM
+cool this is our server or you are just testing something?
+Carol Schmitz 12:02 PM
+yes it's our staging server back end api that we use to access/modify data in mongodb
+i'm working on hooking it up to the front end
+Carol Schmitz 1:25 PM
+I added you to our main JIRA project for the MVP since it contains a task about ingredient emails - https://journeyfoods.atlassian.net/jira/software/projects/JID/boards/2?selectedIssue=JID-33
+Thiago 1:29 PM
+nice awesome, I was working/refactoring our test version, and also create a new template to be able to load dynamically number of news
+I’m running the code from my machine, so is not there yet
+Carol Schmitz 1:41 PM
+oh nice
+Carol Schmitz 3:26 PM
+Thanks for the update! It looks like you changed the description though instead of making a comment. Not a big deal, but comments come with a time stamp and help track the progression of the issue over time
+Thiago 3:28 PM
+:man-facepalming:
+hahahaha, thanks for the heads up.
+Carol Schmitz 3:29 PM
+the description was probably blank before
+we created a bunch of issues very quickly
+and we're all still trying to figure out the JIRA workflow together, so I'm definitely open to suggestions if you have any ideas about how to streamline
+Thiago 3:36 PM
+hummm cool, I worked with JIRA like 4 years ago, a lot of things changed, we will find the best way to help us and we learn how to use the templates, but right now I fell we are in the “found a bug/fix quickly” mode =]
+Carol Schmitz 3:39 PM
+yep, pretty much :slightly_smiling_face:
+Last time I used JIRA was even longer ago and I'm impressed with all the new features
+Thiago 3:40 PM
+yeah!!!
+Carol Schmitz 11:52 AM
+Hi Thiago, I wanted to check in with you about your work on the ingredient emails - we'll be queueing them up to send out tonight. Are there any updates we should add to the Colab notebook before the send? Let me know so we can coordinate
+Thiago 12:03 PM
+Hi Carol,
+at this first point I have been working with our testing version send_automated_email_now_v2
+* I did some refactoring to be able to send the e-mails using a dynamic list.
+* I Updated the search keywords as Riana mention before.
+"ingredient_name" + ingredient insights
+"ingredient_name" + insights
+"ingredient_name" + market
+"ingredient_name" + industry
+"ingredient_name" + commodity
+I’m sending you a test we run last Friday.
+Carol Schmitz 12:07 PM
+great
+Thiago 12:09 PM
+You will receive an e-mail from research@ with 5 links (searching for “orange commodity”). (edited) 
+Carol Schmitz 12:11 PM
+Got it
+This looks good. I want to incorporate your changes into this week's email send, but I'm not sure the best way to do that
+Thiago 12:14 PM
+cool
+I can create a copy of the notebook and then update with the features a have.
+if something didn’t go well we used the previous version.
+Carol Schmitz 12:20 PM
+ok, that sounds like a good plan
+I would also like to copy your changes into the "send later" method, since usually we schedule the emails the night before so they are sent first thing in the morning
+I think the only difference between the two is send later has a send_time parameter, where send_now does not
+:+1:
+1
+
+Thiago 12:25 PM
+awesome I was taking a look on it yesterday and couldn’t see much difference =].
+good to know that is just the ‘send_time’ parameter.
+ok so now is 12:25
+I will working on it starting now, and I believe around 16:00 will be finished
+that looks good?
+Carol Schmitz 12:28 PM
+yes. I usually schedule around 9-10 PM
+That will give us a few hours to test also. I will do a "send later" for say, 5 minutes later, just to see what happens
+Thiago 12:29 PM
+great, that looks like a good plan =]
+Carol Schmitz 12:29 PM
+before you get started, can you tell me a bit more about the dynamic list changes you mentioned earlier? I wasn't sure what you were referring to there
+Thiago 12:30 PM
+sure
+the actual version is limited to 4 links, if the API have more than that It will get only the 4 links and reject the rest
+Carol Schmitz 12:33 PM
+oh, OK
+I thought we were already doing that
+Thiago 12:34 PM
+but now with the dynamic list, if the API return 5 or more link  it will send all of them
+I had to create a new template on mandrill for that
+ingredient-email-update-v2
+Thiago 12:41 PM
+if the api return just one good link, it will send the e-mail with just that link
+if the api return 10 good links, we will receive e email with the 10 links.
+and so on…
+Carol Schmitz 12:41 PM
+oh! nice
+Thiago 12:41 PM
+that makes sense hahahahah?
+Carol Schmitz 12:41 PM
+yes, i get it now
+thank you so much! It's great to finally have some engineering help
+:blush:
+1
+
+Thiago 12:41 PM
+:wink: awesome =]
+Thiago 4:13 PM
+Hi carol, I’m just fixing a few bugs, but the code is almost done
+I just sent a test to my e-mail and I got 35 news with de ingredient “lime” (edited) 
+it will be ready in next minutes.
+Thiago 4:27 PM
+can I save to the original notebook file?
+Carol Schmitz 4:32 PM
+I think so?
+In my mind it makes sense to keep everything in one file so that we don't have multiple versions floating around
+Thiago 5:15 PM
+ok =] I’m saving now
+saved
+you should be able to see my changes
+Carol Schmitz 5:19 PM
+I do!
+Carol Schmitz 5:32 PM
+Hm, there are some duplicate links, is that okay?
+Thiago 5:33 PM
+I saw that, but they were from different days when I checked it
+what ingredient?
+Carol Schmitz 5:35 PM
+hm, maybe depends which ingredient
+Carnitine
+is the first one I checked
+Thiago 5:35 PM
+ok.
+Carol Schmitz 5:37 PM
+I don't know how much it matters
+I feel like this latest batch is much better than we've had in past weeks
+uh oh
+I'm getting multiple emails with content for carnitine
+Thiago 5:39 PM
+:flushed:
+Carol Schmitz 5:39 PM
+but the email subject says different ingredients, like chlorella, glutamic acid, bitter ground powder
+also *|MC_PREVIEW_TEXT|* is showing up in my inbox before I open the email. I don't see that text after the message is opened though
+You have access to the research email?
+research@journeyfoods.com
+Thiago 5:42 PM
+hummmm… you are running the method send_emails_later_v2?
+let me see
+Carol Schmitz 5:42 PM
+yes
+Check out the Ingredient Insight Emails label in the research gmail account to see copies of the batch I just sent myself
+Thiago 5:44 PM
+ok
+what is the psw for research@journeyfoods.com?
+Carol Schmitz 5:46 PM
+Nutrition3.0!
+Thiago 5:47 PM
+image.png 
+image.png
+
+
+Carol Schmitz 5:49 PM
+hm, i don't have access to that code
+I will just forward you the emails from my account
+Thiago 5:50 PM
+ok
+you got like 36 e-mails?
+Carol Schmitz 5:56 PM
+yes
+I copied the weirdest ones from our customer list
+to test with
+because those are the edge cases. the standard ingredients produce more reliable results
+It looks like content from Ingredient 1 is appearing in emails for remaining ingredients for that user
+Thiago 6:03 PM
+hummmmm ok
+to send the e-mails I’m using a array,
+I think this array is not getting clean after sending the previous e-mail.
+Carol Schmitz 6:06 PM
+that sounds like it could be the case
+Thiago 6:13 PM
+hummmmmm ok.
+Carnitine
+Passion fruit
+Strawberry
+if you look at this e-mails you will see that is good
+because they are the first ingredient for each line on the spreadsheet
+hold on.
+Carol Schmitz 6:22 PM
+Exactly
+Thiago 6:22 PM
+do you want to try again (with a smal list of ingredient lol)
+:+1:
+1
+
+Carol Schmitz 6:22 PM
+That’s what I was trying to say in my comment about ingredient 1 above
+:wink:
+1
+:+1:
+1
+
+Thiago 6:23 PM
+yes yes
+Carol Schmitz 6:26 PM
+there are at least 3 duplicate links in the Carnitine email. I think this is OK for now though, since there are so many links. We can work on removing the duplicates for next week
+Thiago 6:29 PM
+nice
+so now you got 9 e-mails
+each one for a different ingredient.
+Carol Schmitz 6:31 PM
+unfortunately the first 3 all have Carnitine links
+Thiago 6:31 PM
+:man-facepalming:
+the 4th 5th 6th all got Passion Fruit?
+Carol Schmitz 6:34 PM
+5th has Passion Fruit and some Erythriyol
+6th has Passion fruit, Erytitol, and Ginger
+so... some progress?
+7 8 and 9 are all strawberry though
+#2 has a couple of Cordycep links - doesn't mention cordycep specifically but it's a type of mushroom
+want me to forward this last batch of 9?
+:+1:
+1
+
+on the plus side, I haven't seen anything from longer than 7 days ago, so that's great! :slightly_smiling_face:
+:wink:
+1
+
+Thiago 6:42 PM
+that is weird
+Thiago 6:49 PM
+can you send the firs 3 e-mails? “Carnitine” “Organic Cordycep” “Isoleucine”
+Carol Schmitz 6:50 PM
+oops sorry - already sent them all
+Thiago 6:50 PM
+hahahahahah no problem
+hummmmm
+interesting
+I’m going to send you 3 e-mail with this guys here (“Carnitine” “Organic Cordycep” “Isoleucine”)
+Carol Schmitz 6:53 PM
+ok
+Thiago 6:54 PM
+I think somehow when you tested for the second time, the code didn’t get the fix I did
+Carol Schmitz 6:54 PM
+ohhhhh
+you know what
+I didn't refresh the prep part
+so of course I got the same emails
+:woman-facepalming:
+I just closed the notebook
+you copied the new code into ingredientemail.ipynb?
+*IngredientEmails
+Thiago 6:56 PM
+hahahahaha I run the code from my computer so it re runs the prep every-time
+I have a copy
+Carol Schmitz 6:57 PM
+ok, please copy into the shared notebook on drive and then I will test again
+Thiago 7:00 PM
+is there
+to be sure, look for  #TJC
+you should see this
+        #TJC this was the fix, I just placed the line below inside the for loop
+        results_list = []
+        #TJC
+Carol Schmitz 7:01 PM
+I see it!
+ok, let's try again...
+Thiago 7:01 PM
+:crossed_fingers:
+Carol Schmitz 7:02 PM
+uh oh
+theres an indetation error
+on line 257
+Thiago 7:06 PM
+:flushed: wow
+Carol Schmitz 7:06 PM
+i think i fixed it
+I have had issues with tabs/spaces when copying from my local machine to the notebook
+Thiago 7:06 PM
+that was weird, lol
+ohhhhh yeah, thanks for saying hahahaha the same happens to me
+Carol Schmitz 7:07 PM
+looks promising so far...
+nice!
+these are good enough for this week, thank you so much for your efforts
+we'll work on removing duplicate entries for next week
+Thiago 7:10 PM
+Thank you =] :blush:
+Carol Schmitz 7:11 PM
+may I ask, have you been working on anything else besides these email scripts and modifying the template since you started?
+Thiago 7:12 PM
+not really, in the first days I was playing with some web scrapping, but didn’t do anything yet
+these e-mails was my first task I got (edited) 
+Carol Schmitz 7:14 PM
+ok, just curious
+I'm impressed with your progress. I wanted to make faster updates on these emails, but I'm working on like 25 other things simultaneously
+so I've only had a couple of hours each week to make small improvements
+Thiago 7:17 PM
+Thank you Carol, please few free to give me more tasks, I would love to help =]
+ohhh btw are you felling better?
+Carol Schmitz 7:20 PM
+Yes, I'm feeling much better, thank you
+I think I might still be contagious though, so I am not sure if I will come in to the office tomorrow or not
+Thiago 7:22 PM
+Good, yeah we are working great with slack so =]
+Carol Schmitz 7:25 PM
+hm, have you gotten a duplicate email message? I thought I only initiated one send ~15 minutes ago, but then I got another batch 5 minutes ago
+did you send the test again?
+Thiago 7:25 PM
+no
+let me see
+I didn’t get any duplicate email
+also are still getting the “|MC_PREVIEW_TEXT|” msg
+i did a quick change on the template when we were fixing the bugs.
+Carol Schmitz 7:32 PM
+the last batch I tested had the preview text
+are you saying that should be fixed? i can test again
+Thiago 7:34 PM
+interesting I didn’t get the PREVIEW_TEXT msg this last time. :thinking_face: (edited) 
+yeah it should be fixed
+Carol Schmitz 7:37 PM
+nice!!
+first email came through without it
+:wink:
+1
+
+Thiago 7:41 PM
+nice also got it here too
+:grin:
+1
+
+Carol Schmitz 11:03 AM
+Good morning
+Thiago 11:03 AM
+Hey Carol good morning.
+Carol Schmitz 11:04 AM
+is the size of the ingredient array for the emails limited?
+Thiago 11:05 AM
+No,
+for you it is showing 20 max? (edited) 
+Carol Schmitz 11:06 AM
+no, it's not showing a max
+I was just wondering
+We may need to send 11 ingredients to one customer next week
+Thiago 11:08 AM
+ohhhh when you say “is the size of the ingredient array for the emails limited?” you mean in the spreadsheet right?
+Carol Schmitz 11:09 AM
+yes, the number of ingredients the script reads from the spreadsheet
+i realize now 'ingredient array' is a bit vague
+Thiago 11:12 AM
+I can run a test, but the code is running over the ingredients array. (edited) 
+Carol Schmitz 11:33 AM
+so if there are more ingredients in one row, it will continue running until it reaches an empty cell?
+Thiago 11:36 AM
+yes I believe so.
+I will test that just to be 100% sure (edited) 
+Carol Schmitz 11:58 AM
+great, thank you
+Thiago 12:08 PM
+I was also thinking in get rid of the send_automated_email_now_v2 method
+and use the send_automated_email_v2 with a default argument for send_time like
+send_time=None
+just to clear a little bit.
+Carol Schmitz 12:09 PM
+Great idea
+it could be send_time=current_datetime
+to send immediately
+:+1:
+1
+
+Thiago 12:11 PM
+even better
+Carol Schmitz 12:47 PM
+When you have a moment, please go to bubble.is and create an account. Once you have done that I will invite you to our project
+Thiago 12:49 PM
+done!
+Carol Schmitz 1:00 PM
+There's a lot there
+The Firebase setup is in the Plugins section under API Connector - there is a Firebase section for the few actions I have hooked up
+Thiago 1:03 PM
+ok
+alright
+Carol Schmitz 1:12 PM
+and these are the REST API calls I've been using https://firebase.google.com/docs/reference/rest/auth
+Thiago 1:21 PM
+hummmm ok
+Thiago 1:30 PM
+Now I see what you were talking about the login.
+Thiago 1:35 PM
+by the way - I didn’t test yet to e-mail with 11 ingredients cause I was wrong i will have to update the method get_email_input_from_dataframe
+Carol Schmitz 1:40 PM
+that's ok
+we don't need to send again til next tuesday
+Thiago 1:40 PM
+:wink:
+Carol Schmitz 1:40 PM
+I'd say if you can test it by the end of the week we'll be good
+Thiago 1:41 PM
+cool
+about the firebase, what should I be looking for now, as you said there is a lot over there.
+i just tested the login API on postman, got the token.
+Carol Schmitz 1:50 PM
+well we need to connect firebase login to the bubble login
+Thiago 1:51 PM
+ok
+Carol Schmitz 1:51 PM
+register and login actually
+so when the user logs in on bubble they are also logged in on firebase, and the token is stored
+we need the idToken to send to API calls on the back end
+Thiago 1:56 PM
+ok
+so we need to call the firebase login API right after the user logged in bubble,
+after that I will have the idToken.
+and then we need to store the token
+this last part I didn’t get very well
+Carol Schmitz 2:01 PM
+OK, let me try to explain differently
+After login success in firebase, the firebase API returns a response which includes idToken
+:+1:
+1
+
+you said above you got the token
+ok
+Thiago 2:02 PM
+yep
+Carol Schmitz 2:02 PM
+so we need that token to interact with the back end API - it is sent as an Authorization parameter in the header of other API calls
+each time we query the ingredient database, we need to send the ID token
+Thiago 2:03 PM
+ohhhhhhh
+Carol Schmitz 2:03 PM
+we aren't going to ask the user to enter their username/password each time we make an API call, so we need to store the token for use during the login session
+Thiago 2:04 PM
+we need to store the token in the user session
+cool
+Carol Schmitz 2:04 PM
+exactly
+Thiago 2:05 PM
+got it,
+I will take a look on that
+:+1:
+1
+
+Thiago 2:33 PM
+:man-raising-hand:
+How can I see the action for a button (login)?
+I’m at the Index Page, looking into the Workflow tab.
+Carol Schmitz 2:35 PM
+so the workflow tab shows all actions. there should be something like "when button Login is clicked"
+and when you click on that box you see a list of steps in the workflow
+Thiago 2:37 PM
+yes yes I’m right there!
+image.png 
+image.png
+
+
+Carol Schmitz 2:38 PM
+yep
+Thiago 2:39 PM
+I was hoping to see something like, “call the login api with this informations”
+this will the “Only When” part?
+Carol Schmitz 2:40 PM
+ah, so the index page isn't currently using the firebase API calls
+it's just logging in with bubble
+Thiago 2:41 PM
+:wink:
+when login to bubble, we call a API to the backend or its a list inside the bubble?
+Carol Schmitz 2:45 PM
+list in bubble
+Thiago 2:46 PM
+hummmmmmm ok thanks Carol =]
+Carol Schmitz 2:47 PM
+Most everything is in bubble right now. Some of our ingredient data is populated from API calls to the back end, but almost everything else is in bubble
+Thiago 2:49 PM
+nice good to know
+so that being said when I get the token I will store in the bubble for now.
+Carol Schmitz 2:53 PM
+Yeah, I think that is the best way but I'm not sure. I created an idToken field in the User data type for this
+Thiago 2:54 PM
+:ok_hand:
+Thiago 3:59 PM
+its ok to edit the bubble right?
+Carol Schmitz 4:00 PM
+yep
+wait
+what are you editing?
+Thiago 4:00 PM
+Index
+Carol Schmitz 4:00 PM
+OK
+Don't change index, but create a new page and clone index to test a new feature
+Thiago 4:01 PM
+:wink:
+Carol Schmitz 4:01 PM
+you'll see we have a lot of pages that start with test-
+these are features in development
+Thiago 4:01 PM
+hummm ok
+Carol Schmitz 4:01 PM
+the ones that start with app- are live
+Thiago 4:01 PM
+nice
+Carol Schmitz 4:01 PM
+we don't want to mess with those
+:+1:
+1
+
+in general, unless it's a bug fix or something like that
+Thiago 4:03 PM
+got it, that was what I thought….
+i read some docs here in how to set up the firebase call, lets see …
+Thiago 5:07 PM
+Ok I’m getting close
+I created a page call test-index-tjc
+Carol Schmitz 5:25 PM
+nice
+hm, so this will work for one user
+but if we have multiple concurrent users I don't think it will work
+Thiago 5:27 PM
+yeah I was looking right now in something to replace that
+Carol Schmitz 5:27 PM
+great
+Carol Schmitz 5:34 PM
+that is the part that had me stumped
+when I was working on this earlier
+Thiago 5:34 PM
+hummmmm ok.
+every time we need to call the API we will need to update the token?
+… for each user
+wait….
+:joy:
+let me try again
+Carol Schmitz 5:39 PM
+ok
+Thiago 5:39 PM
+so all user has a id token entry
+Carol Schmitz 5:39 PM
+yes
+Thiago 5:39 PM
+when calling the API I need to store the token into the user’s idToken entry
+Carol Schmitz 5:40 PM
+when calling the login API endpoint
+when calling other endpoints, you need to send the value stored in idToken field
+Thiago 5:41 PM
+ok
+Carol Schmitz 5:41 PM
+idToken lasts 1 hour
+then after 1 hour we need to use the refresh token to get a new idToken
+Thiago 5:42 PM
+hummmmmmmm
+Thiago 6:19 PM
+Hey Carol, do you know what is the password for research@journeyfoods.com for the dashboard
+my user is kind not working =/
+Carol Schmitz 6:19 PM
+I think it's Coll@bor@te
+or Coll@bor@te1!
+you mean thiago@journeyfoods?
+is not working
+Thiago 6:20 PM
+yeah
+I trying to run some test here and keeps saying user not found
+Carol Schmitz 6:21 PM
+did you register?
+https://dashboard.journeyfoods.io/register
+dashboard.journeyfoods.iodashboard.journeyfoods.io
+Journey Foods | Product R&D Portal
+Journey Foods
+I added your email to the authorized user list, but you need to register to set up a password
+also there are 2 separate databases / user lists
+the link above is live
+https://dashboard.journeyfoods.io/version-test/register is for dev environment
+dashboard.journeyfoods.iodashboard.journeyfoods.io
+Journey Foods | Product R&D Portal
+Journey Foods
+if you see /version-test/ in the url it's always dev
+Thiago 6:22 PM
+:man-facepalming:
+thanks Carol yeah I registered on the live version
+Carol Schmitz 6:24 PM
+I see you as a user now
+can you log in?
+Thiago 6:25 PM
+let me see
+Carol Schmitz 6:27 PM
+Coll@bor@te is the password for research on live
+:+1:
+1
+
+Thiago 6:27 PM
+image.png 
+image.png
+
+
+I think a need to do another clone maybe
+Carol Schmitz 6:28 PM
+what URL are you testing ?
+the new page you created won't be available on live yet
+since we haven't pushed the dev version of the app to live since yesterday
+Thiago 6:29 PM
+I’m on bubble
+using the preview tool
+Carol Schmitz 6:29 PM
+right, what is the url in your browser when you got the error above?
+Thiago 6:30 PM
+https://dashboard.journeyfoods.io/version-test/test-index-tjc?debug_mode=true
+
+dashboard.journeyfoods.iodashboard.journeyfoods.io
+Journey Foods | Product R&D Portal
+Journey Foods
+Carol Schmitz 6:32 PM
+OK
+https://dashboard.journeyfoods.io/version-test/register
+you need to register here
+in the dev database
+Thiago 6:32 PM
+ok
+Carol Schmitz 6:33 PM
+you are not a user in the dev db yet
+Thiago 6:35 PM
+yayyyyyyy
+Carol Schmitz 6:35 PM
+i see you :slightly_smiling_face:
+Thiago 6:36 PM
+hahahahha lol
+Carol Schmitz 6:36 PM
+i gotta go get something to eat
+will you be in the office tomorrow?
+Thiago 6:36 PM
+yeah I’ll be here
+Carol Schmitz 6:36 PM
+ok, I'll see you then!
+Thiago 6:36 PM
+=]
+Carol Schmitz 11:36 AM
+I'm still coughing a lot today, so I'm coming in tomorrow instead
+I'll be available here if you have questions
+Thiago 11:38 AM
+Hi Carol, Good morning
+Don’t worry, hope you few better soon  =]
+I will hit you with some questions later
+Carol Schmitz 11:39 AM
+sounds good!
+Thiago 12:39 PM
+:man-raising-hand:
+Carol Schmitz 12:40 PM
+hi
+I really like the handraising emoji in this context btw :slightly_smiling_face:
+:joy:
+1
+
+Thiago 12:41 PM
+now we are calling the firebase api using the research user and psw!
+but we should use the actual user who is trying to logging into the dashboard right?
+:+1:
+1
+
+Carol Schmitz 12:43 PM
+yes
+Thiago 12:44 PM
+nice, I will test something really quickly here
+but I think I getting close.
+Carol Schmitz 12:44 PM
+wonderful
+There are 2 things I want to point out
+1. The dashboard is currently using APIs under JourneyfoodsIO in the API Connector. These connect to the staging server and use research user/pass as credentials to connect to the API. However, we want to push a bunch of updates to the API that will require ID token as credential to connect to the API. Those endpoints are in bubble under JourneyfoodsIO-dev. So, your solution should work with the JourneyfoodsIO-dev endpoints (these are for back end, not login, so you may not have gotten to that yet)
+:+1:
+1
+
+2. We need users to be able to not only login, but also update passwords. Currently password update is run through bubble only and will not affect firebase passwords. But our firebase login flow should be able to handle password updates as well, and when a user changes password they should still be able to login
+:+1:
+1
+
+Thiago 1:01 PM
+:thinking_face:
+Ok!
+Carol Schmitz 1:03 PM
+I hope that makes sense. We will get this working little by little, but I wanted to explain the full scope of the problem(s)
+:wink:
+1
+
+Thiago 1:07 PM
+I fell that is going to make sense very soon
+thanks for sharing that, I keep that in mind.
+:+1:
+1
+
+Thiago 1:33 PM
+yep! make totally sense :man-facepalming:
+Thiago 3:15 PM
+Hi Carol I am working with Anika in the e-mail sample, I’ll be done in the next minutes.
+so then I will need your help to test the login.
+Carol Schmitz 3:22 PM
+sure
+ping me when you're ready
+Thiago 4:04 PM
+ok, I think I didn’t went to far from yesterday =(
+but I would like to start answering your question/comment
+“but if we have multiple concurrent users I don’t think it will work”
+we could give another try?
+I think this is the way, even more after I found this:
+https://manual.bubble.io/working-with-data/the-user-type.html#concept-of-current-user
+Carol Schmitz 4:05 PM
+ok
+Thiago 4:05 PM
+yesterday I logged if my user in dev, I stored to token, and I did the same thing with research user.
+Carol Schmitz 4:05 PM
+that looks promising
+let's try it
+:crossed_fingers:
+1
+
+Thiago 4:06 PM
+image.png 
+image.png
+
+
+Carol Schmitz 4:11 PM
+Ok, I just logged in on your test page and my idToken was updated
+Thiago 4:11 PM
+really??
+Carol Schmitz 4:12 PM
+yep :slightly_smiling_face:
+Thiago 4:12 PM
+:flushed: I though i broke from yesterday hahahahahahah
+Carol Schmitz 4:13 PM
+ha. well the navigation doesn't work and we haven't validated the dev APIs yet, so... still some work do be done :smile:
+the reason I think concurrent users might not work is related to point #1 from earlier this afternoon
+but... maybe it will?
+I'll try updating the navigation to go to test-ingredient-dashboard
+Thiago 4:15 PM
+ok
+Carol Schmitz 4:22 PM
+hm
+it looks like it's sort of working
+I need to step out for an hour or two
+I'll be back on this evening, but we don't need to figure this out today. We can connect tomorrow
+Thiago 4:26 PM
+nice, text me if you need something =].
+Carol Schmitz 4:27 PM
+will do
+:wink:
+1
+
+Carol Schmitz 11:41 AM
+Good morning
+Thiago 11:41 AM
+Good morning Carol.
+Carol Schmitz 11:41 AM
+Are you in the office?
+Thiago 11:41 AM
+just got here
+Carol Schmitz 11:42 AM
+Great. I’m on my way but I forgot my key
+Thiago 11:42 AM
+hahahahah. I can open the door for you =]
+Carol Schmitz 11:42 AM
+I will ask you to let me in Esther than go back :)
+*rather
+Thanks!
+Thiago 11:42 AM
+sure
+ping me when you get here.
+Carol Schmitz 11:43 AM
+Will do
+Thiago 5:11 PM
+hey Carol, when you can, take a look on this page  “test-reset_pw-tjc”
+I was able to reset both passwords :wink:
+the only thing we need to be aware is the idToken (it can’t be expired) but this is for another day. (edited) 
+
+
+2 replies
+Last reply 4 months agoView thread
+Thiago 5:15 PM
+and I was just thinking about our last talk (if we should update the id token when reseting the psw)
+what if I reset my password and forget to login, and also forget what password i set previously??
+Thiago 5:24 PM
+if I try to reset again it will give me a error saying that my token is invalid :scream:
+well I’m just think out loud, maybe this will never happen hahahahahha
+Carol Schmitz 8:04 PM
+Hm, that is an interesting edge case
+Carol Schmitz 8:23 PM
+I got this error message when trying to update my pw... don't think it quite works yet :slightly_smiling_face:
+Screen Shot 2019-09-06 at 8.22.47 PM.png 
+Screen Shot 2019-09-06 at 8.22.47 PM.png
+
+
+Thiago 8:25 PM
+The Idtoken for that user is empty?
+Carol Schmitz 8:26 PM
+Oh, yeah I guess I never signed in the first time
+I registered, and then reset pw right away
+(I used my school email account)
+Thiago 8:31 PM
+Maybe we should also do,
+After registering new user call the api to login in the firebase
+:+1:
+1
+
+Thiago 11:39 AM
+or maybe when we register a new user in firebase, we could check if the API response is sending back an idToken. if “yes” we just need to store it =]
+Carol Schmitz 12:45 PM
+Good point!
+Thiago 11:12 AM
+Hi Carol, good morning!
+Carol Schmitz 11:17 AM
+Hello!
+Thiago 11:29 AM
+I am polishing the ingredient services insights, hopefully it will be ready in the next  minutes . (edited) 
+Carol Schmitz 11:32 AM
+Excellent
+Then we can do some testing earlier in the day before we queue the send later tonight
+Thiago 11:32 AM
+:wink:
+Thiago 2:12 PM
+ok, the IngredientEmails.ipynb is update a ready to test.
+Thiago 2:31 PM
+also I did a few changes, and please few free to give me some feedback if I change to much :wink:
+Carol Schmitz 3:30 PM
+thanks! I will take a look
+Carol Schmitz 4:04 PM
+sending some test emails for ingredients on the test sheet
+Thiago 4:05 PM
+:+1:
+Carol Schmitz 4:06 PM
+your email is on that list
+is that ok to send to you?
+Thiago 4:06 PM
+:ok_hand: yep
+Carol Schmitz 4:14 PM
+I'm not sure how I feel about the images
+The layout looks a little odd
+Do you have the images populated for common ingredients like strawberry?
+they are all the green placeholder for the obscure ingredients in my list
+Thiago 4:18 PM
+yes I think so too.
+yes yes.
+so…
+the layout Anika made it, and after that Riana told me to fix a little things
+about the images this would be a simple test
+usually we would be using a image API.
+Thiago 4:28 PM
+do you want to make it “less odd”? (edited) 
+Carol Schmitz 4:36 PM
+We have not very much time to make more changes before the emails go out. My inclination would be to remove the images for this week since they aren't populated with real content yet anyway, and work on making the image/title layout look "less odd" for next week
+Thiago 4:36 PM
+ok =]
+Thiago 4:44 PM
+I removed the img from the layout.
+I can sent you a test e-mail.
+Carol Schmitz 4:48 PM
+sending test now
+Thiago 4:48 PM
+:wink:
+Carol Schmitz 4:55 PM
+Please make sure there are no unresolved issues in bubble when you sign off for the night
+the bubble support team will do a test deployment tomorrow at 9am
+Thiago 4:56 PM
+alright :ok_hand:
+Thiago 5:06 PM
+do you think is good to go for tomorrow?
+…the email insights.
+Carol Schmitz 5:10 PM
+yeah i think so
+looks much better without the images
+Thiago 5:10 PM
+I agree, we can work on that.
+Carol Schmitz 5:11 PM
+for next week, if it would be possible to have the image and title side by side with the title centered, so the multiple lines are to the right of the image instead of below, I think that would be ideal
+:+1:
+1
+
+yes we can :slightly_smiling_face:
+Thiago 5:12 PM
+good idea I like it.
+:slightly_smiling_face:
+1
+
+Thiago 5:41 PM
+so… to set up the e-mail we just need to update the date to send_time = '2019-09-10 12:56:00'
+and hit play?
+Carol Schmitz 5:46 PM
+yep
+i usually wait til later in the evening
+on Monday nights. but that's the whole workflow currently
+Thiago 5:47 PM
+I will test one more time then.
+Thiago 5:52 PM
+yeah I think is good to go! but I will keep the tradition and set up latter =]
+Carol Schmitz 6:29 PM
+so you're sending out the emails this week?
+Thiago 6:29 PM
+yeah if its ok for you.
+Carol Schmitz 6:30 PM
+of course
+go for it :slightly_smiling_face:
+I'm happy to hand off the task
+:ok_hand:
+1
+
+Thiago 6:30 PM
+:+1:
+Carol Schmitz 6:33 PM
+there is one more step I have been doing
+I just shared a 'send report' sheet with you
+I have copied the output from the colaboratory notebook to a new tab in this sheet after sending
+for historical record keeping purposes
+I don't know if it's necessary, and I think a better solution would be to automatically populate the sheet with code, but it's there if you want to keep using it
+Thiago 6:40 PM
+hummm  cool I will take a look o that.
+are you coming to the office tomorrow?
+Carol Schmitz 6:42 PM
+yes
+1-6
+Thiago 6:43 PM
+cool, so we can talk about   the payments and the other questions around login, firebase.
+Carol Schmitz 6:45 PM
+yep
+Thiago 6:48 PM
+running the email script now
+:+1:
+1
+
+Thiago 6:57 PM
+:man-facepalming:
+I think the script its ok but I commented the line that was pointing how many results was found (edited) 
+insight emails will be sent at 2019-09-10 12:56:00
+Carol Schmitz 7:11 PM
+I think that's alright
+Carol Schmitz 5:40 PM
+https://bubble.io/plugin/unix-timestamp-1498486421746x595771559811481600
+BubbleBubble
+Unix Timestamp Plugin for Bubble
+Unix Timestamp Plugin page on Bubble. Add Unix Timestamp in one click to your app. Bubble lets you build web apps without any code.(581 kB)
+https://s3.amazonaws.com/appforest_uf/f1498486838518x111461181659251460/2017_06_26_09_19_17_phish___Google_Search.png
+https://bubble.io/plugin/unix-converter-1494464159228x621608555717853200
+BubbleBubble
+UNIX Converter Plugin for Bubble
+UNIX Converter Plugin page on Bubble. Add UNIX Converter in one click to your app. Bubble lets you build web apps without any code.(19 kB)
+https://s3.amazonaws.com/appforest_uf/f1494935373198x984879844356328200/2000px_LACMTA_Square_Orange_Line.svg.png
+Thiago 5:47 PM
+Math.round((new Date()).getTime() / 1000)
+Carol Schmitz 6:16 PM
+Screen Shot 2019-09-10 at 6.16.16 PM.png 
+Screen Shot 2019-09-10 at 6.16.16 PM.png
+
+
+Carol Schmitz 9:51 PM
+Good evening, just wondering if you have things to do outside bubble tomorrow
+Thiago 9:53 PM
+Hi Good evening!
+yep I do, I want to work a little bit with the layout for the ingredients insights and slack app
+but this shouldn’t take more than half of the day. (edited) 
+Carol Schmitz 9:55 PM
+OK, great. Alex, our designer will be working in the app tomorrow too
+Sometimes when 2 people are working simultaneously it can be kind of hard to test things (depending on what you are doing)
+so if you're noticing the app being refreshed a lot you can take a break and work on some of those other things :slightly_smiling_face:
+Thiago 9:58 PM
+Hummm ok.
+no problem, =] I have a lot of changes for the emails that I want to test.
+and in the bubble I just want to learn how to create the plugin (edited) 
+Carol Schmitz 9:59 PM
+sounds good!
+thanks and good night
+Thiago 9:59 PM
+good night Carol.
+Thiago 11:12 PM
+now I can sleep.
+image.png 
+image.png
+Carol Schmitz 8:15 AM
+Nice!
+Thiago 3:12 PM
+Hey Carol, how are you?
+Carol Schmitz 3:22 PM
+Hello, I'm good how about you?
+Thiago 3:22 PM
+I’m good too =]
+Thiago 3:30 PM
+just want to share with you this sad story. lol
+I was testing few firebase call (login, reset psw, refresh idtoken ), check it out this timeline
+12:15 - I logged in  - OK
+13:50 - I refresh idToken using the refresh_token from the login above - OK
+13:52 - I tried to reset my psw using the new token from the step above - NOT OK error = CREDENTIAL_TOO_OLD_LOGIN_AGAIN
+:tired_face:
+i did that in postman.
+Carol Schmitz 3:33 PM
+aw bummer :disappointed:
+Thiago 4:32 PM
+it is so weird
+I thought that after refreshing the token I would be able to keep the user logged (edited) 
+Carol Schmitz 5:46 PM
+I think you need to refresh the token within less than 1 hour
+That's the whole point of tokens expiring, so the user isn't authenticated anymore after a period of inactivity
+Thiago 5:48 PM
+:man-facepalming:
+ok that makes sense
+I was thinking that we could keep to user logged after 1 hour of inactivity
+so in our flow if I get inactive for 2 hours, I will have to logging again
+is this what we want?
+Carol Schmitz 5:54 PM
+I think so - generally apps with sensitive data automatically log you out after some period of inactivity
+Thiago 5:55 PM
+ok…
+you just solved my problem hahahahaha.
+but…
+we goback to the reset psw issue but in a different way now….
+I’m not gonna be able to reset a password with a expired token. (edited) 
+Carol Schmitz 6:04 PM
+hm
+I think... this is why I was struggling so much with figuring out how to connect the firebase and bubble logins
+it's not so simple
+Thiago 6:06 PM
+Ok.
+https://media.giphy.com/media/B5mmjHbYTX96g/giphy.gif(Not automatically expanded because 2 MB is too large. You can expand it anyway or open it in a new window.)
+that is me….
+making bubble and firebase work =/
+so ok…
+my solution is get rid off bubble login feature
+and do all from firebase.
+Carol Schmitz 6:19 PM
+Yes, that is the goal
+Thiago 6:20 PM
+Ok =]
+Carol Schmitz 6:21 PM
+we will have to do some testing to make sure the Current User can still be identified, or possibly change some workflows that rely on Current User is logged in state
+But I believe we can figure it out
+Carol Schmitz 6:40 PM
+Oh shoot
+are you working in bubble?
+Thiago 6:41 PM
+yes
+just cloned the register page (edited) 
+Carol Schmitz 6:41 PM
+ack
+I'm sorry
+I am troubleshooting an urgent issue with the payments page and I forgot to tell you before I reverted
+Thiago 6:42 PM
+no worries =]
+Carol Schmitz 6:42 PM
+still getting used to an additional team member - sorry!
+Thiago 6:42 PM
+hahahahahaha
+Carol Schmitz 6:42 PM
+we'll have to figure out a good process for avoiding that in the future
+can you please pause on that for a bit until I figure this out
+without payment capabilities we can't generate revenue, which is #1
+Thiago 6:44 PM
+sure
+Carol Schmitz 6:45 PM
+thanks
+Thiago 6:45 PM
+:wink:
+Carol Schmitz 6:45 PM
+sorry if I caused you to lose work
+We can push forward to save your progress
+or recover i mean
+Thiago 6:45 PM
+I didn’t lose much, is fine,
+don’t worry =]
+Thiago 8:28 PM
+We push the version test to live,
+But I think I found the problem
+On LIVE, the radio buttons are with capital "I"
+2 Ingredients and 10 Ingredients
+But the action to run the stripe plugging is validating with "I" in lower case.
+Like 2 ingredients and 10 ingredients.
+Carol Schmitz 8:28 PM
+Oh!
+That should be a pretty easy fix
+I think we should revert to 6PM tonight and make the I change in the stripe workflow
+I can do that now
+Thiago 8:30 PM
+:ok_hand:
+Thiago 3:53 PM
+mi!s#&tHT6*&!PZfSNMwT%43FzwfqN
+Carol Schmitz 5:22 PM
+sush@almedalabs.com / ALJFIO
+Thiago 9:44 AM
+Good morning Carol,
+I need you help with bubble =]
+hummm i think I got it hahahahaha
+Carol Schmitz 9:51 AM
+haha ok
+that happens to me all the time :wink:
+that was supposed to be a regular smiley, but I guess the link works too
+Thiago 9:52 AM
+=]
+Carol Schmitz 9:53 AM
+oh man i am too tired
+:sleeping:
+1
+
+Thiago 9:53 AM
+I’m working on the payments page (changing the radio buttons)
+:+1:
+1
+
+Carol Schmitz 9:53 AM
+*wink not link
+Thiago 9:54 AM
+the :wink is my favorite emoji
+:wink:
+Carol Schmitz 9:54 AM
+good to know!
+Thiago 9:54 AM
+look how cool it is hahahahha
+Carol Schmitz 11:02 AM
+So, I had a nice conversation with Riana yesterday.  I am going to be shifting into more of a project management role, and I'm going to make it a priority to protect your time
+I think some of the things we were talking about yesterday will improve
+But I will need you to come to me if you have a lot of days like you were mentioning on Tuesday where you work all day and feel like you don't get anything done. It may happen once in a while, but it can't be the norm. Sound good?
+Thiago 11:05 AM
+yes sound good, I like that =]
+I will be using my another fav emoji :man-raising-hand:
+Carol Schmitz 11:05 AM
+yes!!
+please do
+anytime
+Thiago 11:07 AM
+do you know what this meeting is about?
+I’m totally lost hahahahahah
+Carol Schmitz 11:16 AM
+we're talking about what fuse will be building for us over the next 6-9 months
+Thiago 11:16 AM
+thanks =]
+Carol Schmitz 11:16 AM
+and also some updates on things they have been doing
+Thiago 11:16 AM
+ok
+cool thanks.
+Carol Schmitz 11:52 AM
+the new firebase login works :slightly_smiling_face:
+I guess you already knew that, but I just confirmed
+Thiago 11:54 AM
+thanks for telling, I tested but is good to know that is really working hahahahah
+did you create a new account? and logged?
+Carol Schmitz 11:58 AM
+yes. I deleted my carol@journeyfoods account from firebase/bubble and used your new register page in version-test
+i just thought of something
+we will probably have to use different emails for testing in version-test vs. live - bubble can recognize 2 separate environments but firebase won't know the difference between dev/live
+:ok_hand:
+1
+
+Thiago 12:03 PM
+good thinking.
+Carol Schmitz 1:08 PM
+are you working in bubble?
+Thiago 1:09 PM
+yes, I working on a test page
+test-payments-thiago
+Carol Schmitz 1:41 PM
+ok - go ahead and keep testing if you want
+Thiago 1:41 PM
+ok
+Thiago 1:58 PM
+Hi, I changed those radio buttons for two regular buttons, I not worrying much about the design right now, but the only block that I’m getting from it, is that when I look to the mobile version the buttons is getting on top of each other.
+image.png 
+image.png
+
+
+do you know how to fix that?
+Carol Schmitz 2:20 PM
+hmmm
+Carol Schmitz 2:27 PM
+I just selected both buttons and clicked "group these items into a group" and now they are both in Group Ingredient Buttons and I think the overlap is solved
+I think using groups is one way to improve bubble's responsiveness
+Thiago 2:30 PM
+hummmmm cool
+thanks :wink:
+Carol Schmitz 2:31 PM
+Np
+Carol Schmitz 10:57 AM
+Hello Thiago
+Hope you had a nice weekend
+Do you have questions for Google today?
+Thiago 10:58 AM
+Hi Carol good morning
+oh yeah my weekend was awesome, my mom was here we had some fun =]
+about Google…
+I don’t have any question…
+I though that was something that i should go hahahahah, I should have talked to you first. (edited) 
+Carol Schmitz 11:04 AM
+Well, my thinking is that I don't have a clear picture of our upcoming needs today. We can spend the next 2 weeks working out the bugs in the platform and figuring out what we need to do in Q4, then go to the meeting more prepared with some specific goals
+I don't like meetings for the sake of meetings
+:ok_hand:
+1
+
+so I will write back to Mike and tell him we'll be there on the 1st
+Thiago 11:05 AM
+I love that,
+I was talking to Anika earlier, trying to get a heads up for this meeting.
+she explained to me and I was going just because is a meeting hahahahah.
+but I like you plan better =]
+Carol Schmitz 11:09 AM
+ok... hm, what to do now that she has already responded :confused:
+Thiago 11:10 AM
+:man-facepalming:
+have been in this meeting before?
+Carol Schmitz 11:12 AM
+no, my understanding is that it's an info session kinda like "office hours" - a service google provides
+Thiago 11:13 AM
+well I can go there and have a first appearance
+and then share later with with and the team.
+so then we will get even more ready for next time
+Thiago 11:14 AM
+what do you think?
+
+
+12 replies
+Last reply 4 months agoView thread
+Carol Schmitz 11:14 AM
+If you want to
+What shape are the ingredient emails?
+Thiago 11:15 AM
+I will send you a email test in 10 min
+Carol Schmitz 11:19 AM
+ok cool
+Thiago 11:53 AM
+the e-mail still needs some final touches.
+Carol Schmitz 11:54 AM
+none of the links i have clicked work
+i'm getting 'not found' error
+when i click the Read button. haven't clicked every article yet, but... that's a key functionality
+:ok_hand:
+1
+
+Thiago 12:03 PM
+link was fixed
+what do you think about the img?
+I’m still not sure with what we should replace them (edited) 
+Carol Schmitz 12:06 PM
+https://docs.google.com/spreadsheets/d/1TkzjjPkhwKVef46R_2h-kR1Rq0HtxjXmZhDijxPM19M/edit#gid=0 - this is one list we hav
+GSuite Spreadsheet 
+Nutritionix Ingredients Images URL
+Spreadsheet from Google DriveClick to open in Google Drive
+
+
+have
+Thiago 12:08 PM
+ok
+so if I have cherry in my ingredients list,  i should be able to see this img in all links?
+https://d2xdmhkmkbyw75.cloudfront.net/465_thumb.jpg(4 kB)
+https://d2xdmhkmkbyw75.cloudfront.net/465_thumb.jpg
+ (edited) 
+Carol Schmitz 12:11 PM
+So, that link is what we have for now
+we also have all those images on our server
+but they are hidden behind authenticated API calls
+Thiago 1:01 PM
+so… for tomorrow do you want to use the default image or we can use this spreadsheet.
+also the Read button is kind weird, don’t you think?
+Carol Schmitz 1:03 PM
+is there a slack channel for ingredient insights?
+Thiago 1:03 PM
+#ingredientsservices
+Carol Schmitz 1:04 PM
+thanks - I think your question about images should go to the group
+Thiago 1:05 PM
+:ok_hand:
+Carol Schmitz 1:05 PM
+my opinion is that our image database is not user-ready yet so i would not include the images at all in the emails yet
+what do you mean about the read button is weird? the placement is a little weird to me, I think the button itself looks nice
+Thiago 1:06 PM
+just the position
+Carol Schmitz 1:39 PM
+are you working in bubble now?
+Thiago 1:40 PM
+just finished helping Anika.
+not using anymore
+Carol Schmitz 2:35 PM
+thanks - you are in the office, right? can you please send me that list of projects we wrote down last week when you are at a good stopping point? taking a pic of the paper should be pretty quick
+Thiago 2:38 PM
+I’m not in the office today… :face_with_rolling_eyes:
+but
+Email insights
+Firebase auth
+Slack app (edited) 
+these are from the top of my head
+Carol Schmitz 2:39 PM
+thanks
+Thiago 5:22 PM
+Hey Carol,
+I just fixed a bug on the payments page, i think it would be good to deploy to live
+Right now in LIVE, if I miss one input or forget to select a plan, the workflow won’t stop. and will move to the other page saying that everything was fine…
+so I added a action to terminate the workflow.
+this is prevent the user to miss any requirement’s input. (edited) 
+Carol Schmitz 5:48 PM
+ok, go ahead and deplot
+*deploy
+Thiago 5:50 PM
+done!
+:tada:
+1
+
+Carol Schmitz 6:07 PM
+So, when I deployed earlier today I added a DEPLOYMENT line to the changelog
+what do you think? is it overkill?
+Thiago 6:09 PM
+I like it,
+Carol Schmitz 6:09 PM
+maybe we don't need a separate deploy line, we just change the Nos to Yes
+the deployment time is automatically stored in bubble
+Thiago 6:10 PM
+I like the Idea the have easy this info
+like if I out , and I just need to know when we deploy
+i can open this doc on my phone and check
+Carol Schmitz 6:11 PM
+ok - to confirm, keep DEPLOYMENT line on changelog?
+Thiago 6:11 PM
+yes I like that
+Carol Schmitz 6:11 PM
+if so, please add one for your recent deployment
+Thiago 6:11 PM
+yep
+Carol Schmitz 6:11 PM
+:slightly_smiling_face:
+Thiago 6:13 PM
+added,
+the description I think we can skip for the DEPLOYMENT logs
+Carol Schmitz 6:14 PM
+sure
+Thiago 6:15 PM
+I just turn everything to YES also.
+Carol Schmitz 6:15 PM
+cool
+yes i saw and I agree with that
+one more question
+Riana and Anika want to use 90-minute time windows for the workflow schedule, but I think 30-minute windows give more flexibility and you can always reserve more than one slot at a time if you need a longer work session. Do you have a preference?
+Thiago 6:20 PM
+sorry, I’m reading the doc now.
+Carol Schmitz 6:21 PM
+no worries! just curious what you think
+Thiago 6:28 PM
+yeah I think slots of 30 minutes is good and give everybody more flexibility.
+but I think we should wait a little bit and see how changelog works.
+or at least merge the two file in one
+Carol Schmitz 6:33 PM
+merging the files is an interesting idea
+we'll see
+you're sending the ingredient emails tonight, right?
+Thiago 6:33 PM
+yep (edited) 
+I will just polish the layout a little bit more and send it in the next hours.
+Carol Schmitz 6:35 PM
+perfect! thank you
+have a great evening
+Thiago 6:36 PM
+you too ^^
+Thiago 10:31 AM
+good morning Carol.
+are you working remote today?
+Carol Schmitz 10:32 AM
+I was planning to go into the office
+and you?
+Thiago 10:32 AM
+I’m here =]
+you still need that pic with the project?
+Carol Schmitz 10:33 AM
+nah, I will be there soon so I can look at it
+Thiago 10:33 AM
+cool ok
+Carol Schmitz 10:35 AM
+thank you
+Thiago 10:04 AM
+Hi Carol good morning.
+Carol Schmitz 10:07 AM
+Hello
+Thiago 10:08 AM
+I’ve being working in the index page this morning
+and I have a question for you. mabe you can help me.
+Carol Schmitz 10:08 AM
+sure
+well i'll try certainly
+Thiago 10:09 AM
+awesome
+so
+when we call a API like “Firebase Login”
+if a type the wrong password I will get a error from bubble.
+image.png 
+image.png
+
+
+so my question is, do you know how to avoid this msg?
+Carol Schmitz 10:13 AM
+Short answer is no
+I noticed that recently
+Thiago 10:13 AM
+I asked Alex and he didn’t know either. (edited) 
+Carol Schmitz 10:13 AM
+Haven't tried to troubleshoot it yet
+Carol Schmitz 10:23 AM
+do you know what the error code is from firebase api?
+Thiago 10:24 AM
+400 bad request
+image.png 
+image.png
+
+
+Carol Schmitz 10:25 AM
+I wonder if we should check the 'capture response headers' box on that call
+https://forum.bubble.io/t/how-to-catch-a-400-error-from-api-connector/27682/2
+BubbleBubble
+Bubble Forum
+Bubble Community Forum. Bubble is a visual programing language. Instead of typing code, use a visual editor to build applications.
+Apr 18th, 2018
+Thiago 10:49 AM
+I saw that before, but could understand what he did.
+Carol Schmitz 10:56 AM
+Screen Shot 2019-09-18 at 10.54.33 AM.png 
+Screen Shot 2019-09-18 at 10.54.33 AM.png
+
+
+before the data type was json
+Thiago 10:56 AM
+hummmmmm
+Carol Schmitz 10:57 AM
+This will return an object resulting in the string “[object Object]” whatever the result- whether it’s a properly formatted result or the 400 error page. So now you can check for a condition where API 2’s result is [object Object] and API 1’s result is empty, meaning the 400 error happened.
+Thiago 10:58 AM
+hummmm
+so we would have 2 calls
+:thinking_face:
+Carol Schmitz 10:59 AM
+well, I think the 2 calls in that quote is talking about the other person's specific use case
+I am looking at the workflow and this API change seems to have broken the terminate workflow step
+I'm going to change it back to JSON
+ok, in steps 3 and 4 of the workflow I changed it back to only when firebase - body - idToken is empty
+Thiago 11:02 AM
+ok
+Carol Schmitz 11:03 AM
+It might be worth trying to create a new API call for firebase login that is Text Data type
+for the purposes of identifying API errors
+Carol Schmitz 3:22 PM
+When are you heading to the event?
+Thiago 3:23 PM
+I’m plannig to get there at 6:15
+Carol Schmitz 3:24 PM
+cool
+I will probably go a little earlier
+Thiago 3:24 PM
+do you want to meet first
+I mean I can go early too.
+Carol Schmitz 3:28 PM
+how are you getting there? walking?
+Thiago 3:33 PM
+yeah…
+its easy.
+Sorry for taking so long to answer
+I was testing that idea of the second API call to track api error (edited) 
+but got this
+image.png 
+image.png
+
+
+Carol Schmitz 3:36 PM
+aw man
+that's not great
+want to meet at the Grand blue line stop and walk the rest of the way over there together?
+Thiago 3:39 PM
+sure
+Carol Schmitz 3:42 PM
+ok, it'll probably take me about 30 minutes to get there
+I can slack you when I'm about to get on the blue line, and if you leave then we'll probably arrive at grand around the same time
+I'm pretty much ready to go, and you?
+Thiago 3:43 PM
+hummmm not really,
+Carol Schmitz 3:44 PM
+ok
+Thiago 4:03 PM
+What time do you want meet at the Grand station?
+Carol Schmitz 4:05 PM
+I could leave whenever
+If I leave now I will probably be there around 4:30
+I think I'm going to do that actually, I want to avoid rush hour on the train
+Thiago 4:16 PM
+Ok.
+I'll try to get there in 30 min
+Carol Schmitz 4:31 PM
+Cool. I should be at grand around 4:45
+Carol Schmitz 4:47 PM
+I’m in front of Starbucks
+Thiago 4:47 PM
+I'm took the longest way
+Hahahahha
+Be there in 3 min
+I'm here actually
+Carol Schmitz 10:08 AM
+Good morning Thiago, I am having trouble registering in the /version-test/ and could use some assistance when you have a few minutes
+Thiago 10:08 AM
+Sure
+Carol Schmitz 10:09 AM
+I want to create a new account using hello@journeyfoods.com
+Thiago 10:09 AM
+Ok
+Carol Schmitz 10:09 AM
+I deleted from firebase
+That email is on the authorized user list
+Thiago 10:10 AM
+Ok
+This user... is already an user in bubble?
+Carol Schmitz 10:11 AM
+no, I deleted the bubble user account also
+Thiago 10:13 AM
+Are getting error from api?
+Are you*
+Carol Schmitz 10:13 AM
+no, nothing happens
+Oh, I see
+Thiago 10:19 AM
+Im trying to remember the workflow
+Carol Schmitz 10:20 AM
+So, the search for Authorized users isn't working
+I thought it was because of a data privacy role, but when I updated the roles it didn't resolve the issue
+Thiago 10:21 AM
+Ohhhhhh the same thing was happening with me the other day
+Carol Schmitz 10:22 AM
+Screen Shot 2019-09-19 at 10.21.28 AM.png 
+Screen Shot 2019-09-19 at 10.21.28 AM.png
+
+
+Carol Schmitz 10:28 AM
+ugh, this is frustrating
+I wanted to create a new account so we could show a demo tonight
+Thiago 10:29 AM
+I'm a few station to the office
+10 minutes
+I'll take a look
+Carol Schmitz 10:31 AM
+thank you
+Thiago 10:31 AM
+Sure
+Thiago 10:51 AM
+Carol
+I’m not sure what happened but
+Carol Schmitz 10:54 AM
+??
+Thiago 10:54 AM
+image.png 
+image.png
+
+
+first try
+:flushed:
+Carol Schmitz 10:55 AM
+hm
+i'm still getting the erro
+r
+Thiago 10:56 AM
+I created the user (edited) 
+psw: jfpsw123
+are you enter hello@journeyfoods.com
+Carol Schmitz 10:57 AM
+well if you have already registered, I cannot
+Thiago 10:57 AM
+I will delete
+would you mind to try one more time? I’m kinda worry now
+try again…
+I delete the user on firebase and bubble
+Carol Schmitz 10:59 AM
+ok
+trying now...
+yeah it doesn't work for me
+I'm still getting the same error
+Thiago 11:02 AM
+cool
+can you share your screen with me
+Carol Schmitz 11:02 AM
+when I try in an incognito window, I can't get debug_mode=true to load, it just reverts to the regular page
+how?
+screenshot?
+Thiago 11:03 AM
+do you have skype?
+Carol Schmitz 11:04 AM
+let's try hangouts
+Thiago 11:04 AM
+nice
+Carol Schmitz 11:04 AM
+https://meet.google.com/rhk-umtv-kco
+meet.google.commeet.google.com
+Meet
+Real-time meetings by Google. Using your browser, share your video, desktop, and presentations with teammates and customers.
+Carol Schmitz 12:06 PM
+pitches start at 3:15
+FYI
+Thiago 12:06 PM
+ok
+Thiago 12:15 PM
+thanks I will go back to home go straight to the event
+:+1:
+1
+
+Thiago 3:02 PM
+I'm heading to the event
+Bringing my Mac and my badge :man-facepalming:
+Carol Schmitz 3:04 PM
+Great
+Pitches are starting soon
+I am sitting in the second row on the left
+Thiago 3:10 PM
+Watching live 
+Watching live
+
+
+Carol Schmitz 3:31 PM
+You made it! Great
+Thiago 3:47 PM
+Wow that was AWESOME!!!!!
+Carol Schmitz 3:48 PM
+Yeah Zach was great
+Thiago 4:47 PM
+I can see a lot of companies here that could be journey foods's client/costumers
+Carol Schmitz 12:56 PM
+Hi Thiago, thanks for coming to the event last night
+I was planning to come into the office today but I got a late start so I won't be able to make it
+I wanted to check in to see if you have any questions or need help with anything
+:man-raising-hand:
+1
+
+Thiago 1:02 PM
+Hi Carol, I really like the event yesterday, hope next time I can be more helpful =].
+yes I do have a question.
+talking about the ingredients services…
+the thumbnails… how can you add something new for next Tuesday.
+I wanted to send real photo instead of the “photo is coming soon”.
+Carol Schmitz 1:05 PM
+right
+maybe you can insert links to images found here: https://pixabay.com/
+pixabay.compixabay.com
+Pixabay - 1 million+ Stunning Free Images to Use Anywhere
+Find your perfect free image or video to download and use for anything. ✓ Free for commercial use ✓ No attribution required ✓ High quality images.(8 kB)
+https://pixabay.com/static/img/logo_square.png
+Thiago 1:08 PM
+ok
+Carol Schmitz 1:08 PM
+https://pixabay.com/api/docs/
+pixabay.compixabay.com
+Pixabay API Documentation
+Documentation to Pixabay's API for searching and retrieving public domain images.
+Thiago 1:09 PM
+do you expect to see diferents pictures for each news/article?
+Carol Schmitz 1:09 PM
+make sure you include a link to the logo
+oh
+that's a good question
+wait a minute, let me check on something
+Thiago 1:09 PM
+ok.
+Carol Schmitz 1:10 PM
+` "news_results": [
+   {
+     "position": "Integer - Article position",
+     "title": "String - Article title",
+     "link": "String - Link to the",
+     "date": "String - Article date",
+     "source": "String - Article source",
+     "snippet": "String - Article snippet",
+     "category": "String - Article category",
+     "thumbnail": "String - Article thumbnail"
+   },`
+oh, that didn't work... i was trying to format as code
+this is from SERP API docs - see there is a 'thumbnail' key?
+Thiago 1:11 PM
+yep
+I took a look on that before
+Carol Schmitz 1:11 PM
+ah
+what did you find?
+Thiago 1:12 PM
+it will return the some thing every time
+Carol Schmitz 1:12 PM
+same thing?
+Thiago 1:12 PM
+{
+            "position": 2,
+            "title": "Popeyes employees fired for putting cayenne pepper in food",
+            "link": "https://www.cbs42.com/news/popeyes-employees-fired-for-putting-cayenne-pepper-in-food/",
+            "source": "CBS42.com",
+            "date": "2 weeks ago",
+            "snippet": "SCOTT, La. (CNN NEWSOURCE) — Popeyes' new chicken sandwich has customers \nstorming restaurants all over the country to get their ...",
+            "thumbnail": "data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        },
+"thumbnail": "data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+wow  hahahaha
+Popeyes employees fired for putting cayenne pepper in food”
+:joy:
+Carol Schmitz 1:13 PM
+haha
+ok, so are you saying thumbnail is always data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== ?
+Thiago 1:14 PM
+yes.
+Carol Schmitz 1:15 PM
+hm - it should be a URL like this: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQdBI3wIjf_BX3zfRRYJjTGRRF5CNNZvqWAuza8-4mVZ75iBjlwOVTxcfGtg6_hLyUbPQ9cFA
+according to the docs
+I see on their status page that the build is failing
+https://serpapi.com/news-results
+SerpApiSerpApi
+Google News Result API via SerpApi - SerpApi
+Google News Result API via SerpApi - SerpApi
+so, maybe we need to look into using a different API to get news results
+this one has had some problems (the news results weren't returning anything at all for several days earlier this summer) - it may not be reliable enough for our needs
+Thiago 1:22 PM
+=/
+yeah I was try to change some parameters
+but no success
+yeah i just thought about using another API just for the images but that could be to much random results and not related to the news it self
+Carol Schmitz 1:29 PM
+yeah, when I first considered your question I was thinking it should be a picture of the ingredient
+But that doesn't really make sense because it would be the same pic for every article, as you mentioned
+Thiago 1:31 PM
+yeah…
+dang it
+I’m will keep playing with the serp API or try to find another one.
+but you know, this one is looking on google hahahahah
+Carol Schmitz 1:33 PM
+https://zenserp.com/a/serp-api-review/
+Zenserp.com
+SERP API review: Top 7 Google Search APIs comparison - Zenserp.com
+This article lists and compares the Top 7 most popular search result APIs. We hope to help your vendor selection process with this serp api review.(58 kB)
+https://zenserp.com/wp-content/uploads/2019/05/serp-api-review.jpg
+something to consider
+ok, switching gears for a minute - are you working with Anika on the ingredients page today?
+Thiago 1:39 PM
+no
+I helped her yesterday before going to the event,
+basically just fixed the alignments.
+Carol Schmitz 1:41 PM
+ok
+Thiago 2:35 PM
+tell me an ingredient
+Carol Schmitz 2:55 PM
+jalapeno pepper
+why?
+Thiago 3:04 PM
+opsss hang on, I fixing a bug
+:face_with_rolling_eyes:
+Thiago 3:05 PM
+in the mean time, Riana just asked me if the Stripe is working as one time charge?
+
+
+3 replies
+Last reply 4 months agoView thread
+Thiago 3:05 PM
+I don’t know how to answer that =/
+Thiago 3:33 PM
+ok…
+sending you a test
+Carol Schmitz 3:56 PM
+hey!!
+nice
+just saw the test in my inbox
+Thiago 3:58 PM
+so… after filtering the news for most recent and removing the duplicates, I calling the serp API passing the new’s link as “query” and changing the tbm parametr to isch to return just images. (edited) 
+instead of tbm=nws I’m doing tbm=isch
+Carol Schmitz 4:02 PM
+ah, cool
+Thiago 4:20 PM
+I think only now I understand the real question Riana asked me
+:man-facepalming:
+long story short… she was mention the status of our ticket with bubble about the stripe subscription plan.
+Thiago 4:24 PM
+and I saw they answer our ticket 1 hour ago.
+
+3 replies
+Last reply 4 months agoView thread
+Thiago 5:30 PM
+I think I have a lead on the stripe problem…
+Thiago 5:36 PM
+the live version is different from the dev, we should deploy.
+the action on LIVE says Subscribe the user to a plan when in dev is Subscribe the user to Test Basic Two
+that’s why is not selecting the plan in live automatically.
+Carol Schmitz 5:43 PM
+hm
+can you send a link to the page please?
+I think I was looking at a different page
+Thiago 5:45 PM
+I just left the office
+But was the test- settings
+Carol Schmitz 5:46 PM
+oh
+yes
+that is a bug in bubble
+Thiago 5:48 PM
+I see
+Carol Schmitz 5:49 PM
+The way it is supposed to work: when you add a workflow step Subscribe the user to Test Basic Two to a Bubble page in dev, if there is both a Test plan and a Live plan in Stripe called Test Basic Two, Bubble will automatically use the Test Stripe plan in Dev and the Live Stripe plan in Live. We have deployed many times since adding that test-settings page, and the live version of the app is not picking up the live stripe plan for some reason
+:+1:
+1
+
+We have a support ticket open with bubble
+I have double checked the Stripe plans multiple times and the setup in Stripe looks correct to me, but you are welcome to take a look at that too in case I have somehow missed some difference in the plan names
+Thiago 5:52 PM
+I think our end is correct
+
+
+2 replies
+Last reply 4 months agoView thread
+Thiago 5:52 PM
+But my guess would be the deployment is not getting deployed
+If you look to the action in the workflow
+Is not the same
+So it looks like is not deployed
+Carol Schmitz 5:59 PM
+Hm, OK I will take another look
+Carol Schmitz 6:18 PM
+test-settings-dev.png 
+test-settings-dev.png
+
+
+test-settings-live.png 
+test-settings-live.png
+
+
+the workflow actions look the same to me, except for the plan name being empty in the live version
+Thiago 7:19 PM
+Image from Android 
+Image from Android
+
+
+Step one is different
+Carol Schmitz 7:21 PM
+It'
+s the same action
+because in live the plan name is empty, the step says a plan instead of the plan name
+does that make sense?
+:ok_hand:
+1
+
+Thiago 7:24 PM
+Ohhhhhh ok
+Carol Schmitz 8:06 PM
+do you see the problem with this plan name? can't figure out why I am getting this error in stripe
+Screen Shot 2019-09-20 at 8.05.59 PM.png 
+Screen Shot 2019-09-20 at 8.05.59 PM.png
+
+
+I'm trying to create new test plans in stripe that match names AND ids of the live plans
+Thiago 12:31 AM
+I just couldn’t wait until Monday
+image.png 
+image.png
+
+
+Thiago 12:45 AM
+in Stripe
+We create a pricing plan (as you did before) in the test mode;
+than you copy the ID of that plan;
+Change to “Production” mode;
+Create the same plan with the same Name and paste the ID from the test mode.
+:ok_hand:
+Carol Schmitz 10:26 AM
+Hm, I wanted to do it the other way around so we could keep the existing live plans, since those ones already have subscribers
+but it's worth a shot
+Carol Schmitz 10:38 AM
+I think the problem was related to accidentally copying whitespace characters into the plan ID. I just created 2 new test plans that match plan IDs for the existing live subscription plans. I'm going to do something similar for the dashboard plans and then copy the new plan ids into bubble
+Thiago 10:38 AM
+:wink: :ok_hand: :+1:
+Thiago 6:04 PM
+Hi Carol hope you are having a great Sunday
+I notice that you deployed to live a few hours ago, and I would just to letting you know that I would be deploying in the next 30 min, just adding a few “workflow stoppers”, I notice the we are calling thi sing up api even if is not a authorized user or the psw is different.
+Carol Schmitz 6:06 PM
+Thanks!
+Was there a typo in your last message? Thi sing up api?
+Thiago 6:08 PM
+the*
+sign*
+few typos hahahaha
+Carol Schmitz 6:08 PM
+Ah
+Ok sounds good, thank you for the update
+Carol Schmitz 6:31 PM
+Were you able to figure out how to subscribe a user to a plan when they aren't logged in?
+Thiago 6:32 PM
+just notice that hahahahaha
+i was testing and it wasn’t going through.
+Carol Schmitz 6:33 PM
+ah ok
+I got an error when I tried that earlier
+Thiago 6:34 PM
+But I just remember that Riana wants to create a user for this right?
+Carol Schmitz 6:35 PM
+Hm, I think so
+we could introduce sign up at this point
+Thiago 6:35 PM
+yep
+Carol Schmitz 6:35 PM
+then send an email later to have them update their password when the dashboard is ready
+Thiago 6:39 PM
+hummmm i just thinking now what she really meant. by “creating a new user…”
+Carol Schmitz 6:40 PM
+do you know? are you confused about it?
+Thiago 6:42 PM
+should we go to through the entire flow of sign up.
+or
+just create a Authorized User? so then he can register latter?
+Carol Schmitz 6:43 PM
+I think we want to sign the user up
+that way we can subscribe her to a plan
+We need to maybe reconsider the authorized user plan too
+because of the issue where the email addresses are available to anyone
+:thinking_face:
+1
+
+by available I mean viewable
+Thiago 6:46 PM
+right!
+ok I will add the “sign up” to the workflow for now
+so we can subscribe the user
+Carol Schmitz 6:50 PM
+yes, can you sign them up in firebase also?
+Thiago 6:50 PM
+yes
+just need email and psw
+Carol Schmitz 6:50 PM
+i didn't think the payments page has a psw though...
+Thiago 6:50 PM
+we can use the same Nutrition3.0!
+Carol Schmitz 6:51 PM
+mmm
+something different I think would be safer
+Thiago 6:51 PM
+:ok_hand:
+the same dummy password we have for the register page?
+Carol Schmitz 6:52 PM
+I don't think we want to ask the user for a password here - but we should be able to send them a reset psw link later
+how about a different dummy password
+Thiago 6:53 PM
+cool.
+Carol Schmitz 6:55 PM
+have we figured out the firebase/bubble password reset yet?
+Thiago 6:56 PM
+no, I didn’t went to much deeper on that
+Carol Schmitz 6:57 PM
+ok
+think it might be do-able by wednesday?
+Thiago 7:02 PM
+yes.
+Carol Schmitz 7:04 PM
+good, me too
+I'm working on a schedule of features
+I'll probably have some more questions about time estimates
+Thiago 7:05 PM
+please do, its a way to keep priorities on radar =]
+Carol Schmitz 7:06 PM
+ok
+back to authorized user list - I was thinking that we update the data privacy roles to hide the the emails... let anyone sign up, but if they are not authorized send them to a blank page that tells them to contact us for access
+https://dashboard.journeyfoods.io/version-test/not-authorized?debug_mode=true
+Thiago 7:09 PM
+hummmmm
+Carol Schmitz 7:10 PM
+actually
+not have an authorized user list at all. make it a boolean field attached to the user
+:ok_hand:
+1
+
+Thiago 7:11 PM
+I like that
+Carol Schmitz 7:54 PM
+are you working in bubble?
+Thiago 7:55 PM
+Not anymore
+Carol Schmitz 7:55 PM
+ok. I started playing around with something a few minutes ago and forgot to check the log
+didn't want to interfere
+Thiago 8:23 PM
+Ok np
+when you are good give me a heads up so I can test really quickly and push to live.
+Carol Schmitz 8:30 PM
+ok
+all good
+Carol Schmitz 9:18 PM
+are you testing?
+Thiago 9:39 PM
+Not yet
+I was just taking a look to see if I miss something
+But I didn't update anything
+Carol Schmitz 9:41 PM
+ok
+send me a message when you're done? There are a few things I want to update but it's not urgent, I can get to it tomorrow or Tuesday if needed
+Thiago 9:42 PM
+ok
+can I test now?
+Carol Schmitz 9:43 PM
+yes
+I thought you were testing an hour ago... when I said all good
+Thiago 9:43 PM
+cool
+hahahahaha
+sorry, I thought that “all good” was more like “all good I will let you know when I’m done”
+sorry my bad
+Carol Schmitz 9:44 PM
+no worries
+Thiago 9:44 PM
+my test is fast
+:+1:
+1
+
+Carol Schmitz 9:44 PM
+there are bound to be some miscommunications
+Thiago 10:08 PM
+I’m finishing here
+Thiago 10:16 PM
+I’ done
+I left the payments page the same way
+could figure out
+my mission for tomorrow
+good night
+Carol Schmitz 10:24 PM
+good night
+Thiago 10:33 PM
+Could not* figure out
+:thinking_face:
+1
+
+Sorry... I need to focus on that with time
+Carol Schmitz 10:35 PM
+oh no problem
+I tried earlier today and couldn't get it
+we have payments for subscribed users so that's an improvement
+Carol Schmitz 11:53 AM
+Good morning Thiag
+o
+Thiago 11:53 AM
+Hi Good morning
+Carol Schmitz 11:55 AM
+just checking in to see how you are doing with priorities, tasks, etc
+Thiago 11:55 AM
+Right now, I’m looking into stripes subscription
+working in the test-payments page
+Thiago 11:57 AM
+i was able to work in the e-mails layout, so I wasn’t planing to go much further. I believe we are getting close to the desire layout
+
+
+3 replies
+Last reply 3 months agoView thread
+Thiago 12:00 PM
+and… It is in my radar to start working with the reset password flow
+Thiago 12:05 PM
+when you were testing the subscription with stripes, were you getting this msg
+image.png 
+image.png
+
+
+Carol Schmitz 12:08 PM
+no
+Screen Shot 2019-09-22 at 2.54.31 PM.png 
+Screen Shot 2019-09-22 at 2.54.31 PM.png
+
+
+Screen Shot 2019-09-22 at 2.57.04 PM.png 
+Screen Shot 2019-09-22 at 2.57.04 PM.png
+
+
+those are the errors I got
+I did not try too hard to investigate/fix
+Carol Schmitz 12:19 PM
+Anyway, I was just checking in because I saw you in bubble but didn't see you signed up on the shared work calendar. Please remember to sign up
+Thiago 12:22 PM
+yes yes,
+I’m trying to fix Riana’s logging.
+she try to reset but it just change on buble
+Carol Schmitz 12:24 PM
+yes, i think the pw reset flow is a top priority for today
+man
+I had a feeling this firebase login was going to cause problems
+Thiago 12:27 PM
+I’m already felling hahahahaha
+Carol Schmitz 12:29 PM
+yeah
+Thiago 12:39 PM
+are you in bubble now?
+Carol Schmitz 12:39 PM
+no
+I have some pages open but I'm not working on it
+Thiago 12:40 PM
+ok. =]
+Carol Schmitz 12:40 PM
+I just closed them
+Thiago 12:40 PM
+cool tks
+Thiago 1:58 PM
+So…
+remember that we start using the idtoken for get data from the server?
+changing from stg to dev?
+Carol Schmitz 1:59 PM
+yes
+I think there's a problem, am I right?
+Thiago 2:02 PM
+isn’t working
+sorry I was double checking
+yeah
+img URL, scientific name, and nutrition summary
+is not getting populated
+Carol Schmitz 2:05 PM
+i'm trying to reproduce the error
+can you send a link?
+Thiago 2:05 PM
+https://dashboard.journeyfoods.io/version-test/app-ingredient--detail/kiwifruit-1562969512444x158097321299807800?degub_mode=true
+Carol Schmitz 2:06 PM
+looks like a DNS error
+Screen Shot 2019-09-23 at 2.06.20 PM.png 
+Screen Shot 2019-09-23 at 2.06.20 PM.png
+
+
+Thiago 2:08 PM
+wow
+this is the stg address
+Carol Schmitz 2:09 PM
+the first 2 are staging
+the 3rd one is dev
+Thiago 2:10 PM
+I’m so confuse hahahahah
+Carol Schmitz 2:10 PM
+you are in the journeyfoodsio channel, right?
+Thiago 2:10 PM
+yes
+Carol Schmitz 2:10 PM
+OK. I just posted a message to fuse
+I think this might have something to do with a deployment they did overnight
+Thiago 2:11 PM
+:flushed:
+I used postman now and got results back
+Carol Schmitz 2:12 PM
+hm
+maybe we need to re-initialize the call in bubble api connector
+Thiago 2:12 PM
+ok I will do that
+:+1:
+1
+
+Thiago 2:24 PM
+error when initializing.
+yeah I think they did something because on postman is working, but postman has a lot of bypass
+Carol Schmitz 2:30 PM
+hmmm
+Thiago 3:20 PM
+So Carol just so you know…
+I will be changing the reset password flow starting at 4:30
+Talking to Anika we decide to use firebase feature to reset the psw.
+doing that we will start updating the password in firebase.
+Carol Schmitz 3:21 PM
+thanks
+Thiago 3:21 PM
+and for now we won’t be using the reset-pw page.
+Carol Schmitz 3:21 PM
+ok
+Thiago 3:21 PM
+I believe you are working on bubble now.
+Carol Schmitz 3:22 PM
+I tested updating the api call a little while ago
+I just closed the windows
+i'm not using it, thanks for checking
+Thiago 3:23 PM
+ok so I will jump in ok.
+:+1:
+1
+
+Carol Schmitz 3:25 PM
+all good :wink:
+Carol Schmitz 5:56 PM
+still in bubble?
+Thiago 5:56 PM
+yep :face_with_rolling_eyes:
+7 min
+Carol Schmitz 5:57 PM
+I need to update a data type real quick - if you aren't active testing right now it will only take a few minutes
+otherwise just let me know when you take a break for 5 minutes. unless you're getting ready to leave now
+then i'll wait til you're on the commute :slightly_smiling_face:
+Thiago 5:58 PM
+go for it =]
+Carol Schmitz 7:35 PM
+Hi Thiago
+Thiago 7:35 PM
+Hi Carol
+Carol Schmitz 7:36 PM
+I want to better understand the back end data flow of the ingredient emails better
+https://drive.google.com/file/d/1TqQk_XfRKuM5VKh2_r5oTgTCgGUIem9Z/view?usp=sharing
+Plain Text 
+Ingredient Insight Emails: Data Flow
+Plain Text from Google DriveClick to open in Google Drive
+
+
+This is a diagram of roughly how it worked when you arrived
+I would like to create a new version of how it works today, and then another version of what we are aiming for with full automation for v1.0
+Thiago 7:37 PM
+Cool
+I will take a look when I get home
+Carol Schmitz 7:38 PM
+you're not home yet!
+oh my, sorry
+Thiago 7:39 PM
+This will be very helpful latter
+No worries
+It's cool :)
+Carol Schmitz 7:39 PM
+anyway, v0.2 should be today's version, currently has a copy of the v0.1 version from before you joined, so v0.2 needs to be updated
+Thiago 7:40 PM
+Nice I can do that
+Carol Schmitz 7:41 PM
+cool
+do you have a solution to hiding the authorized user list?
+Thiago 7:43 PM
+No, I explained to Riana and Anika today that problem about the privacy rules
+And mention your idea to add a Boolean for each user
+Carol Schmitz 7:44 PM
+what do they think?
+Thiago 7:48 PM
+I'm not sure,
+But I think they agreed since it's better than leak that list of users
+But at the same time Riana tried to reset her psw and she got little bit piss hahahahahahha because she couldn't even loging lol
+So I started digging into the reset psw flow
+Carol Schmitz 7:53 PM
+did you end up removing firebase?
+Thiago 7:55 PM
+Nope, actually was the opposite
+Now we are calling a firebase api to send a email to reset the password
+Carol Schmitz 7:56 PM
+ohh, you just need to update the send from email
+from firebase api
+Thiago 7:59 PM
+What do you mean by update the send from email?
+Carol Schmitz 8:00 PM
+the firebase api reset psw email comes from noreply@journeyfoodsio.firebaseapp.com or something
+:+1:
+1
+
+it should be changed to hello@jourenyfoods.com or something
+*journeyfoods
+I mistype that all the time
+Thiago 8:02 PM
+Hahaha
+Yes I agree
+Carol Schmitz 8:03 PM
+you agree with changing the send from email?
+Thiago 8:04 PM
+Hahahahahahhah yes yes
+Carol Schmitz 8:05 PM
+ok
+so, we haven't figured out how to handle the authorized user list yet
+?
+Thiago 8:07 PM
+so what I talked to Riana was
+every user will have this bollean
+authorized user : true/false
+once the user earn access to the dashboard we flip to true
+Carol Schmitz 8:14 PM
+right, that's what we discussed
+you and me, yesterday i think
+what did riana think?
+Thiago 8:17 PM
+She seems to agree with us, she was just think how we will turn that boolean to true.
+at first she was thinking that this boolean was in the firebase, but I explain that was in bubble
+in the end as I said earlier, she tends to agree since it will fix the privacy issue.
+Carol Schmitz 8:25 PM
+ah, ok
+Carol Schmitz 8:39 PM
+one last question - this week's emails are queued up? or will you send out in the morning?
+Thiago 8:40 PM
+I just start the prep block. =]
+I will run a test and would be good to go!
+do you know why we send the same ingredients e-mails to research@
+Carol Schmitz 8:44 PM
+it was something Riana said we should do for QA
+very early on
+I think basically so we can see a copy of what's going out each week, so we can have a record of how it changes over time
+Thiago 9:04 PM
+It's running
+It's taking a long time now that we are getting the thumbnail
+Carol Schmitz 10:03 PM
+Oh yeah, cause you make 2 calls per news item, right?
+Thiago 10:04 PM
+Actually is 6
+No
+First runs 5 times using the keywords
+Market, Industry, Commodity, insights and ingredients insights
+After that, If I got like 10 results
+I will run 10 times the serp api to get the image, one for each result
+Thiago 10:02 AM
+Good morning Carol,
+I will be working from home today.
+Carol Schmitz 11:28 AM
+Thank you
+Carol Schmitz 11:34 AM
+I am wondering about the bubble calendar
+are you entering your time on the correct day? Today is Tuesday
+Thiago 11:35 AM
+:man-facepalming:
+yep
+Carol Schmitz 11:35 AM
+ok cool :slightly_smiling_face:
+no worries, I was just a bit confused. Glad we sorted it out
+has riana talked to you about the api endpoints?
+Thiago 11:37 AM
+those ones that stoped work? dev and stg?
+Carol Schmitz 11:38 AM
+yes
+Thiago 11:42 AM
+we talked about it yesterday.
+when she notice that it wasn’t working
+I explain to her that we change from stg to dev, and that fuse team maybe did something.
+Carol Schmitz 11:44 AM
+wait
+you changed from stg to dev?
+Thiago 11:45 AM
+yes the ingredients details page
+Carol Schmitz 11:45 AM
+that was not what I expected
+oh, ok
+Hm, that should not be our process. Dev is only for testing new features. We should keep the live pages on stg until the production server is ready
+I must have explained something unclearly
+sorry about that
+Thiago 11:47 AM
+no worries at all,
+Carol Schmitz 11:47 AM
+anyway, both stg and dev api endpoints are not working
+so... that's not the main problem here
+Thiago 11:47 AM
+should I turn back to stg/
+Carol Schmitz 11:47 AM
+as far as i can tell
+Eventually
+it should go back to stg... but we're in the process of deploying prod
+so it almost doesn't make sense to go back to stg if prod will be available tomorrow, you know?
+Thiago 11:49 AM
+gotcha!
+Carol Schmitz 1:35 PM
+Hi there, when you are at a good stopping point please let me know so we can chat for a few minutes
+Thiago 1:35 PM
+ok 5 min =]
+Carol Schmitz 1:36 PM
+great
+Thiago 1:41 PM
+alright
+Carol Schmitz 1:42 PM
+ready? I was trying to test functionality on the account I set up last week, hello@journeyfoods.com
+Thiago 1:42 PM
+yes
+Carol Schmitz 1:43 PM
+I get an 'email address not found' error
+but this account is on both the authorized user and user lists
+I'm just confused about the changes you made to login yesterday
+Thiago 1:45 PM
+ok
+the psw is jfpsw123 ?
+Carol Schmitz 1:46 PM
+you're asking me the psw for hello@journeyfoods.com?
+I originally set it up as Nutrition3.0!
+I do not think I changed it
+Thiago 1:47 PM
+ok
+cool
+so yeah
+I added a alert, to see if the email exist in our bubble database
+the idea was to prevent to call the api to logging and the email is not right or don’t exist
+the API would give us that ugly msg…
+Carol Schmitz 1:49 PM
+aha
+ok, well I think something about that check is not accurate
+because hello@journeyfoods.com is a valid email, in the list of users and authorized users and firebase
+Thiago 1:50 PM
+but is getting not found:thinking_face:
+Carol Schmitz 1:52 PM
+yes... confusing, right?
+Thiago 1:52 PM
+yes
+I just created a user to run some test in the payments page
+test@test.com
+jfpsw123
+its logging perfectly
+but even my user thiago@journeyfoods.com is blocking
+Carol Schmitz 1:54 PM
+hmmm
+weird
+Thiago 1:54 PM
+can you logging with your account?
+I can remove this validation
+Carol Schmitz 1:59 PM
+which account?
+Thiago 1:59 PM
+carol@
+Carol Schmitz 2:00 PM
+hm, let me try
+no, carol@ does not work
+Thiago 2:01 PM
+yep
+I will remove that =/
+hummmmmmm
+I think I know
+Carol Schmitz 2:08 PM
+know why it isn't working?
+Thiago 2:09 PM
+yeah but I just prove I was wrong.
+removing now
+done
+yeah you should be good to go!
+I logged with my account thiago@
+Carol Schmitz 2:13 PM
+ok cool
+i logged in with hello@ / jfpsw123
+thanks!
+Thiago 2:14 PM
+no problem
+Carol Schmitz 2:25 PM
+are we ready to deploy?
+Thiago 2:26 PM
+yes
+Carol Schmitz 2:26 PM
+OK great
+I am going to do that now, a little early but we are at a point between changes where I think it makes sense
+Thiago 2:27 PM
+ok
+I will be walking trough the dashboard.
+see if I can find errors
+Carol Schmitz 2:28 PM
+ok great
+I added you to the ingredient insights project in JIRA
+I created user stories and subtasks for all the main things we should be able to do
+if you find any errors, please comment on the related task
+Thiago 2:31 PM
+ok =]
+Carol Schmitz 2:37 PM
+are you testing on live version?
+Thiago 2:38 PM
+just logged in
+Carol Schmitz 2:39 PM
+ok, just checking. I'll be editing version-test
+I don't want to interfere, but if you test on live we should be good
+Thiago 2:39 PM
+I can see that for the ingredients details page we are getting the img url, scientific name, and sumary as aspected
+Carol Schmitz 2:40 PM
+oh??
+that's great news!
+Thiago 3:48 PM
+two things…
+Thiago 3:49 PM
+first in the ingredients detail page, now the img for the ingredients is not showing, =/
+
+
+2 replies
+Last reply 3 months agoView thread
+Thiago 3:49 PM
+the rest still ok .
+second
+how do I open a ticket for bubble support
+Carol Schmitz 3:51 PM
+https://bubble.io/bug_report
+BubbleBubble
+Report a bug on Bubble
+Report a bug to the Bubble team. Bubble is a point-and-click programming tool, entirely without code. Bubble hosts all applications on its cloud platform.
+Thiago 3:51 PM
+ok
+Carol Schmitz 4:02 PM
+what are you reporting? just curious
+Thiago 4:05 PM
+after I logged in and try to subscribe to a plan I’m getting this msg
+image.png 
+image.png
+
+
+Carol Schmitz 4:06 PM
+ah
+Thiago 4:06 PM
+if I try again I will get this msg now.
+image.png 
+image.png
+
+
+but guess what ?????
+Carol Schmitz 4:08 PM
+how are you trying to subscribe? for me it's working from settings
+what??? :slightly_smiling_face:
+Thiago 4:08 PM
+hahahaha
+even getting that error
+my customer at stripe is getting created
+image.png 
+image.png
+
+
+Carol Schmitz 4:10 PM
+hmm
+interesting
+Thiago 4:11 PM
+i was just testing…
+the way I’m setting up is
+log in a user in bubble and subscribe the current user to a plan
+page test-payments-thiago
+its all in the workflow.
+so you just need to hit “submit payment”
+Carol Schmitz 4:14 PM
+ah I see. I guess I wasn't testing the whole workflow because I didn't want to charge my card. I see the stripe popup and then cancel
+Thiago 4:14 PM
+are you testing on live?
+Carol Schmitz 4:16 PM
+yes
+Screen Shot 2019-09-24 at 4.16.19 PM.png 
+Screen Shot 2019-09-24 at 4.16.19 PM.png
+
+
+Thiago 4:17 PM
+yeah I got until there in DEV.
+after this point (using the 4242…. credit card for testing) I get those msg.
+Carol Schmitz 4:18 PM
+hm
+Carol Schmitz 5:00 PM
+I'm done making changes in bubble for now
+Thiago 5:01 PM
+ok
+I opened the ticket
+Thiago 5:02 PM
+there is anything you want me to focus on?
+
+
+3 replies
+Last reply 3 months agoView thread
+Carol Schmitz 5:02 PM
+Have you taken a look at the ingredient insights JIRA project?
+Right now I'm trying to figure out where we are for each item. what is working, what is not working, etc
+I went through and marked a bunch of subtasks as 'verified on dev'
+anything that is not verified on dev needs to be verified
+so... overall testing is one thing to work on
+:+1:
+1
+
+then there's actually fixing the items that have issues. user register/login/psw reset without showing user emails is still a bit murky for me... I would say that should be a top priority
+:+1:
+1
+
+Carol Schmitz 6:31 PM
+Now that we have been using the shared work calendar for a few days, what do you think of the 90-minute intervals? Does it work well for you?
+Thiago 9:59 AM
+Hi Carol good morning.
+I saw your question yesterday but I didn’t have a solid answer at the time, but now I have =].
+in the begging I though it was too much time, but now I think it is good, and give us time to test, fix bugs, and implement in dev our “work”.
+during this time I would spent 60 minutes testing in my test clone page, 10 minutes to “push” to dev and test.
+Carol Schmitz 11:30 AM
+Ok, great, thank you. It’s always fine to wait and give a more thought out answer :slightly_smiling_face:
+Thiago 2:30 PM
+Hey carol are you working on bubble?
+Carol Schmitz 2:32 PM
+not actively
+I was looking at one of the pages earlier but I wasn't using it
+It's closed now
+Thiago 2:33 PM
+ok
+me and Riana will deploy now
+:+1:
+1
+
+Thiago 2:38 PM
+new page https://dashboard.journeyfoods.io/subscribe
+Carol Schmitz 2:43 PM
+nice!
+Carol Schmitz 2:52 PM
+Have you thought at all about how to automate the email send based on the ingredients entered on the confirmation page?
+Thiago 2:55 PM
+No I haven’t.
+Carol Schmitz 2:58 PM
+OK. I have thought about it a little bit but don't have any solutions in mind yet. There's a user story in JIRA so if anything comes up please note it there
+Thiago 3:01 PM
+:wink:
+Carol Schmitz 3:01 PM
+also, I would like you to be posting more regular updates to JIRA, if you can. If something comes up that you weren't expecting to work on (especially troubleshooting bugs) please create a ticket in the backlog. you don't need to worry about filling in all the fields, just a few quick updates about where you are spending your time
+:ok_hand:
+1
+
+Thiago 3:04 PM
+ok I will try my best =]
+:100:
+1
+
+Carol Schmitz 3:06 PM
+don't think too hard or spend too much time on it, I'm trying to encourage more consistent information sharing habits across the team
+Thiago 6:25 PM
+Hi Carol,
+Thiago 6:26 PM
+how is everything?
+
+
+4 replies
+Last reply 3 months agoView thread
+Thiago 6:44 PM
+about your question on the the JIRA - ‘110 Front end - improve ingredient news search parameters on ingredient detail page’
+Thiago 6:48 PM
+can you elaborate I little bit more?
+I worked a little bit on that page, mainly what I did was switching the STG to DEV those 3 api calls.
+
+
+3 replies
+Last reply 3 months agoView thread
+Carol Schmitz 11:33 PM
+how are things with hiding the authorized user list? If I remember correctly you made a change but then reverted it because of an error
+Thiago 11:47 PM
+Yeah... Bubble is a great tool but sometimes I just can't understand why he hates me
+I did a lots of test yesterday when I was testing stripe subscription and didn't get much further,
+But... One way or another we will need to run a search for users
+Thiago 11:52 PM
+Or we don't... And start registering everybody.
+
+
+32 replies
+Last reply 3 months agoView thread
+Thiago 11:54 PM
+And then after the user log in we validate if the current user is authorized
+If yes, cool beans!!! Keep the flow
+Carol Schmitz 12:22 AM
+gonna sleep on it
+see you in the office tomorrow?
+Thiago 12:29 AM
+Yeah
+Thiago 8:58 AM
+hummmmm:thinking_face:
+Thiago 9:07 AM
+turns out we were right to let everybody sign up :grin:
+Carol Schmitz 9:17 AM
+aha!
+yes, that point was unclear to me until Riana mentioned it directly
+Thiago 9:18 AM
+yeah for me too
+Carol Schmitz 9:21 AM
+yeah so, if it's OK to register everyone, we can just use the bool in Bubble for now
+Thiago 9:22 AM
+OK.
+I will work on that
+about my comment, maybe it wasn’t the right timing, but did you understand?
+Carol Schmitz 9:25 AM
+about the company collection?
+Thiago 9:25 AM
+yes
+Carol Schmitz 9:25 AM
+yes, I understood and I'm glad you shared.
+thank you
+I am not sure if we want to use the idea yet, but it's good to think about
+Thiago 9:28 AM
+cool thanks, =]
+:wink:
+Carol Schmitz 9:29 AM
+:slightly_smiling_face:
+Carol Schmitz 9:46 AM
+ok so, for today, you're working on authorized user change from bubble list to user field bool and... password reset?
+Thiago 9:47 AM
+yep yep
+Carol Schmitz 9:56 AM
+perfect. can you reserve some time for that?
+
+
+2 replies
+Last reply 3 months agoView thread
+Carol Schmitz 9:56 AM
+I want to add the new prod API endpoints to bubble but I don't want to interfere
+
+
+2 replies
+Last reply 3 months agoView thread
+Thiago 10:23 AM
+Hi carol, do you know what is the DNS provider for journeyfoods.io
+Carol Schmitz 10:26 AM
+I am not sure currently. Originally we were managing DNS through genesis domains. journeyfoods.io is currently hosted on firebase hosting. I believe Riana set up a cloudfare account at some point recently but I'm not sure if that's DNS or not
+Thiago 10:30 AM
+hummmmm ok I will check with her
+I need to verify firebase domain at our DNS.
+Carol Schmitz 10:30 AM
+why do you ask?
+ohh, for the psw reset email?
+Thiago 10:30 AM
+yes
+Thiago 12:10 PM
+hey Carol.
+I fixed something here in bubble on the subscribe page
+can I deployed in 10 min?
+Carol Schmitz 12:12 PM
+works for me
+thanks
+I'm on my way in
+Thiago 12:12 PM
+ok I’m deploying
+I thought you were doing something in bubble
+=]
+Carol Schmitz 12:22 PM
+Oh yeah, I was and then I finished
+This is why I asked about the time schedule. My changes lately have been smaller so I don’t need a whole 90 min
+But, it’s a process. We’ll figure it out. I also don’t mind you checking in to make sure before a deployment
+Carol Schmitz 2:36 PM
+I just saw a notification from you but I can't find the message, did I miss something? I think it may also be a slack bug
+Thiago 2:37 PM
+auahuauahuaa
+yeah
+probably wasn’t me
+testing…1.2.3
+now its me =]
+Carol Schmitz 2:38 PM
+ok :slightly_smiling_face:
+Thiago 2:45 PM
+message after registration
+Registration successful
+
+We will contact you and set the final touches for your access to our service.
+(edited)
+what do you think?
+Thiago 6:03 PM
+https://journeyfoods.atlassian.net/browse/JFIIS-2
+Carol Schmitz 11:12 AM
+Thank you for the JIRA updates yesterday!
+Thiago 11:15 AM
+yeah sure =]
+Thiago 12:09 PM
+Hi Carol, I working with Anika in the ingredients page.
+can I ask you a favor?
+Carol Schmitz 12:10 PM
+sure
+Thiago 12:10 PM
+https://dashboard.journeyfoods.io/version-test/test-ingredients-thiago
+can you tell me how you see the img with the signs “market”, “industry” etc..
+a screenshot is fine
+Carol Schmitz 12:12 PM
+industry is really hard to see. the text on all the tags looks small to me
+Screen Shot 2019-09-27 at 12.11.56 PM.png 
+Screen Shot 2019-09-27 at 12.11.56 PM.png
+
+
+Thiago 12:13 PM
+awesome
+Carol Schmitz 12:14 PM
+it also looks like there is a small gap between some of the letters
+Thiago 12:15 PM
+this is so weird because for Anika is showing in Italic.
+.svg
+Carol Schmitz 12:16 PM
+hm
+that is weird
+Carol Schmitz 12:17 PM
+have you asked Alex?
+
+1 reply
+3 months agoView thread
+Thiago 12:17 PM
+Anika’s img
+Anika | image.png 
+image.png
+
+
+Carol Schmitz 12:17 PM
+weird. I think it's a different font
+mine is serif
+my font is a serif font, anika's is not. the difference is not just italics
+Thiago 12:19 PM
+yes yes
+Carol Schmitz 3:07 PM
+Hi Thiago, just checking in because Riana told me she wants too share the dashboard with customers on Monday. In my mind, password reset is the main thing we don't have working yet that we should have before sharing with users. Have you made any progress on that this week? I didn't see any comments in the ticket for that one, but I know you worked on it some yesterday. Thanks in advance
+Thiago 3:09 PM
+Hi Carol, functionally is working the only problem is the email domain
+image.png 
+image.png
+
+
+Carol Schmitz 3:10 PM
+what is the current email address?
+that sends the reset email
+Thiago 3:10 PM
+noreply@journeyfoods-io.firebaseapp.com
+I set it up yesterday
+when its all set we will be able the use @journeyfoods.io
+Carol Schmitz 3:12 PM
+you mean we are in the 48-hour period where the domain is being verified?
+Thiago 3:13 PM
+yep
+Thiago 4:01 PM
+Hey Carol!
+we are deploying to live the ingredients page
+:+1:
+1
+
+Carol Schmitz 11:24 PM
+hi :slightly_smiling_face:
+I have been making updates to the Ingredients database in Bubble. A bulk update I made during the week resulted in some duplicates
+Thiago 11:26 PM
+CAROL……
+good evening hahahaha
+I thought I was alone in bubble. (edited) 
+Carol Schmitz 11:27 PM
+I just saw your name pop up
+Thiago 11:27 PM
+yep
+Carol Schmitz 11:27 PM
+in bubble
+so i thought i would warn you
+Thiago 11:27 PM
+I had to fix the workflow for the ingredients page
+Carol Schmitz 11:28 PM
+I don't need to actually make changes now though
+mostly just need to identify which ingredients are duplicated
+I'm working in the live db
+are you in dev?
+Thiago 11:29 PM
+yes
+but I just finished what I had to do
+do you need help with anything?
+Carol Schmitz 11:33 PM
+oh, I don't think so, thank you
+
+
+4 replies
+Last reply 3 months agoView thread
+Carol Schmitz 11:34 PM
+If you want a random thing to think about, the issue I ran into earlier this week was when trying to update the bubble ingredient database with ingredient names on the master data sheet
+I thought I uploaded a sheet using the 'modify' function to change existing entries if their name had changed
+But actually I just created new entries duplicating the names that already existed, rather than modifying existing entries
+The bubble ingredients database is just a stop gap for now anyway
+So I'm not sure how much effort it's worth putting into it now
+:heavy_check_mark:
+1
+
+Thiago 11:38 PM
+yep I ask myself the same question ahahaahhahaha
+about bubble.
+Thiago 11:54 PM
+can I bother you with a totally Random thing.
+Carol Schmitz 11:54 PM
+go for it :slightly_smiling_face:
+Thiago 11:55 PM
+so, do you know how to set up quickbooks?
+:face_with_rolling_eyes:
+Carol Schmitz 11:57 PM
+the email we got?
+sorry
+I think the answer to your question is yes
+I believe I set mine up earlier today
+But... I don't remember doing much. They presented me with a bunch of forms, I filled them in.. not much to set up
+Thiago 11:58 PM
+I got this email
+image.png 
+image.png
+
+
+Carol Schmitz 11:58 PM
+I can try to help if you're having difficulty
+Thiago 11:58 PM
+i did (edited) 
+Carol Schmitz 11:59 PM
+just click the button
+it will prompt you to create an account
+you enter all your tax info
+Thiago 11:59 PM
+ok
+Thiago 12:00 AM
+and that’s it right?
+after filling the tax info
+Carol Schmitz 12:01 AM
+yes
+Thiago 12:01 AM
+hummmmmm ok
+i think I was overthinking
+I though we had to enter our bank account for the direct deposit too.
+Carol Schmitz 12:03 AM
+I don't know about that
+Riana did mention switching payroll providers
+but she didn't say anything to me about my bank account
+Thiago 12:05 AM
+yeah I thought quickbooks was the new payroll provider.
+Carol Schmitz 12:06 AM
+I dunno, but I don't want to pay $10 a month
+Thiago 12:06 AM
+but is more like a taxe controller thing
+Carol Schmitz 12:06 AM
+it's accounting software
+Thiago 12:06 AM
+management*
+Carol Schmitz 12:06 AM
+so yes, basically
+Carol Schmitz 10:52 AM
+Good morning, Thiago
+Thiago 10:53 AM
+Good morning Carol.
+how are you felling?
+Carol Schmitz 10:54 AM
+I'm doing well, how about yourself?
+Thiago 10:57 AM
+I’m doing well
+Carol Schmitz 10:58 AM
+Great. I was thinking over the weekend about the changelog, and I have an idea I want to share. I'm curious what you think
+So, instead of having a separate changelog spreadsheet, maybe it would be easier/faster if we use bubble's 'create save point' feature. It already has the timestamp built in, so if we get in the habit of creating save points we'll be able to see changes over time more easily (maybe)
+Thiago 11:04 AM
+:thinking_face:
+when “saving point” I’m saving the whole bubble app?
+or just the page I’m on it
+Carol Schmitz 11:06 AM
+the whole app
+Thiago 11:07 AM
+ok
+Carol Schmitz 11:07 AM
+deploying automatically creates a save point
+Thiago 11:08 AM
+so the idea would be create a save point every-time we are editing a page
+Carol Schmitz 11:11 AM
+yes, after the edits are done. if you're doing a lot of testing and changing a lot of things every few minutes, don't save every change but create a save point at the end of the session like 'testing password reset' or 'fixed typo on page X' or 'added alert for Y condition on login page'
+Thiago 11:16 AM
+I think it is a good idea
+the only problem I can see and its totally manageable, is when two users are editing at the same time.
+we already have calendar to prevent that. but we would have to be very cautions to not save a point when the other user still working. (edited) 
+that made sense? hahahaha lol
+Carol Schmitz 11:20 AM
+Yes, it makes sense
+But I don't think it's actually a problem
+Thiago 11:21 AM
+I confess to you :face_with_rolling_eyes: that I edit bubble out of my time
+
+1 reply
+3 months agoView thread
+Carol Schmitz 11:21 AM
+If I save while you are working, then my save point will include my completed change and your work in progress
+Thiago 11:22 AM
+yes
+Carol Schmitz 11:22 AM
+Then when you are finished you create another save point that will include everything from my save point plus the rest of your changes
+Thiago 11:23 AM
+yes yes,
+Carol Schmitz 11:23 AM
+does that make sense?
+Thiago 11:23 AM
+I like it
+Carol Schmitz 1:18 PM
+Hi Thiago - I see you in bubble. :slightly_smiling_face: No problem, I just wanted to warn you that I am probably going to go a little past 1:30 making updates to the report page. I'm not going to reserve another block because it shouldn't be very long. After my report page updates I'm also planning to deploy
+:ok_hand:
+1
+
+Thiago 1:22 PM
+thanks for the heads up i was just checking something in one of my testing page.
+Carol Schmitz 3:01 PM
+Hi Thiago, I'm having trouble with the password reset
+Thiago 3:01 PM
+ok
+Carol Schmitz 3:01 PM
+I just tried to reset on my carol@journeyfoods.com account and got the Not Authorized alert message
+but my account's Authorized is yes
+this is on live, from the index page
+Thiago 3:02 PM
+did you get the email from firebase?
+Carol Schmitz 3:02 PM
+no
+Thiago 3:04 PM
+hummm ok
+deploying
+please try again
+Carol Schmitz 3:09 PM
+it worked!
+thanks
+Thiago 3:18 PM
+=]
+Thiago 8:14 PM
+Hi, I’m setting up the email for tomorrow :wink:
+Carol Schmitz 8:49 PM
+great! thank you
+Remember we have that meeting at google tomorrow
+:ok_hand:
+1
+
+I'm going to write up some questions before
+Thiago 8:56 PM
+awesome…
+yeah I will go the meeting from the office
+:+1:
+1
+
+Thiago 6:04 PM
+I'm so jealous now that you're already in home hahahahha
+Carol Schmitz 6:04 PM
+how much longer do you have?
+Thiago 6:04 PM
+Long
+Still in the brown line and bus waiting for me
+But ok
+Carol Schmitz 6:06 PM
+you go all the way to kimball?
+on the brown
+Thiago 6:06 PM
+Western
+I'm at Belmont now
+So... Just checking with you...
+Tomorrow we should receive a direct deposit, if this doesn't happen we have to tell Riana so she will send a wire transfer.
+Carol Schmitz 6:10 PM
+I believe she said depending on how long it takes to verify the accounts, she might send a wire instead
+I am not sure if that meant tomorrow or not
+Thiago 6:10 PM
+Hummmmm
+Carol Schmitz 6:11 PM
+But if you need the payment, I would ask for the wire tomorrow
+Thiago 6:11 PM
+:ok_hand:
+Carol Schmitz 6:12 PM
+She didn't tell me an exact date
+And I know she's good for it so I can wait a few extra days
+But she has offered to send a wire to me before if I need payment urgently, there's no shame in that
+Thiago 6:13 PM
+Ok good to know
+Carol Schmitz 6:14 PM
+:slightly_smiling_face:
+Thiago 6:14 PM
+I believe the direct deposit takes time to set up
+I will probably talk to her about the wired so I can pay the rent and be more calm :wink:
+Carol Schmitz 6:15 PM
+good idea - especially if the anxiety is distracting you from work :wink:
+Thiago 6:16 PM
+:face_with_rolling_eyes:
+Carol Schmitz 8:01 PM
+Just an FYI, I added a step to the index login workflow, where users whose 'Beta' field is set to 'yes' are prompted to change their password (and when they do, their 'Beta' is set to 'no'
+:+1:
+1
+
+Thiago 12:34 PM
+Hi Carol good morning
+Carol Schmitz 1:06 PM
+Hello Thiago
+Carol Schmitz 1:35 PM
+Do you have a question, or just saying hi?
+Thiago 1:36 PM
+1 sec…
+=]
+I was just saying hi
+Carol Schmitz 1:40 PM
+Hi :smile:
+Hope you are having a nice day
+Thiago 2:26 PM
+it’s better now
+Carol Schmitz 2:28 PM
+Glad to hear it!
+Thiago 2:30 PM
+=]
+Carol Schmitz 2:30 PM
+Can we meet tomorrow to discuss connecting the ingredient emails to the dashboard? This is a big goal for our next sprint ending 10/15, so I want to meet with you early to make sure we understand the work effort and are prioritizing it accordingly
+Thiago 2:31 PM
+yes sure. =]
+awesome now it make more sense to me
+Carol Schmitz 2:39 PM
+connecting ingredient emails to the dashboard makes more sense?
+Thiago 2:40 PM
+YES…
+The way I talked to Riana I was working in connect the dashboard with the spreadsheet
+like if you subscribe to a ingredient on dashboard a new row would be add to the spreadsheet
+Thiago 2:57 PM
+cool
+do you want meet in the office tomorrow,
+Carol Schmitz 2:58 PM
+no, I'm going to work remote
+I just added you to a weekly engineering review meeting we have on the calendar
+I am not sure if others will join, the meeting doesn't always happen
+Thiago 3:00 PM
+sweet even better =]
+Carol Schmitz 3:01 PM
+Let's plan to meet at 1. If others join we can discuss larger issues with the group, if it's just you and me we can talk about emails. If we don't have a chance to talk about emails in the larger group meeting, you and me can meet after to discuss connecting emails to the dashboard separately
+Thiago 3:02 PM
+:+1:
+Carol Schmitz 3:02 PM
+I doubt the group meeting will be 2 hours, so we'll probably be done by 3
+Thiago 3:03 PM
+ok
+Carol Schmitz 3:24 PM
+can you update the ingredient data flow diagram with the current process (in the v0.2 tab) before we meet tomorrow? https://journeyfoods.atlassian.net/browse/JFIIS-119?atlOrigin=eyJpIjoiMGIzYjg5OGY1MmViNDM0OWJjOWQ3NzcwNjA5YTRkMjUiLCJwIjoiaiJ9
+JFIIS-119 v0.2 - 10/1 version
+Status: To Do
+Type: Subtask
+Assignee: Thiago Cavalcante
+Priority: Medium
+Added by Jira Cloud
+Thiago 3:27 PM
+I was looking into that last week
+I will take another look but I could find much difference
+Carol Schmitz 3:28 PM
+ah
+are you saying the process hasn't changed since v0.1?
+currently the v0.2 tab is a copy of v0.1. I think you added some steps around Search SERP API for news items and filter out relevant results, for example, adding the searches for multiple tags (like market, insights, commodity, etc) and adding the image thumbnailis
+I know you have made a lot of improvements to the emails over the last month, so if you don't know how to update the diagram, please bring a list of those improvements to our meeting and we can figure out if/how they belong in the diagram together. Does that work?
+Thiago 3:34 PM
+ohhh yeah I change a lot the algorithm, this changes I see that it is inside of the box
+image.png 
+image.png
+
+
+let me rephrase
+when I look this diagram i can see a hight level view of the whole ingredients services
+:+1:
+1
+
+so my changes would be inside of this process.
+Carol Schmitz 3:37 PM
+ah
+your changes are more detailed than this diagram describes?
+Thiago 3:38 PM
+Search SERP API
+Filter
+Format
+yes, I just took the Search SERP API process and improve it
+Carol Schmitz 3:42 PM
+ah ok
+so then maybe tomorrow we work on defining v1.0 process that connects the dashboard to the script and add that to the diagram instead
+we'll create the diagram together as a sort of specification document and then you can build it :slightly_smiling_face:
+Thiago 3:50 PM
+sure
+Thiago 4:03 PM
+since this is a higher level view, what do you think to create a requisites docs related to those process
+so then we could go deep in details. (edited) 
+Carol Schmitz 4:06 PM
+Not sure, but it sounds like a good idea. let's talk about it tomorrow
+Thiago 4:07 PM
+:wink:
+Carol Schmitz 4:07 PM
+I am constantly wavering between the desire to document and the need to move quickly/assumption that things will change
+:ok_hand:
+1
+
+Thiago 10:38 AM
+good news
+firebase is set
+Good Morning =]
+Carol Schmitz 11:14 AM
+Hi! What do you mean firebase is set?
+Custom domain?
+Thiago 11:21 AM
+yep
+just tested and I got a email from noreply@journeyfoods.io
+Carol Schmitz 11:25 AM
+sweet!
+thanks
+did you see my note in JIRA about the refresh tokens?
+:face_with_rolling_eyes:
+1
+
+Thiago 11:25 AM
+I can’t believe was a typo :man-facepalming: but is done now
+
+1 reply
+3 months agoView thread
+Thiago 11:26 AM
+i didn’t see yet
+Carol Schmitz 11:31 AM
+ok. I'm working today on getting JIRA more organized for our next sprint, but it's not organized yet so I wanted to call your attention to that one
+what else are your priorities currently? I know the refresh token is important but I
+am not sure if it's more important than the other things you are working on
+https://journeyfoods.atlassian.net/browse/JID-28?atlOrigin=eyJpIjoiOTZkODEzNDcxMDYyNDM5ZTk2MWUyNWYyMjk1Mjg1YWMiLCJwIjoiaiJ9
+JID-28 Authentication - refresh idToken to maintain user login
+Status: In Progress
+Type: Task
+Assignee: Thiago Cavalcante
+Priority: Highest
+Added by Jira Cloud
+Thiago 12:07 PM
+OK, I will be working on this issue
+:+1:
+1
+
+so what should happen if the token is expired ?
+log the user out?
+Carol Schmitz 12:52 PM
+hmmm
+we are meeting in a few minutes, so let's talk about it on the call after the ingredient email diagram
+Thiago 12:53 PM
+:wink:
+Thiago 8:45 PM
+Hi Carol
+what do you think about this
+image.png 
+image.png
+
+
+Carol Schmitz 8:46 PM
+Oh I like that, just change section to session
+Thiago 8:47 PM
+:wink:
+Carol Schmitz 8:48 PM
+can you share with Riana in a message with both of us? She was messaging me about the images disappearing yesterday so I want to update her on our discussion/plan
+Thiago 8:48 PM
+sure
+Carol Schmitz 8:48 PM
+what happens when you click login?
+Thiago 8:48 PM
+you get redirect to index page (edited) 
+Carol Schmitz 8:49 PM
+ok, that sounds good to me
+Thiago 4:05 PM
+Hi Carol, having a nice Friday?
+Carol Schmitz 4:20 PM
+yes
+we just added confluence to JIRA so we can build better documentation
+Thiago 4:21 PM
+Nice :slightly_smiling_face:
+I saw your comment on jira about the refresh token
+Those pages use the idtoken on the API calls
+?
+Carol Schmitz 4:23 PM
+yes
+any page with an ingredient card
+Thiago 4:25 PM
+Hummmm ok thanks for the heads up,
+I'll be working on it
+Carol Schmitz 4:25 PM
+great
+Thiago 5:53 PM
+so,  you want to prompt the pop-up with the inputs (email and password) to the user refresh the session right there and keep working where they left.
+that’s the goal for now right?
+Carol Schmitz 5:57 PM
+I think that would be a better experience for them, do you agree?
+Thiago 5:57 PM
+yes
+Carol Schmitz 5:57 PM
+also it depends how hard it would be / long it will take to change
+Thiago 5:58 PM
+on the pop up its ok to have just one input? for password?
+and the email we use the one is in the section
+Carol Schmitz 6:10 PM
+I think so
+Thiago 6:13 PM
+still working on it
+image.png 
+image.png
+
+
+Carol Schmitz 6:13 PM
+I like that
+Thiago 6:15 PM
+nice I will see if I can wrap up nicely this page before working on the other ones.
+:+1:
+1
+
+Thiago 6:26 PM
+hummm I was just checking the main loging workflow and saw the new action you mention this days about the “Beta”users being redirected to app-reset-pw page.
+on the app-reset-pw workflow I will add the fields to be update for the current user, adding the new idToken and refreshToken.
+after reseting the psw firebase revoke the previous logins
+that makes sense to you? :sweat_smile:
+Carol Schmitz 6:34 PM
+ah, i see
+yes that makes sense
+Thiago 6:35 PM
+cool I will add those
+Carol Schmitz 1:02 PM
+OK, I feel like I got a lot of clarity from that meeting. Did you?
+Thiago 1:04 PM
+Not really,
+Yeah, when we were talking more about design I was following.
+Carol Schmitz 1:07 PM
+ok. give me 15-20 minutes and we can review
+Thiago 1:07 PM
+thank you
+Carol Schmitz 1:45 PM
+sorry that took a little longer than expected
+https://journeyfoods.atlassian.net/wiki/spaces/JIT/pages/721018/Dashboard+Project+Plan?atlOrigin=eyJpIjoiNzk4NTJjMDk0YmIzNGI4Yzg3MTJhNjQ5OTQ0YjMwNmUiLCJwIjoiYyJ9
+Dashboard Project Plan in Engineering
+Last updated 2 days ago by Carol Schmitz | Added by Confluence Cloud
+I'm building a confluence site for our documentation
+this page is for the product detail pages we were discussing in our meeting
+Thiago 1:54 PM
+hi Carol just a sec… =]
+Thiago 2:03 PM
+Sorry my dog, was crazy
+:dog:
+Carol Schmitz 2:09 PM
+haha
+first of all, do you understand what we are building? Our customers have food products, we want to show them information about their products on the dashboard
+Thiago 2:13 PM
+yes, like journey foods company has a product (journey bites)
+and I believe that this page is the core for the PLM
+Carol Schmitz 2:13 PM
+yes
+So basically, on that project plan document, I listed a bunch of subtasks we should try to complete over the next week. I think it makes sense to start with a wireframe showing the overall page structure and where we want the different features/data to show
+Thiago 2:18 PM
+love it!!!
+I start loosing focus when I try to put all together  in an image
+so the wireframe will help a lot
+Carol Schmitz 2:20 PM
+good, glad you think so
+I think I will create the wireframe, since i'm a bit more familiar with the concepts/goals
+are you comfortable with turning the wireframe into a front end design on bubble?
+i'm trying to figure out how to best split the tasks between us
+Thiago 2:22 PM
+yes yes yes
+I like that
+ohhh
+before I forget
+I added the refresh token to those pages
+and have good news
+Carol Schmitz 2:24 PM
+great
+oh?
+Thiago 2:25 PM
+I found a way to handle the api error without showing that ugly msg.
+Carol Schmitz 2:26 PM
+awesome!
+Thiago 2:26 PM
+is already working for the popup (refresh session)
+Carol Schmitz 2:27 PM
+great
+I don't remember if we have a task for that, but if we don't can you create one and add these notes to it?
+Thiago 2:27 PM
+yes
+Carol Schmitz 2:28 PM
+I think you should work on adding that error handling to other pages today, while I build the wireframe for products
+Thiago 2:29 PM
+:ok_hand:
+Thiago 4:40 PM
+Hi, need a opinion…
+what do you prefer
+1 msg saying  Email or Password is invalid
+or
+2 msg Password is invalid /Email is invalid
+Carol Schmitz 4:41 PM
+What about Email and/or Password is invalid?
+Thiago 4:42 PM
+hummm nice
+ok
+just add this msg on index page (edited) 
+:+1:
+1
+
+Carol Schmitz 5:25 PM
+thanks for the savepoints today
+very clear
+Thiago 5:25 PM
+sure =]
+there is more coming in the next minutes =]
+Carol Schmitz 5:27 PM
+excellent
+Thiago 5:47 PM
+from the top of your head, do you know if we have a Jira ticket to fix layout?
+like in the dashboard after log in
+Carol Schmitz 5:48 PM
+fix it?
+how?
+Thiago 5:49 PM
+like make more responsive.
+Carol Schmitz 5:50 PM
+I don't think so
+has Riana told you that is a priority?
+Thiago 5:50 PM
+no no
+Zach mention to me a couple minutes ago.
+Carol Schmitz 5:51 PM
+haha ok
+He asked me too. I told him to make a JIRA ticket
+Thiago 5:52 PM
+hahahahahaha I told him to open a group msg with you and me hahahahah
+well anyway
+Carol Schmitz 6:36 PM
+I'll be in around 1 tomorrow, let me know if you have any questions about the wireframes before then
+Thiago 6:37 PM
+ok.
+Carol Schmitz 10:29 PM
+let me know if I'm interfering in bubble. I'm working on some data type updates for the product versions
+Thiago 10:30 PM
+actually I forgot to close the window your are fine, =] (edited) 
+Carol Schmitz 10:32 PM
+ok :slightly_smiling_face: good night
+Carol Schmitz 7:34 PM
+So, Riana wants to add % back to the ingredient list
+Thiago 8:03 PM
+Hi Carol
+you mean on the products details page
+Carol Schmitz 8:06 PM
+yes
+:woman-facepalming:
+1
+
+Thiago 8:07 PM
+its ok I can copy and paste from the original
+Carol Schmitz 8:07 PM
+oh nice!
+we only want %, not amount
+Thiago 8:10 PM
+ok
+Carol Schmitz 10:17 PM
+check out the updates I made to populate your designs with real data!
+https://dashboard.journeyfoods.io/version-test/test-app-products-data
+https://dashboard.journeyfoods.io/version-test/test-product-detail-data/strawberry-chia-journey-bites-v12-1570666531316x436118924694501900
+Carol Schmitz 11:51 AM
+Hello Thiago, how are you today?
+Thiago 11:53 AM
+Hi Carol I’m doing well =] how are you?
+Carol Schmitz 11:55 AM
+pretty good!
+a little tired
+I woke up at 8 to see our meeting was cancelled... but I couldn't fall back asleep :confused:
+Thiago 11:56 AM
+hahahahahah sorry about that.
+but its good that you are working from home today =]
+Carol Schmitz 11:58 AM
+yep
+Thiago 11:58 AM
+I made some progress with the google cloud functions
+image.png 
+image.png
+
+
+Carol Schmitz 12:03 PM
+nice! I think that is showing that you sent your email and a list of ingredients to GCF and GCF received the request, is that right?
+Thiago 12:03 PM
+yes
+Carol Schmitz 12:05 PM
+cool
+Thiago 12:09 PM
+I’ll be running more tests, I’m with a weird felling that maybe this solution won’t work when we run a bigger list of users, but lets see =]
+Carol Schmitz 12:10 PM
+hm, ok
+Carol Schmitz 12:20 PM
+keep me posted
+Thiago 4:31 PM
+Hi Carol, have question
+what are the conditions to a user receive a email from ingredients services?
+Think like, looking to the Bubble database I need to extract a list of user to send the emails, but what are the conditions to a user be eligible to be inside of this list?
+that makes sense?
+Carol Schmitz 4:35 PM
+mmmm yes
+I think maybe those conditions don't exist yet. What do you thinking of adding a Receives Emails field of type yes/no?
+that way later we can let the user decide for themselves whether or not they want the weekly emails, with a checkbox in settings or something like that
+Thiago 4:39 PM
+initially I was thinking something with the subscription plan
+2 Ingredients 10 Ingredients
+Carol Schmitz 4:40 PM
+The subscription plans are about to change pretty dramatically
+Thiago 4:40 PM
+:astonished:
+nice
+ok I think the new field is the most simple for now
+Carol Schmitz 4:42 PM
+haha
+the current plans don't really make sense for what the sales teams are proposing to customers, and the subscription limits are kind of arbitrary. so i don't want to base the emails off of that
+Thiago 4:44 PM
+ok cool
+I will create a new entry in User
+:+1:
+1
+
+Carol Schmitz 4:45 PM
+hows the cloud functions part going?
+Thiago 4:46 PM
+its going
+Carol Schmitz 4:47 PM
+:slightly_smiling_face:
+Thiago 4:47 PM
+I believe next week we will stop using the spreadsheet
+my only concern is about performance, I think the google function has a max timeout of 9 min
+Carol Schmitz 4:49 PM
+ooh
+Carol Schmitz 4:49 PM
+is that a problem with the long list of users?
+:+1:
+1
+
+
+
+2 replies
+Last reply 3 months agoView thread
+Carol Schmitz 4:49 PM
+i mean, the script was taking a lot longer to run than 9 minutes in colab, is that the concern?
+
+
+2 replies
+Last reply 3 months agoView thread
+Carol Schmitz 4:55 PM
+are you going to be in bubble for a while? I was planning to copy the test pages we designed yesterday into app-products and app-products--detail, so we can deploy and test
+Thiago 4:56 PM
+no, I was just researching
+:+1:
+1
+
+Thiago 11:42 AM
+Good Morning =]
+how are you in this morning?
+Carol Schmitz 11:46 AM
+Hi, I'm doing well, how about you?
+Thiago 11:47 AM
+I doing pretty good too.
+I had a question for you but I’m just checking one more thing
+Carol Schmitz 11:48 AM
+sure
+I'll be back soon
+Thiago 11:50 AM
+:wink:
+Thiago 12:05 PM
+about Riana’s msg, yes i took a look on the the bubble news section
+Carol Schmitz 12:06 PM
+can you copy this message into our group thread please?
+Thiago 12:07 PM
+yes yes I was just giving you some info first so you are not get surprised.
+Carol Schmitz 12:08 PM
+ok, thanks :slightly_smiling_face: you can surprise me in the group thread, its ok
+Thiago 12:08 PM
+ahahahaha alright
+Carol Schmitz 12:41 PM
+are you working in bubble? Something weird is going on with the ingredient--detail page that i'm trying to troubleshoot but I don't want to interfere with your work. If you are in bubble it's not interfering with what I'm doing, so no worries. just checking :slightly_smiling_face:
+Thiago 12:42 PM
+I’m not testing so I think is good
+and I working on the Bubble API.
+:+1:
+1
+
+Carol Schmitz 1:17 PM
+Hi, I need your help please
+Thiago 1:17 PM
+sure
+Carol Schmitz 1:18 PM
+Something about the refresh session workflow you added is causing unexpected results on the dashboard and I'm not sure how to fix it
+Thiago 1:18 PM
+ok
+live version?
+Carol Schmitz 1:18 PM
+can you take a call now? I can call through slack
+Thiago 1:18 PM
+yes
+Carol Schmitz 1:19 PM
+I think it'd be easier / faster to talk
+Thiago 1:19 PM
+yes
+Carol Schmitz 1:19 PM
+Call
+Call Ended
+Ended at 1:23 PM - Lasted 4 minutes
+
+You both joined
+Call
+Call Ended
+Ended at 3:00 PM - Lasted 1 hour and 37 minutes
+
+You both joined
+Thiago 3:58 PM
+Hi Carol, good afternoon.
+I’m working on bubble doing some research and trying to find a way to schedule a API call.
+let me know if I messing with your activity =]
+Carol Schmitz 4:07 PM
+nope, i'm just doing data updates for our new customers
+it looks pretty cool I have to say
+want to see?
+Thiago 4:08 PM
+:ok_hand:
+yes
+Carol Schmitz 4:08 PM
+login to live using brittania@properdough.com / PD01JFIO
+Thiago 4:11 PM
+wow
+this is really nice
+Carol Schmitz 4:13 PM
+right? only the triple chocolate has ingredients added
+but you get the idea
+thanks for your help!
+it's exciting to see it coming together
+did you see the reports and labels
+Thiago 4:15 PM
+yes it’s very exciting,
+reports?
+wow see this page should be our outdoor at the food bytes event.
+this is so cool.
+I’m not a food scientist but I would love to have this to play  with uahuahauahuahaa
+Carol Schmitz 4:17 PM
+yes, well we didn't have all this functionality ready by then
+Thiago 4:18 PM
+yes yes, I’m really happy that I’m seeing this =] (edited) 
+Carol Schmitz 4:21 PM
+good! remember this is sensitive customer data, so we need to be careful with sharing it
+:wink:
+1
+
+i'm going to deploy, hang on a sec please
+Thiago 4:23 PM
+just saw the report and labels page
+very good job Carol =]
+Carol Schmitz 4:27 PM
+I'm glad you like them
+I think I want to make the upload boxes bigger on the label page
+Carol Schmitz 4:48 PM
+are you adding new users to the test db in bubble?
+Thiago 4:57 PM
+no
+but I’m using bubble api
+we are pretty close to some big changes on the ingredients services.
+Carol Schmitz 5:05 PM
+oh yeah?
+
+1 reply
+3 months agoView thread
+Carol Schmitz 5:19 PM
+that's exciting
+I broke something with the privacy settings on reports and I'm having trouble figuring out what
+Thiago 5:26 PM
+need help?
+Carol Schmitz 5:28 PM
+it's not urgent, but it's bugging me that the behavior changed and I don't know why. so I could use some help if you've got time
+the reports and labels are supposed to be private files
+so you can't view them if you're not logged in
+https://dashboard.journeyfoods.io/version-test/fileupload/f1568138564621x255978966202521800/sample-report.pdf
+but I can go to that page without being logged in
+Thiago 5:37 PM
+hummm
+ok give 10 minutes =]
+Carol Schmitz 5:42 PM
+I think i'm going to revert to the state of the app a few weeks ago
+temporarily
+Thiago 5:48 PM
+I’m here now
+did you revert it
+Carol Schmitz 5:50 PM
+yes
+https://dashboard.journeyfoods.io/version-test/fileupload/f1568138564621x255978966202521800/sample-report.pdf
+try to access from a private browser window
+Thiago 5:52 PM
+Sorry, you do not have permission to modify this file
+i got this msg
+Carol Schmitz 5:54 PM
+me too
+that's what we want to happen
+so i screenshot the privacy roles in the old version
+Thiago 5:54 PM
+hummmm.
+cool
+Carol Schmitz 5:55 PM
+5 files 
+Screen Shot 2019-10-13 at 5.48.16 PM.png
+
+
+Screen Shot 2019-10-13 at 5.48.36 PM.png
+
+
+Screen Shot 2019-10-13 at 5.49.30 PM.png
+
+
+Screen Shot 2019-10-13 at 5.49.41 PM.png
+
+
+Screen Shot 2019-10-13 at 5.49.54 PM.png
+
+
+Thiago 5:55 PM
+its working the way it should now?
+
+1 reply
+3 months agoView thread
+Carol Schmitz 5:55 PM
+these are the things I can think of that might be related to the desired behavior
+so now i'm reverting back to how it was a few minutes ago
+Thiago 5:57 PM
+ok
+Carol Schmitz 6:03 PM
+hm, i don't see any differences
+do you?
+Thiago 6:05 PM
+this version would be the most recent?
+Carol Schmitz 6:06 PM
+yes, from just before i reverted
+Thiago 6:06 PM
+ok
+yeah I can see the file now
+Carol Schmitz 6:17 PM
+did you fix it?
+Thiago 6:17 PM
+no,
+I can’t see anything weird so far
+hummmmmm
+wait
+yep
+I think I know
+see now if its working how it should?
+Carol Schmitz 6:21 PM
+i think so
+Thiago 6:21 PM
+ok
+try again
+Carol Schmitz 6:23 PM
+i am pretty sure it is working now
+what did you change?
+Thiago 6:23 PM
+did you tried again?
+Carol Schmitz 6:23 PM
+yes
+one file isn't working, but i think it's more related to how the file was uploaded than the app functionality
+Thiago 6:24 PM
+well
+the only thing I did was on User privacy
+image.png 
+image.png
+
+
+I checked it the View attached files checkbox
+Carol Schmitz 6:26 PM
+hm
+that's kinda weird
+Thiago 6:26 PM
+so I was hoping you say that its not working.
+Carol Schmitz 6:27 PM
+i would think that checking view attached files would allow MORE view privileges
+Thiago 6:28 PM
+so thats why I told you to try again
+because it wasn’t check before and you said it was working
+so here it is
+lets start over
+Carol Schmitz 6:29 PM
+ok
+Thiago 6:29 PM
+right now the checkbox is checked (edited) 
+Carol Schmitz 6:30 PM
+and the pdf is not protected
+not working
+Thiago 6:30 PM
+yes
+so its not good
+let uncheck
+lets*
+Carol Schmitz 6:30 PM
+go ahead
+Thiago 6:30 PM
+done
+I got blocked
+Carol Schmitz 6:31 PM
+and now it's protected! and working
+ok cool
+we solved it
+thank you!
+i'm going to push live
+Thiago 6:31 PM
+:+1:
+ok… I’m leaving now =]
+Carol Schmitz 6:33 PM
+ok! good night
+thanks again
+Thiago 6:34 PM
+good night,
+anytime =]
+:wink:
+Carol Schmitz 3:59 PM
+Hi Thiago, I hope you're having a nice day
+Carol Schmitz 3:59 PM
+I'm planning to deploy a few fixes in the next hour or so, let me know if you'll be in bubble anytime soon
+
+1 reply
+3 months agoView thread
+Carol Schmitz 4:01 PM
+Also I wanted to check in on the cloud functions progress and see where we are with that
+
+1 reply
+3 months agoView thread
+Thiago 4:10 PM
+Hi Carol I’m doing pretty good =]
+hope your are having a nice day as well.
+me and Riana just got back from the office space we might get hahahahah
+pretty cool
+Thiago 4:25 PM
+[
+    {
+        "name": "Riana",
+        "company": "Vegani",
+        "email": "rianalynn8@gmail.com",
+        "ingredients": [
+            "Strawberry",
+            "Guava",
+            "Apple",
+            "Baobab",
+            "Cayenne Pepper"
+        ]
+    },
+    {
+        "name": "Carol",
+        "company": "Journey Foods",
+        "email": "carol@journeyfoods.com",
+        "ingredients": [
+            "Mango",
+            "Cayenne Pepper"
+        ]
+    },
+    {
+        "name": "Anika",
+        "company": "Journey Foods",
+        "email": "anika@journeyfoods.com",
+        "ingredients": [
+            "Passion Fruit",
+            "Erythritol",
+            "Ginger Extract",
+            "Passion Fruit Extract",
+            "Lemon Extract",
+            "Monk Fruit",
+            "Monk Fruit Masker",
+            "Saffron",
+            "Piperine",
+            "Sweetener Enhancer"
+        ]
+    },
+    {
+        "name": "Yass",
+        "company": "Safforia",
+        "email": "ygrayeli@safforia.com",
+        "ingredients": [
+            "Passion Fruit",
+            "Erythritol",
+            "Ginger Extract",
+            "Passion Fruit Extract",
+            "Lemon Extract",
+            "Monk Fruit",
+            "Monk Fruit Masker",
+            "Saffron",
+            "Piperine",
+            "Sweetener Enhancer"
+        ]
+    },
+    {
+        "name": "Sush",
+        "company": "Almeda Labs",
+        "email": "sush@almedalabs.com",
+        "ingredients": [
+            "Carnitine",
+            "Organic Cordycep",
+            "Isoleucine",
+            "Glutamic Acid",
+            "Lysine",
+            "Organic Bitter Gourd Powder",
+            "Organic Open-Wall Chlorella",
+            "Milk Thistle",
+            "Serine",
+            "Threonine",
+            "Chlorophyll"
+        ]
+    },
+    {
+        "name": "Tania",
+        "company": "Journey Foods",
+        "email": "tania@journeyfoods.com",
+        "ingredients": [
+            "Mango",
+            "Raspberry",
+            "Spelt"
+        ]
+    },
+    {
+        "name": "Thiago",
+        "company": "Journey foods",
+        "email": "thiago@journeyfoods.com",
+        "ingredients": [
+            "Banana"
+        ]
+    },
+    {
+        "name": "JFO",
+        "company": "Food Guava",
+        "email": "journeyfoods@gmail.com",
+        "ingredients": [
+            "Prickly Pear",
+            "Limes"
+        ]
+    },
+    {
+        "name": "Whitney",
+        "company": "Medium",
+        "email": "wobanner@gmail.com",
+        "ingredients": [
+            "Butter",
+            "Dragonfruit",
+            "Peanut Butter",
+            "Hemp Milk",
+            "Avocado",
+            "Hemp Oil",
+            "Pea Protein",
+            "Agave",
+            "Alternative Dairy",
+            "Salt"
+        ]
+    }
+]
+
+
+3 replies
+Last reply 2 months agoView thread
+Thiago 4:28 PM
+with this structure, its get easier to work with =]
+I adapted the script to work with JSON  and added some logic to be more efficient.
+Carol Schmitz 4:32 PM
+nice!
+Thiago 4:39 PM
+for example. Now the script will look for Baobab Just once and store the results in a dictionary, so I can reuse latter for to send to other users that have baobab in their list.
+Carol Schmitz 4:39 PM
+ah, nice!
+Thiago 4:42 PM
+and last but not least, the script is running trough google functions
+Carol Schmitz 4:45 PM
+nice!!
+Thiago 4:47 PM
+do you have postman?
+Carol Schmitz 4:48 PM
+yes
+Thiago 4:52 PM
+https://us-central1-journeyfoods-io.cloudfunctions.net/ingredients-services
+{
+    "payload": [
+        {
+            "name": "Thiago",
+            "company": "Journey foods",
+            "email": "thiago@journeyfoods.com",
+            "ingredients": [
+                "Banana"
+            ]
+        },
+        {
+            "name": "Thiago",
+            "company": "Medium",
+            "email": "thiago@journeyfoods.com",
+            "ingredients": [
+                "Banana"
+            ]
+        }
+    ]
+}
+image.png 
+image.png
+
+
+if you want to try
+Carol Schmitz 5:00 PM
+cool, thanks
+hm, I think that means we could implement that 'get email for this ingredient now' button I was talking about in our thread with Riana, pretty quickly
+Thiago 5:02 PM
+yes yes is perfect
+hold on.
+Carol Schmitz 5:12 PM
+what do you have in the headers?
+Thiago 5:13 PM
+image.png 
+image.png
+
+
+Carol Schmitz 5:41 PM
+hmm
+i'm not getting a response
+Thiago 5:42 PM
+did you get the email?
+Carol Schmitz 5:42 PM
+no
+Thiago 5:43 PM
+can you take a screenshot of your post man
+Carol Schmitz 5:44 PM
+here you go
+Screen Shot 2019-10-14 at 5.43.31 PM.png 
+Screen Shot 2019-10-14 at 5.43.31 PM.png
+
+
+Thiago 6:05 PM
+wow
+that is weird
+I can call the endpoint
+but sometimes it sends sometimes not hahahahahaha
+Carol Schmitz 6:07 PM
+hmmm
+weird
+darn
+i was hoping we could show it off in a customer demo tomorrow
+Thiago 6:08 PM
+the only difference I see is this, but I think is just different version
+image.png 
+image.png
+
+
+Carol Schmitz 6:08 PM
+yeah, I don't have that option in the dropdown
+and my header is content-type = application/json
+Thiago 6:09 PM
+try to call now
+Carol Schmitz 6:10 PM
+nope
+Thiago 6:24 PM
+haaa
+I think you have a space in the endpont
+Carol Schmitz 6:25 PM
+in the URL?
+Thiago 6:25 PM
+central 1
+image.png 
+image.png
+
+
+Carol Schmitz 6:25 PM
+ohh i see
+yes!
+i got an ok response
+Thiago 6:26 PM
+yeahhh
+Carol Schmitz 6:26 PM
+but no email :disappointed:
+Thiago 6:26 PM
+yeah
+I was expecting that
+I’m fixing a bug
+try banana
+just one ingredient
+Carol Schmitz 6:29 PM
+nope, still no email
+the first time i tried it was a reeally long response time
+but I tried a few different one-ingredient lists and haven't gotten any emails yet
+Thiago 6:37 PM
+{
+   “error”: “Your searches for the month are exhausted. You can upgrade plans on SerpApi.com website.”
+}
+=/
+this response is from SERP API call
+Carol Schmitz 6:39 PM
+ooh no!
+that's not good for today
+I don't understand
+it says we have 0 searches left this month
+but also that our plan started today
+Thiago 6:44 PM
+I’m leaving to office now, I will be back here when I get home
+Carol Schmitz 6:45 PM
+ok
+Thiago 6:45 PM
+but I on the phone if you need me for something urgent
+Carol Schmitz 6:46 PM
+no, thank you though
+Thiago 7:32 PM
+Hi Carol,
+Any news on the serp?
+Carol Schmitz 7:33 PM
+i just posted to you + r
+Thiago 7:33 PM
+:wink:
+Carol Schmitz 7:33 PM
+with what i found out
+Carol Schmitz 10:38 AM
+good morning thiago
+Thiago 10:39 AM
+Hi Carol good morning
+Carol Schmitz 10:40 AM
+I noticed today that ingredients on the subscribed list are showing up as not subscribed when you go to the detail page. I think this is related to the news results not showing and maybe the workflow terminating, or something like that
+
+2 replies
+Last reply 3 months agoView thread
+Thiago 10:40 AM
+I'm here with Riana looking to office space
+Carol Schmitz 10:41 AM
+please take a few minutes to look into it and let me know what you find. we don't need to solve it immediately
+oh nevermind, this can wait
+Thiago 10:41 AM
+:wink: :+1:
+Carol Schmitz 10:41 AM
+are you at a potential new office? where?
+Thiago 10:43 AM
+620 LaSalle
+Carol Schmitz 10:43 AM
+ah - is that the spaces new location?
+Thiago 10:44 AM
+Yes
+Carol Schmitz 10:46 AM
+cool - I hope we go with that one
+Thiago 10:46 AM
+Better location for you
+?
+This one has a roff too
+77444 
+77444
+
+
+Carol Schmitz 10:50 AM
+ooh very nice
+thanks for sharing
+yes, it's easier for me to get to, and also proximity to evening events which I like
+Thiago 4:57 PM
+https://dashboard.journeyfoods.io/version-test/schedule-emails
+Carol Schmitz 10:39 AM
+Good morning Thiago, I got my emails this morning. :slightly_smiling_face: They came in 30 minutes apart, which was unexpected. I don't think it's a problem, but I thought it was interesting
+Thiago 10:41 AM
+Hi good morning
+Yes,
+During the execution of the new script I found a bug so I stopped
+Carol Schmitz 10:43 AM
+ah
+Thiago 10:48 AM
+After fixing, I trigger again from where I had stopped
+Carol Schmitz 11:08 AM
+Cool, thanks
+Thiago 5:37 PM
+Hi,
+I finished the first version of the detail page
+app-ingredient-detail-thi
+Carol Schmitz 5:41 PM
+ooh!
+nice
+I changed the name to test-ingredient-detail-thi
+because i want to save the app- prefix for our live pages
+Thiago 5:45 PM
+:wink:
+ohh yeahhh
+thanks
+Carol Schmitz 5:46 PM
+you're welcome!
+Carol Schmitz 5:55 PM
+did you say you finished? it looks like just the news is removed - i don't see the button
+Thiago 5:55 PM
+yes
+the button show if you are subscribed to that ingredient
+Carol Schmitz 5:57 PM
+ah! brilliant
+Thiago 5:57 PM
+hahahahaha
+thanks ahahhahaha
+can you see?
+Carol Schmitz 10:23 PM
+I got the email!
+Thiago 10:03 AM
+Hi Good morning?
+Carol Schmitz 10:08 AM
+Yes! It is a good morning
+Hope the same is true for you
+Thiago 10:09 AM
+=] nice
+yes it is a good morning,:blush:
+Thiago 10:15 AM
+hahahhaahhaha
+I just notice my ? point hahahahahah
+sorry that was a typo
+Carol Schmitz 10:22 AM
+ah :wink:
+Carol Schmitz 10:28 AM
+ready for our first daily 'stand up' ?
+Thiago 10:32 AM
+can we do around 11:00?
+Carol Schmitz 10:32 AM
+absolutely
+Thiago 10:32 AM
+:wink:
+Thiago 11:03 AM
+ok
+Carol Schmitz 11:05 AM
+hi!
+i am working on troubleshooting the nutrition data display issues today
+also starting to create a test plan in JIRA for fuse to execute next week
+and coordinating with Tania on some ingredient data updates
+Thiago 11:14 AM
+I’m working on the ingredients insights services
+so next week we should be able to trigger the service from bubble (edited) 
+Carol Schmitz 11:15 AM
+by insight services, you mean the automated emails?
+Thiago 11:15 AM
+yes
+today I will check if the users on the google spreadsheet are in bubble and subscribed to the same ingredients.
+by that I mean, I hope finding a user in bubble live database, call Carol, and this user should have 2 ingredients subscribe
+Mango and Cayenne
+Carol Schmitz 11:19 AM
+ah. well i can tell you for user Carol you won't :wink:
+For Sush, Yass, and Whitney, you will find a matching bubble user
+:+1:
+1
+
+except there are a few ingredients they are subscribed to in the google sheet that we don't have in bubble
+Thiago 11:21 AM
+ok
+Thiago 11:22 AM
+I’ll raise this ingredients list,
+
+
+6 replies
+Last reply 3 months agoView thread
+Carol Schmitz 11:39 AM
+do you have an estimate for completing automated emails? I think it's a good priority for you today, but there are a couple of other design-related tasks I want to connect with you about over the next few days.
+Thiago 11:40 AM
+yeah the automated emails it’s gonna take a while I would say until monday.
+Carol Schmitz 11:42 AM
+and that's working full-time only on that issue?
+Thiago 11:44 AM
+yes,
+if there is other priorities, I suggest we keep the automated emails in the second plan.
+Carol Schmitz 11:45 AM
+what do you mean by second plan? i think i'm with you but a little confused
+Thiago 11:46 AM
+by second plan I mean, lets not waste much time on this now, but keep it in our radar.
+:100:
+1
+
+its only 3 costumers
+Carol Schmitz 11:47 AM
+yes. our users woont be able to tesll a difference if theey are gettinng auto emails or manaully triggered emails
+:100:
+1
+
+Thiago 11:47 AM
+and its working for now
+Carol Schmitz 11:47 AM
+exactly
+ok
+so, i think we should start reedesigning the ingreedient detail page
+Thiago 11:47 AM
+cool
+Carol Schmitz 11:48 AM
+remove news and replace with the button, redesign reecommendation list, add completeness icon
+and resize boxes / reorganize layout to make the key information easy to access/view
+Thiago 12:00 PM
+1 - remove news and replace with the button
+2 - redesign recommendation list
+3 - add completeness icon
+4 - resize boxes/reorganize layout to make the key information easy to access/view (edited) 
+Carol Schmitz 12:02 PM
+Yes. Those are the 4 updates to ingredient--detail I want to have live by the end of the sprint
+possibly earlier if we can
+Thiago 12:03 PM
+end of the sprint (Nov 1st?)
+Carol Schmitz 12:03 PM
+yes
+Thiago 12:05 PM
+I’m pretty sure we can do all the four (3.5 the first it’s working just need to test more) by Tuesday.
+Carol Schmitz 12:06 PM
+nice
+Thiago 12:09 PM
+the problem here is the time we will spent changing the layout, going back and forth. since we don’t have a reference model.
+wireframe*
+Carol Schmitz 12:11 PM
+hmm
+Thiago 12:11 PM
+that’s why I say the we can do all that on Tuesday because on that day we would be in the office. hahahaha
+
+
+2 replies
+Last reply 3 months agoView thread
+Carol Schmitz 12:12 PM
+do you want to collaborate on a wireframe over hangouts today, maybe spend like 30 min making a google drawing?
+Thiago 12:15 PM
+I would say we could do a hangout and already make some changes and discuss about the layout.
+all the same time,
+Carol Schmitz 12:16 PM
+ok - 2pm good?
+Thiago 12:16 PM
+:ok_hand:
+yes
+I want to push myself a little bit more, what other activity I could be working separately, (not the emails lol) (edited) 
+Carol Schmitz 12:23 PM
+sure, how about multi-user teams?
+right now each user's account is separate, but we want to share products/ingredient lists (actually not sure if ingredient lists should be per user or per team) across multiple users in one company
+Thiago 12:27 PM
+so if we are in the same company I should be able to see your products?
+Carol Schmitz 12:27 PM
+yes
+and one person on the team should be the company admin who has the ability to add other users
+(doesn't need to be an automated add immediately)
+Thiago 12:29 PM
+hummm
+this is for this sprint?
+Carol Schmitz 12:30 PM
+in bubble, yes
+if possible. I think it's kind of complex and might take some time
+so I don't know if this sprint is realistic
+but riana mentioned it's a high priority issue for users, and it's also an up-sell on our end. so if we have a user currently subscribed, we may be able to get them to pay more next month if they can share an account with another team member
+so when you said you wanted to push, i thought there would be a high potential for ROI by you working on this sooner
+Thiago 12:33 PM
+ROI?
+Carol Schmitz 12:33 PM
+return on investment
+the investment in this case being your time
+Thiago 12:33 PM
+:wink:
+Carol Schmitz 12:34 PM
+i sent an invite for our meeting later, I'm going to take a break from chat
+
+1 reply
+3 months agoView thread
+Thiago 12:34 PM
+ok
+Carol Schmitz 2:38 PM
+i stepped a way for a min, brb
+Carol Schmitz 2:48 PM
+hi, i'm back
+are you still there?
+Thiago 3:47 PM
+image.png 
+image.png
+
+
+Carol Schmitz 7:31 PM
+hey thiago
+i'm going to be online tonight building a demo profile for riana and zach to pitch at cdl tomorrow
+if you're around and want to pitch in, let me know, no worries if you want to rest and recharge this evening :slightly_smiling_face:
+Thiago 7:35 PM
+I’m in =]
+I will be off for next hour.
+but I can get back here
+Carol Schmitz 7:38 PM
+cool
+check in with me here and I'll let you know where we are by then
+Thiago 7:39 PM
+ok
+Carol Schmitz 7:40 PM
+thanks!!
+Thiago 9:32 PM
+All right
+Carol Schmitz 9:33 PM
+hi
+do you think you can do some final touches on visuals for ingredient recommendation?
+Thiago 9:36 PM
+yes
+you mean the similar ingredients panel?
+Carol Schmitz 9:36 PM
+yes
+i added a photo and made the rows taller
+but i think you are better at alignment and groups and those kinds of things
+Thiago 9:37 PM
+ok
+Carol Schmitz 9:38 PM
+the drop shadow on hover, etc
+Thiago 9:39 PM
+drop shadow on hover? (edited) 
+Carol Schmitz 9:39 PM
+shadow
+you know when you hover over an ingredient in the product detail page and it gets a shadow that makes it feel like its floating or something
+Thiago 9:40 PM
+hummm ok I will take a look on the
+Carol Schmitz 9:40 PM
+anyway, just kind of clean up the page a little
+Thiago 9:41 PM
+so just to be clear, this page should be good by tuesday and now we are almost finishing for tomorrow
+did I miss somithing?
+Carol Schmitz 9:42 PM
+well, i was thinking about it from a different perspective,  let me explain
+riana and zach will pitch investors tomorrow, and i thought it would be  cool experience for them giving a demo if they click subscribe, then the 'send me news' button appears, then they click send me news and an email sends
+Thiago 9:44 PM
+sure
+Carol Schmitz 9:45 PM
+i am not worried about it being perfect design wise
+just spend like 30 min cleaning it up a little
+Thiago 9:45 PM
+yeah I miss that part I did no about tomorrow.
+but ok now I know hhahahahahha
+Carol Schmitz 9:45 PM
+yes, that's why i asked if you were available tonight. it's totally a last minute thing and not necessary at all
+but if it goes well, then we get to stay in this accelerator
+Thiago 9:46 PM
+when you are planning to deploy
+Carol Schmitz 9:47 PM
+I don't kno
+know
+Thiago 9:48 PM
+ok
+lets do this
+Carol Schmitz 9:48 PM
+:slightly_smiling_face:
+Carol Schmitz 11:04 PM
+ooh!
+it looks so nice
+the only thing I am not sure about is the left-right spacing
+i am wondering if the similar ingredients panel should be smaller left-right
+Thiago 11:06 PM
+=]
+Carol Schmitz 11:06 PM
+so it aligns with the right side of the header and submit data sectioon
+Thiago 11:08 PM
+hummm…
+I will remove the spacing
+:+1:
+1
+
+what do you think if we remove the border
+take a look now
+Carol Schmitz 11:20 PM
+its loading
+Carol Schmitz 11:29 PM
+that looks better
+i'm going to move the similar ingredients panel left though
+Thiago 11:29 PM
+ok
+I’m working on getting the default img
+Carol Schmitz 11:30 PM
+let me try
+can you shrink the width of the ingredients panels?
+i'm having trouble with the nested groups
+Thiago 11:33 PM
+yes its a bit crazy
+Carol Schmitz 11:34 PM
+ok i'm having this weird experience
+https://dashboard.journeyfoods.io/version-test/test-dashboard
+dashboard.journeyfoods.iodashboard.journeyfoods.io
+Journey Foods | Product R&D Portal
+Journey Foods
+i created this test page to link to your -thi ingredient detail page
+but when i click the ingredient, it takes an excessive time to load
+have you tried loading your ingredient page from another page?
+Thiago 11:36 PM
+not yet
+lets see
+I shrink the panel
+a little bit
+need more
+Thiago 11:41 PM
+when I click on this link I am redirected to the index page (edited) 
+Carol Schmitz 11:43 PM
+i just made you and admin
+thiago@ ?
+Thiago 11:43 PM
+I’m no longer getting the ingredient info
+ok
+it was ok for me
+did the ingredients info stop showing for you too?
+image.png 
+image.png
+
+
+Carol Schmitz 11:46 PM
+mmm, some of them did?
+Error parsing data from Apiconnector2: {"Raw Data Name": "Strawberries, raw", "Allergens": "", "Calcium, Ca": 16.0, "Calories": "UNAVAILABLE", "Carbohydrate, by difference": 7.68, "Cholesterol": 0.0, "Copper, Cu": NaN, "Dietary/Functional": "lacto vegetarian, pescatarian, vegetarian, lacto-ovo vegetarian, ovo vegetarian, gluten-free, paleo, vegan, ant-cancer, antioxidant, heart-health, diabetes-friendly, weight-loss, anti-inflammatory, low-calorie, low-fat, superfood, kidney-health, ketogenic", "Fatty acids, total monounsaturated": 0.043, "Fatty acids, total polyunsaturated": 0.155, "Fatty acids, total saturated": 0.015, "Fatty acids, total trans": 0.0, "Fiber, total dietary": 2.0, "Folate, DFE": 24.0, "Food Categories": "fruit", "Global ID": "5cd2aaf246b28db796ba6e77", "Image URL": "https://d2xdmhkmkbyw75.cloudfront.net/831_highres.jpg(124 kB)
+https://d2xdmhkmkbyw75.cloudfront.net/831_highres.jpg
+", "Iron, Fe": 0.41, "JF Master Name": "strawberry", "Journey Code": "000059", "JourneyFoodsIO Display Name": "Strawberry", "Magnesium, Mg": 13.0, "Manganese, Mn": NaN, "Niacin": 0.386, "Notes": "", "Nutritional Summary": "Per 100 grams:\nCalories: 32\nProtein: 0.67g\nTotal lipid (fat): 0.30g\nCarbohydrate, by difference: 7.68g\nFiber, total dietary: 2.0g\nSugars, total: 4.89g", "Pantothenic acid": NaN, "Phosphorus, P": 24.0, "Potassium, K": 153.0, "Process Tags": "raw", "Protein": 0.67, "Riboflavin": 0.022, "Scientific Name": "Fragaria x ananassa", "Selenium, Se": NaN, "Sodium, Na": 1.0, "Source": "USDA", "Source Code": "9316", "Sub Categories": "color additive, preservative", "Sugars, total": 4.89, "Thiamin": 0.024, "Top 100": true, "Total lipid (fat)": 0.3, "Vitamin A, RAE": 1.0, "Vitamin B-12": 0.0, "Vitamin B-6": 0.047, "Vitamin C, total ascorbic acid": 58.8, "Vitamin D (D2 + D3)": 0.0, "Vitamin E (alpha-tocopherol)": 0.29, "Vitamin K (phylloquinone)": 2.2, "Zinc, Zn": 0.14, "biotin": NaN, "category": "[]", "chromium": NaN, "insoluble fiber": NaN, "iodine": NaN, "molybdenum": NaN, "soluble fiber": NaN, "sugar alcohol": NaN}
+Carol Schmitz 12:09 AM
+ooh they're back!
+nice, did you fix something?
+Thiago 12:09 AM
+hahahahahah
+nice
+Thiago 12:16 AM
+I switch the img conditions
+its working
+but maybe there is a better way
+image.png 
+image.png
+
+
+when I call the get ingredients data API with an ingredient that does not exist in the DB, I get a bad response
+that’s why it wasn’t working the other way around (edited) 
+Carol Schmitz 12:24 AM
+ahh
+nice thanks
+Thiago 12:26 AM
+ok…
+I think I going to head out
+What do you think so far?
+Carol Schmitz 12:27 AM
+it's really good
+thanks for your help
+Thiago 12:29 AM
+I just tested getting to the our test page from test-dashboard
+and was very smooth
+it depends a lot of the performance of the api calls
+well
+see you tomorrow =]
+Carol Schmitz 12:32 AM
+good night!
+Thiago 12:35 AM
+good night :sleeping:
+Thiago 11:08 AM
+Hi,
+Carol Schmitz 11:09 AM
+Hello
+Thiago 11:09 AM
+Good morning =]
+the ingredients detail page is running faster in live, I think
+Carol Schmitz 11:10 AM
+Yes!
+I think so too
+Thiago 11:22 AM
+so we decided to have a stand up meeting but we did a lot of work yesterday hahahahah
+which was awesome (edited) 
+Carol Schmitz 11:56 AM
+Yes
+Thanks again for jumping in
+Thiago 11:57 AM
+yes thanks for calling me =]
+Carol Schmitz 12:01 PM
+you're welcome
+today i'm working on the QA test plan and reviewing documents from fuse
+how about you?
+Thiago 12:04 PM
+My plan was to work on the ingredient detail page
+but, since its pretty done now, I don’t know what would be the next priority.
+Carol Schmitz 12:04 PM
+ah!
+maybe i can help you figure it out?
+Thiago 12:05 PM
+oh yeah =]
+what’s next?
+there is the multiuser feature, but I think this task should be discuss more and set some MVP requirements.
+Carol Schmitz 12:07 PM
+hm, what do you mean?
+by mvp requreements
+Thiago 12:10 PM
+all I can see now its an idea (big one).
+Carol Schmitz 12:12 PM
+Oh I see
+Thiago 12:12 PM
+by MVP requirements I mean… lets get the idea and then list a few requirements like
+* create a new panel in the product page where I can see other products from the user in the same company (edited) 
+Carol Schmitz 12:13 PM
+We have talked about it a lot (I think mostly before you joined) but I see how setting some specs would be helpful
+Ok
+Would you like to explore google sheets integration? The eventual goal is to be able to import a product into our dashboard directly from sheets. But an integration that allows you to views a sheet from google in our front end would be a nice first step
+Thiago 12:18 PM
+ok =]
+Carol Schmitz 12:26 PM
+thanks
+oh actually
+there's one other thing that's in the pipeline which I haven't prioritized yet because I'm not sure how much work it would be
+but you know how we were talking about adding a link to the ingredients page on the homepage?
+like this
+PDF 
+insights div 2 (1).pdf
+210 kB PDF — Click to view
+
+
+Thiago 12:37 PM
+hummm
+on shopify
+Carol Schmitz 12:45 PM
+no this is https://journeyfoods.io/
+journeyfoods.iojourneyfoods.io
+Journey Foods IO | Software Product Hub for Food Research
+A cloud-based food hub driven by AI to support scientists, founders, supply chains, and manufacturers in product management, ingredient optimization. Try now.
+we want to add the blue section from the pdf to the site
+Thiago 12:46 PM
+Ok
+Where can I find  the source code for this page?
+Carol Schmitz 12:47 PM
+https://bitbucket.org/journeyfoodsio/journeyfoodsio-site/src/master/
+Thiago 12:47 PM
+Perfect
+I will take a look on that
+Carol Schmitz 12:47 PM
+thanks
+give me an estimate when you have a chance, pleease
+Thiago 12:49 PM
+:wink:
+Thiago 4:45 PM
+Hi Carol, I took some time figuring out how to set up the site in my local machine
+but I’m good to go now
+this is a easy change, but I kinda scare to say that will be ready in the next hour, lol
+I’m seeing a few things that will required some research.
+but I will challenge myself to finish this task by Monday afternoon.
+that is good for you?
+Carol Schmitz 4:58 PM
+yes that's good
+i will have something else ready for you by monday
+Thiago 4:59 PM
+awesome =]
+Carol Schmitz 4:59 PM
+but let's plan on showing riana tuesday
+Thiago 4:59 PM
+:wink:
+Carol Schmitz 5:00 PM
+so, challenge yourself to finish by monday, but know that if it takes an extra day, no big deal. also expect to make more changes after we share with riana
+Thiago 5:00 PM
+ok
+Carol Schmitz 5:01 PM
+but that sounds great. i was hoping it would be about a day
+if so, i think it's worth doing early
+next week i am planning another mini sprint for the analysis page
+:ok_hand:
+1
+
+we are going to change it to links to articles and news for the user's subscribed ingredients
+Thiago 5:03 PM
+do you have a img to put in the front-end?
+Carol Schmitz 5:03 PM
+not ready made
+Thiago 5:03 PM
+ok
+Carol Schmitz 5:03 PM
+i think the idea was to pull some of the graphics from the ingredients page
+the rest I think can be done with css
+Thiago 5:04 PM
+hummm ok. I can get from there =]
+cool lets see
+refresh some frontend skills =]
+Carol Schmitz 5:06 PM
+nice :slightly_smiling_face:
+feel free to ping me if you want an opinion or get stuck on something
+:+1:
+1
+
+Carol Schmitz 11:03 AM
+Good morning, Thiago. I hope you're having a nice day
+just checking in for stand up
+today I have a few customer demos give and prepare for, I will review documentation updates from fuse and I'm still troubleshooting the data display issues we are having
+Thiago 11:08 AM
+Hi Carol, good morning! =]
+its a nice day today =]
+for now I’m working on adding the “ingredients services” section in the front-end
+It will require me some time to get used to with the structure and features, but I believe that will be done  this afternoon
+Carol Schmitz 11:14 AM
+the new div on the homepage?
+Thiago 11:14 AM
+yes
+Carol Schmitz 11:14 AM
+nice!
+Thiago 11:21 AM
+cool
+how we are for this sprint? I mean like , are we gonna make it  through all the tasks?
+Carol Schmitz 11:25 AM
+mmm
+i don't know
+in a certain sense i'm not worried about whether or not we finish all the tasks
+we still don't have a good sense of the team's capacity, so estimating scope is tricky
+i just want to make forward progress on key tasks, strengthen our processes, and release a couple of new features to users by the end of the month
+Thiago 11:32 AM
+what do you mean when you say “we still don’t have a good sense of the team’s capacity”
+Carol Schmitz 11:36 AM
+well, we roughly defined a scope at the beginning of the sprint. but we don't know if that size of scope is realistic for a team of our size to complete in 2 weeks. does that make sense?
+:+1:
+1
+
+Thiago 11:41 AM
+yes it makes sense now, I was thinking in something else but its clear now =]
+Carol Schmitz 11:42 AM
+so, I'm more trying to track what we actually get done accurately than I am trying to finish all the tasks in the sprint by the deadline
+Thiago 11:50 AM
+hummm nice I like that, thanks for clarifying
+On the last sprint I got the impression from Riana was kind worry for our uncompleted tasks, that’s why I was kinda worry and trying to go over all the tasks in time,
+but now its more clear for me =]
+Carol Schmitz 11:58 AM
+well, i do have to mention that this is my opinion. Riana might still be worried :slightly_smiling_face:
+Thiago 11:59 AM
+hahahahahahahaha
+Carol Schmitz 11:59 AM
+I know she wants us to go fast... but we go too fast and it can get sloppy
+I have a good idea of some high-value items to focus on (this ingredient page div is one of them) that I think she will be happy with. There will always be uncompleted tasks :slightly_smiling_face:
+Thiago 4:24 PM
+Hi Carol,
+are we going to a video meeting in a few minutes?
+Carol Schmitz 4:25 PM
+uh
+i don't have anything on my calendar
+what for?
+Thiago 4:27 PM
+me neither, hahahaha Riana mention to me about a video call at 4:30
+maybe was something private  hahahahahaha
+Carol Schmitz 4:29 PM
+oh ok
+are you in the office with her?
+Thiago 4:29 PM
+I’m not in the office today
+I thinks she is not as well
+don’t worry, =]
+Thiago 4:36 PM
+well, I just need to do some final touches but is coming together
+image.png 
+image.png
+
+
+Carol Schmitz 4:38 PM
+nice!
+i like it
+Carol Schmitz 10:43 AM
+Good morning, Thiago. I'm planning to come into the office today, will you be there?
+Thiago 10:44 AM
+Good morning Carol,
+yes
+I will go to the office today =]
+I will be leaving around 5:30 to go on javascript meet up event
+Carol Schmitz 10:46 AM
+oh cool
+Thiago 10:46 AM
+https://www.meetup.com/js-chi/events/258154896/?_xtd=gatlbWFpbF9jbGlja9oAJDI0MTQwZjM2LWQ5YTctNDkyNS05ODEzLTY2NTQwZWNkNzI0NQ&_af=event&_af_eid=258154896
+
+MeetupMeetup
+Getting Started With VueJS; HTTP/2 PUSH and NDJSON Streaming
+Tue, Oct 22, 2019, 6:15 PM: TALK 1 ==============Title: Getting Started with Vue - An Overview and Walkthrough TutorialDescription: A straightforward and concise introduction for those who'd like to l(6 kB)
+Where
+Cars.com 300 S Riverside Plaza #1100 Chicago, IL
+When
+Tue, Oct 22, 2019, 6:15 PM
+https://secure.meetupstatic.com/photos/event/c/0/8/c/600_484189292.jpeg
+Carol Schmitz 7:31 PM
+Interesting talks, thank you!
+Learning about NDJSON format was cool. Also scoped CSS in Vue seems like a useful feature
+Thiago 7:33 PM
+Yeah!
+Thiago 7:34 PM
+It was kinda fast pace but was a good introduction
+
+2 replies
+Last reply 2 months agoView thread
+Thiago 7:46 PM
+Thanks for coming a leading the way hahahaha
+Carol Schmitz 7:48 PM
+You’re welcome!
+I saw an email notification about the sticker, thanks for that too :)
+Thiago 7:49 PM
+:wink:
+Carol Schmitz 9:49 PM
+good evening Thiago
+Thiago 9:50 PM
+Hi good evening =]
+Carol Schmitz 9:50 PM
+please commit your changes to the journeyfoodsio-site repo in the morning
+have a nice night
+Thiago 9:50 PM
+ok, do you want me to push too?
+Carol Schmitz 9:51 PM
+yes
+Thiago 9:51 PM
+ok
+Carol Schmitz 9:52 PM
+thanks
+Thiago 9:52 PM
+=]
+Carol Schmitz 9:52 PM
+that's all, have a nice evening
+stand up at 11 tomorrow?
+Thiago 9:52 PM
+yes yes
+Carol Schmitz 9:52 PM
+:100:
+:100:
+1
+
+Thiago 10:29 PM
+don’t know what it’s going on, when I try to push I get a msg like
+git@bitbucket.org: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+I think they (bitbucket)  are having some issues.
+Carol Schmitz 10:31 PM
+oh right
+Thiago 10:31 PM
+image.png 
+image.png
+Carol Schmitz 10:31 PM
+I saw that notification
+Thiago 10:32 PM
+I not 100% sure that is related,
+Carol Schmitz 10:32 PM
+yeah, i'm not either
+I used sourcetree to manage commits locally
+Thiago 10:33 PM
+I will keep looking, maybe try to set up my SSH KEY again
+hummmm I using the terminal
+Carol Schmitz 10:33 PM
+I remember getting an error like that when i ran from the command line
+Thiago 10:33 PM
+:thinking_face:
+Carol Schmitz 10:33 PM
+but i think it might be a key issue
+did you load your key in bitbucket?
+Thiago 10:33 PM
+yes
+I cloned it using the key.
+Carol Schmitz 10:35 PM
+hm, well it could definitely be a key issue
+sourcetree doesn't take too long to setup
+it's kinda nice to have a gui
+Thiago 10:38 PM
+ok
+lets see
+Carol Schmitz 10:40 PM
+:flushed:
+Thiago 10:40 PM
+hahahahaha
+Carol Schmitz 10:41 PM
+(that's me seeing)
+Thiago 10:41 PM
+hahahahahahahahahahahaha
+Thiago 10:55 PM
+ha
+its working now
+Carol Schmitz 10:56 PM
+nice
+Thiago 10:56 PM
+just pushed
+Carol Schmitz 10:57 PM
+thanks
+Thiago 10:58 PM
+:wink:
+Carol Schmitz 11:17 AM
+Good morning Thiago, hope you're having nice day so far. Today I am working on reviewing notes/documents from fuse, testing user teams, and exploring product uploads. How about you?
+Thiago 11:20 AM
+Hi Good morning.
+I’m working on the front end, add some more style, and change the img on the ingredient section.
+Carol Schmitz 11:23 AM
+change which img?
+on app-ingredient--detail ?
+Thiago 11:25 AM
+image.png 
+image.png
+
+
+Carol Schmitz 11:31 AM
+ahh - homepage
+cool, thanks
+Thiago 11:35 AM
+I will take a look on Jira also and see if there is some task a can execute fast, but I will let you know
+maybe I will work on this
+https://journeyfoods.atlassian.net/browse/JID-269
+I think is pretty simple change
+Carol Schmitz 11:43 AM
+yes, that should be fast
+that would be a good thing to complete today if you can
+Thiago 11:45 AM
+nice
+I’m on it
+Carol Schmitz 10:26 AM
+Good morning Thiago, I hope you're having a nice day
+I am starting stand up early but no worries if you want to wait til 11
+After reviewing user teams and product uploads yesterday, I think I'd like to chat with you about the 2 features to get your input on an approach
+Thiago 10:27 AM
+Hi Good morning!
+:slightly_smiling_face:
+1
+
+nice
+Carol Schmitz 10:28 AM
+I also have to review some documents Riana sent yesterday
+Thiago 10:30 AM
+ok, I finishing some final touches in the ingredients section on the journeyfoods.io
+I already switch the images but it’s not looking good. (edited) 
+Carol Schmitz 10:32 AM
+screenshot?
+Thiago 10:33 AM
+sure
+image.png 
+image.png
+
+
+I just made some cropping in the image, lets see if will fit better
+Carol Schmitz 10:34 AM
+yeah, I think if the green box and button had rounded corners that would be good too
+Thiago 10:36 AM
+:ok_hand:
+Carol Schmitz 10:37 AM
+OK
+Thiago 10:37 AM
+the button is already rounded
+
+1 reply
+2 months agoView thread
+Carol Schmitz 10:38 AM
+Is that all you worked on yesterday? I'm asking because if so I think this might be too much time to spend on these details. Maybe we need to take a break and come back to it
+Thiago 10:39 AM
+oh no, I did some work on bubble too
+Carol Schmitz 10:40 AM
+oh yes, moving the products up on the dashboard, I saw that update thanks
+Thiago 10:41 AM
+image.png 
+image.png
+
+
+Carol Schmitz 10:44 AM
+That's nice
+Maybe crop the green box to remove the empty space below the dashboard screenshot?
+Thiago 10:46 AM
+the green box is a div with background-color green
+I will try to add a max-height
+image.png 
+image.png
+
+
+Carol Schmitz 10:50 AM
+I would put a little more padding in the green section below
+Thiago 10:54 AM
+image.png 
+image.png
+
+
+Carol Schmitz 10:57 AM
+can we have a call for 10-15 minutes this morning?
+Thiago 10:57 AM
+sure
+Carol Schmitz 10:58 AM
+ok
+i'll call you in 15
+Thiago 10:58 AM
+:ok_hand:
+Carol Schmitz 11:14 AM
+Call
+Call Ended
+Ended at 11:32 AM - Lasted 18 minutes
+
+You both joined
+Thiago 11:16 AM
+Winningfood1!
+Carol Schmitz 11:23 AM
+api.journeyfoods.io = production
+
+1 reply
+2 months agoView thread
+Carol Schmitz 11:23 AM
+api-dev.journeyfoods.io = dev
+api-stg.journeyfoods.io = staging (edited) 
+Carol Schmitz 4:14 PM
+Hi Thiago, how's it going? Let me know when you have a few minutes to chat - no rush
+Thiago 4:25 PM
+hi I’m available now
+Carol Schmitz 4:26 PM
+thanks
+first I wanted to see how the subdomain task is going, any luck?
+Thiago 4:30 PM
+I think I’m close to, but I’m with a felling that maybe we need to talk to fuse team and ask then to do few changes on the IP address, but I’m not sure
+like for testing I create the subdomain
+api-pro.journeyfoods.io
+and now I trying to make this address redirect to
+35.224.47.226
+prod ip address
+but this api address to we need to add to port number too like 35.224.47.226:5000
+and firebase won’t let me add the Port
+it will say that my IP address is invalid
+Carol Schmitz 4:36 PM
+hm
+firebase?
+Thiago 4:37 PM
+yeah I create a subdomain on firebase, then connect it with cloudflare
+Carol Schmitz 4:40 PM
+ah ok
+firebase says api-pro subdomain needs setup
+Screen Shot 2019-10-24 at 4.40.53 PM.png 
+Screen Shot 2019-10-24 at 4.40.53 PM.png
+
+
+Thiago 4:41 PM
+yeah
+cloudflare
+image.png 
+image.png
+Carol Schmitz 4:43 PM
+Remember to remove your old A records and any AAAA records from your DNS provider
+did you do this?
+Thiago 4:44 PM
+I though about that, but not sure if I should delete all A records
+Carol Schmitz 4:45 PM
+can I see the full list?
+Thiago 4:46 PM
+imagen when we create the subdomain api-dev are we will remove the api-pro?
+image.png 
+image.png
+
+
+Carol Schmitz 4:46 PM
+well I thought api-pro was just for testing
+so it will be removed once it's working
+Thiago 4:47 PM
+ok but we will also need to create the api-stg
+so the way I’m seeing when I create the api-stg do I will have to remove the A record of api-dev? (edited) 
+and also I don’t what are these other A records hahahahahaha
+Carol Schmitz 4:57 PM
+ohh, I see what you are saying
+no, i don't think that's how it works
+Thiago 4:57 PM
+hahahaha yeah
+Carol Schmitz 4:58 PM
+let me try to explain hang on
+ok, so the removing A record comments is only for the same subdomain, I think
+In this case it's a new subdomain so there aren't old A records
+but
+I think the name should be api-pro instead of api-pro.journeyfoods.io
+Thiago 5:02 PM
+ok I just added that to see if something change
+I will go back like  it was before
+done
+Carol Schmitz 5:04 PM
+hm
+so, also maybe in firebase it needs to be only api-pro ?
+I am not sure
+Screen Shot 2019-10-24 at 5.04.48 PM.png 
+Screen Shot 2019-10-24 at 5.04.48 PM.png
+
+
+Thiago 5:06 PM
+but if I remove the .journeyfoods.io is no longer a subdomain.
+Carol Schmitz 5:07 PM
+yeah good point
+Thiago 5:07 PM
+wow
+look now
+its pending
+Carol Schmitz 5:08 PM
+ah, nice!
+cool
+it takes a while for it to propagate
+I just added api-dev
+Thiago 5:08 PM
+wanna know what I did
+Carol Schmitz 5:09 PM
+you changed something? yes please share :slightly_smiling_face:
+Thiago 5:09 PM
+hahaha
+Thiago 5:10 PM
+I change to proxy status
+image.png 
+image.png
+
+
+
+1 reply
+2 months agoView thread
+Thiago 5:10 PM
+to DND only
+Carol Schmitz 5:10 PM
+ahh
+I thought of that but forgot to send the message
+cool
+Thiago 5:15 PM
+I will add the A records on cloudflare for api-dev and stg
+:+1:
+1
+
+Thiago 5:27 PM
+I’m wounder if this is the right thing to do
+Carol Schmitz 5:37 PM
+what? DNS only?
+Thiago 5:37 PM
+yeah
+hummm
+Carol Schmitz 5:38 PM
+well
+the only other one set to dns only is journeyfoods.io
+which is a live site and we know it works
+so, this makes me think it is at least an OK thing to do (as in not wrong)
+Thiago 5:40 PM
+ok
+did you change anything on Cloudflare?
+Carol Schmitz 5:41 PM
+no
+I didn't log in
+Thiago 5:44 PM
+when I switch to DNS only it was showing a msg saying the our IP address was visible for everyone something like that
+but now its normal
+Carol Schmitz 5:46 PM
+well yes
+it's ok if the IP is public because you can't get the data unless you authenticate
+Thiago 5:50 PM
+I did some more style on the front end until Riana said great hahaha so I stoped commitd and pushed
+Carol Schmitz 5:51 PM
+wonderful
+Thiago 5:57 PM
+so once the subdomain its set up, we will try to redirect to our server like http://35.224.47.226:5000
+Carol Schmitz 5:57 PM
+exactly
+Thiago 6:00 PM
+so api-pro.journeufoods.io == 35.224.47.226
+Carol Schmitz 6:02 PM
+yes
+Thiago 6:03 PM
+ok
+so let try???
+api.journeyfoods.io is connected hahahaha
+Carol Schmitz 6:04 PM
+well that's the website
+not the api
+Thiago 6:06 PM
+I’m confused now hahahahah (edited) 
+Carol Schmitz 6:08 PM
+hm
+I am not sure firebase is the place to do this
+actually
+can you put 35.224.47.226 as the content for Name = api-pro.journeyfoods.ioo
+*journeyfoods.io
+api-pro.journeyfoods.io sorry for typos
+I don't think firebase is the way to do this
+i'm not sure
+Thiago 6:10 PM
+ok
+question
+api.journeyfoods.io = production?
+Carol Schmitz 6:15 PM
+ideally yes, it should be (I think)
+Thiago 6:15 PM
+ok
+api-pro.journeyfoods.io and api.journeyfoods.io both are connected on firebase
+Carol Schmitz 6:17 PM
+yeah
+so they are just replicating journeyfoods.io
+it's the same 'site'
+Thiago 6:17 PM
+since I create the api-pro.journeyfoods.io for testing I will delete it and use the other one
+:100:
+2
+
+Carol Schmitz 6:17 PM
+on firebase
+Thiago 6:17 PM
+yes yes
+we didn’t change yet
+Carol Schmitz 6:17 PM
+ohh ok :slightly_smiling_face:
+Thiago 6:19 PM
+I tested earlier redirecting to another page like www.google.com and was working
+I will do again on api-pro
+Carol Schmitz 6:21 PM
+ok
+Carol Schmitz 6:57 PM
+what do you think about WFH with a few slack call check-ins / brainstorming / troubleshooting sessions tomorrow instead of in the office and then next M-W in the new office with Riana?
+Thiago 7:17 PM
+yeah
+I think that’s ok
+Carol Schmitz 7:18 PM
+thanks
+Thiago 7:18 PM
+=]
+Carol Schmitz 11:03 AM
+good morning Thiago
+Thiago 11:03 AM
+Good morning
+Carol Schmitz 11:04 AM
+just checking in on the subdomain issue we were discussing yesterday
+Also I saw a note between you and bubble support so I wanted to ask about that. I have done some troubleshooting with stripe payment plans so maybe I can help
+Thiago 11:06 AM
+nice
+so the subdomain all of them are connected, but I don’t know how to redirect to our server
+the api.journeyfoods.com its redirecting to 35.224.47.226
+Carol Schmitz 11:08 AM
+ok
+I'll look into that
+Thiago 11:08 AM
+but nothing happens, and I think it is because of the port that is not being passed
+:thinking_face:
+1
+
+Carol Schmitz 11:08 AM
+it's not a high priority though, so we can hold on that task for the next few days
+Thiago 11:09 AM
+:ok_hand:
+Carol Schmitz 11:10 AM
+what's going on with payments?
+Thiago 11:13 AM
+so that bug report.
+the goals is to attached a subscription plan to a user.
+instead of just charge the user once
+Carol Schmitz 11:14 AM
+for the /ingredients page?
+i mean /payment
+/payments
+Thiago 11:15 AM
+the payments page its just where I’m testing the functionality, once its working we would implement the soluction on the ingredients page
+Carol Schmitz 11:17 AM
+Hm, I thought ingredients was a free trial?
+Thiago 11:17 AM
+sorry
+subscribe page
+Carol Schmitz 11:22 AM
+Ah
+I see
+I didn't even know that page existed
+Thiago 11:22 AM
+:astonished:
+Carol Schmitz 11:23 AM
+I think we need to create a user
+log them in
+and then subscribe the current user to a plan
+Thiago 11:25 AM
+I’m doing that, maybe I’m doing something wrong
+I create a page called test-payments-thiago
+Carol Schmitz 11:26 AM
+ah i see, i was looking at payments
+i'll check test now
+Thiago 11:26 AM
+:ok_hand:
+I create this page to not have to type all the time the email and password, just test the stripe functionality
+:100:
+1
+
+Carol Schmitz 11:31 AM
+looks like it works?
+Screen Shot 2019-10-25 at 11.30.56 AM.png 
+Screen Shot 2019-10-25 at 11.30.56 AM.png
+
+
+Thiago 11:31 AM
+keep going
+onnn wait
+i sugest you use the versio test
+this is live it will charge
+Carol Schmitz 11:35 AM
+its ok I have a company card (it doesn't actually have money on it so the payment always fails - but it's useful for testing)
+Thiago 11:35 AM
+Hahaha ok
+Carol Schmitz 11:36 AM
+Screen Shot 2019-10-25 at 11.34.12 AM.png 
+Screen Shot 2019-10-25 at 11.34.12 AM.png
+
+
+Thiago 11:36 AM
+Yes
+This is the error I'm trying to solve (edited) 
+Carol Schmitz 11:37 AM
+ok
+Thiago 11:40 AM
+if you try for the second time it “works”, but the msg will say that your plan was updated
+Carol Schmitz 11:41 AM
+hm
+Thiago 11:41 AM
+so weird
+becaus if you look at stripe
+Carol Schmitz 11:41 AM
+It looks like it's an error from stripe though, not bubble
+:thinking_face:
+1
+
+Thiago 11:41 AM
+the user was created
+image.png 
+image.png
+
+
+Carol Schmitz 11:43 AM
+I see
+Thiago 11:45 AM
+I think it is a bubble error because the msg is coming from Stripe saying “You passed an empty value for customer”
+Carol Schmitz 11:46 AM
+yeah, I see. bubble should be sending customer = test@test.com
+Carol Schmitz 11:54 AM
+hm
+Thiago 11:56 AM
+?
+Carol Schmitz 11:57 AM
+I tried unselecting 'update existing subscription' and it still threw the same error but didn't create the customer this time
+Thiago 11:59 AM
+did you create in live?
+live-version?
+Carol Schmitz 12:02 PM
+no
+ha
+there is the user in test data in stripe :slightly_smiling_face:
+Thiago 12:03 PM
+yep =]
+Carol Schmitz 12:12 PM
+hmmm
+this is so weird
+I wonder if it's worth trying to set up the API connector to send subscription requests to Stripe directly
+instead of using the bubble plugin?
+might be faster than waiting for bubble support to respond
+random question - how long do you think it would take to set up the /ingredients page to call the send ingredient email script in GCF, like the send email button on app-ingredient--detail
+Thiago 12:19 PM
+1 hour
+I think we just need to call the API passing the parameters
+Company, Ingredients, Email and Name
+Carol Schmitz 12:22 PM
+ok
+what do you think of making that change and then deploying the homepage update with link to /ingredients today?
+Thiago 12:24 PM
+ok
+just one thing
+should I remove the zappier ?
+the Zappier is doing things like slack msg, update spreadsheet, send email to client saying you emails are on the way
+Carol Schmitz 12:29 PM
+remove from where?
+Thiago 12:29 PM
+sorry
+Carol Schmitz 12:29 PM
+ohh, ingredients
+Thiago 12:29 PM
+yes
+ingredient’s workflow
+Carol Schmitz 12:29 PM
+Hmmm
+Thiago 12:31 PM
+the idea before was to send the ingredients emails, every day at 10:00 something like that
+so if I set up a sample now, I would get the email tomorrow  by 10:00 am
+Carol Schmitz 12:31 PM
+I don't know if the email is needed - they will be getting the insight email within a few minutes
+Why send every day at 10am? Why not send instantly?
+Thiago 12:33 PM
+I agree with you
+just send the email hahahahaha
+but there is other stuffs in the middle like
+sale’s slack channel getting a notification
+if we send the email right away, can I keep asking for more trial?
+Carol Schmitz 12:41 PM
+what do you mean keep asking for more trial?
+Thiago 12:42 PM
+submit more than one time for the trial
+send me a trial for Banana
+send me a trial for Guava
+send me a trial for Avocado
+send me a trial for (other ingredient)…
+Carol Schmitz 12:44 PM
+I think, since we will see the notifications in slack, if someone requests too many trials we can figure out how to restrict it
+but for now just let anyone sign up
+Thiago 12:48 PM
+ok I will add the call before it gets redirect to trial-insightconfirm page (edited) 
+Carol Schmitz 12:53 PM
+great
+I'm going to remove the send email step from the zap
+Thiago 12:54 PM
+ok
+I got the email
+Carol Schmitz 12:57 PM
+haven't removed it yet :wink:
+Thiago 12:57 PM
+hahahahaha I mean I received the email form insights services hahahahah
+Carol Schmitz 12:58 PM
+oh
+well
+did you get the email saying you'll get the insight in 2 days?
+Thiago 12:58 PM
+yeah I received that too.
+Carol Schmitz 12:58 PM
+ok
+I just turned that step on
+and set up the zap again
+Thiago 12:59 PM
+you mean off right?
+Carol Schmitz 1:00 PM
+yes
+:woman-facepalming:
+1
+
+i turned the email step off, then turned the zap back on
+Thiago 1:01 PM
+hummmmmm
+what if we  send the email on the trial-insightconfirm page?
+Carol Schmitz 1:02 PM
+oh, like on page load of the confirmation page?
+Thiago 1:02 PM
+yes
+Carol Schmitz 1:03 PM
+i kind of like that, since it takes a little while to send
+Thiago 1:03 PM
+yes yes I thought the same thing
+Carol Schmitz 1:04 PM
+ok
+do that, and try another test
+Thiago 1:05 PM
+so then we can change
+Thank you! We received your ingredient trial request and will send your insight within 1 business day. Insights begin at $3 per month, sign up below.
+to
+Thank you! We received your ingredient trial request and will send your insight in a few  minutes. Insights begin at $3 per month, sign up below.
+(edited)
+Carol Schmitz 1:05 PM
+maybe the 'sign up' button should not appear until the email is sent
+i just thought of the case where the user doesn't know the email is in the middle of sending, and they click 'sign up' before the insight email sends and it never sends
+Thiago 1:10 PM
+humm lets test that
+gonna run again
+ops
+I forgot to remove the call from the other page hahahah hang on
+testing again
+I think it works
+I will try again with a different ingredient
+ok
+here it is what happen
+I was redirected to the confirmation page
+and try multiple times clicking in the sign up button but nothing happen
+and I could see that the progress bar on to of the page wasn’t complete.
+once the progress was done, I clicked and got redirected to subscribe page
+Carol Schmitz 1:24 PM
+ah
+Thiago 1:28 PM
+the better idea would be if we could call the script and don’t have to wait for the response you know.
+Carol Schmitz 1:29 PM
+yeah
+Carol Schmitz 1:35 PM
+but for now, I think this works
+have you seen this journeyfoods.io pop up?
+Screen Shot 2019-10-25 at 12.56.53 PM.png 
+Screen Shot 2019-10-25 at 12.56.53 PM.png
+
+
+Thiago 1:37 PM
+yes
+Carol Schmitz 1:44 PM
+do you know where the code is for it? I want to turn it off
+Thiago 1:46 PM
+hummm let me see
+Carol Schmitz 1:52 PM
+oh it looks like maybe it is in mailchimp?
+Thiago 1:54 PM
+hummmmmm
+maybe
+its weird
+I can’t find it either
+look for <!-- Start of Async Drift Code -->
+this is for the pop with Glenn photo
+Carol Schmitz 1:59 PM
+yes
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+that's better - playing with slack formatting
+Thiago 2:00 PM
+yeah
+Carol Schmitz 2:01 PM
+ok, is the ingredients page working well enough that we can push it live?
+Thiago 2:03 PM
+yes =
+=]
+lets do it
+Carol Schmitz 2:27 PM
+ack
+help please
+the start today button turned blue again
+when I deployed
+I don
+t know why
+it looks fine on localhost
+Thiago 2:28 PM
+hummmm
+hang on
+for me is green
+image.png 
+image.png
+
+
+Carol Schmitz 2:29 PM
+oh
+well that's great
+:slightly_smiling_face:
+Thiago 2:30 PM
+hahahahahahahah
+Carol Schmitz 2:32 PM
+<a href="https://dashboard.journeyfoods.io/ingredients" class="btn-start-today rounded ">START TODAY</a>
+Thiago 2:32 PM
+still blue for you?
+
+
+3 replies
+Last reply 2 months agoView thread
+Carol Schmitz 2:32 PM
+think its ok to change to btn-start-today
+Thiago 2:35 PM
+this is what I have in safari
+image.png 
+image.png
+
+
+Thiago 3:32 PM
+for one moment I thought I was especial hahahaha
+Carol Schmitz 3:42 PM
+ha, why? because it loaded correctly for you?
+Thiago 3:42 PM
+yes hahahahaha
+for everybody was blue
+Thiago 3:50 PM
+do you think I was rude when said that we were focusing on fixing the bug for the green button? (edited) 
+Carol Schmitz 3:52 PM
+no, I think it was an appropriate comment
+we posted so many screenshots with this font before deploying
+Thiago 3:54 PM
+ok =]
+well was good to know that there is a gap until the page is fully propagated
+:100:
+2
+
+Carol Schmitz 3:59 PM
+yeah it took about an hour
+Thiago 4:10 PM
+Riana also mention about the spacing, but its in other parts of the page
+Carol Schmitz 4:10 PM
+oh right
+do you know how to reduce the space? I think it'd be fine to change
+Thiago 4:11 PM
+I think so
+there is some divs with only padding
+Carol Schmitz 4:12 PM
+  <div class="py-5">
+  </div>
+this one?
+Thiago 4:12 PM
+<div class="py-5">
+  </div>`
+hahahahaha
+yes
+Carol Schmitz 4:13 PM
+ok i think it looks good without that extra div
+can you remove and commit changes?
+Thiago 4:13 PM
+yes
+should I remove all of them?
+Carol Schmitz 4:16 PM
+remove all of what?
+Thiago 4:16 PM
+<div class=“py-5”>
+ </div>`
+Carol Schmitz 4:17 PM
+I only saw 1?
+oh i see now
+i think no
+Thiago 4:18 PM
+I think we could remove just the one that is above   <h2>The Future of R&D is Here</h2> (edited) 
+
+
+9 replies
+Last reply 2 months agoView thread
+Carol Schmitz 4:18 PM
+the white space doesn't look as big in the other places
+Thiago 4:20 PM
+ok
+so remove white space and change the font on the ingredients panel
+Thiago 4:32 PM
+pushed
+:pray:
+1
+
+Carol Schmitz 4:49 PM
+i deployed
+i'm gonna wait an hour to announce it
+thanks for your help
+have a nice weekend :slightly_smiling_face:
+Thiago 4:56 PM
+:wink:
+Have a nice weekend Carol see you on Monday
+Carol Schmitz 4:58 PM
+:sunglasses:
+Carol Schmitz 5:10 PM
+how long would you say you spent on css/html updates for this site cumulatively over the week?
+i'm trying to do some retroactive time tracking so we can better estimate capacity going forward
+Thiago 5:13 PM
+Hummmm
+Carol Schmitz 5:14 PM
+including sharing screenshots / getting feedback etc
+not just the css work
+5 hours? 10 ? more?
+Thiago 5:15 PM
+15hours
+Carol Schmitz 5:19 PM
+thanks
+Thiago 11:44 AM
+hello =] Good morning
+Carol Schmitz 11:46 AM
+Hi Thiago
+Thiago 11:52 AM
+How it’s everything?
+Carol Schmitz 11:53 AM
+Pretty good, feels a little hectic
+Thiago 11:54 AM
+=]
+Carol Schmitz 11:56 AM
+how are you? sorry you're stuck in a stinky office :confused:
+Thiago 12:14 PM
+=/
+well.
+so about the product update
+Carol Schmitz 12:15 PM
+you mean the spreadsheet I shared in the data channel? or something else?
+Thiago 12:16 PM
+yes the product upload feature actually
+does bubble have already this feature to upload from a csv or we will be using Bubble API to “upload” the products?
+Carol Schmitz 12:17 PM
+bubble has an upload from CSV feature
+Thiago 12:19 PM
+cool
+Carol Schmitz 12:21 PM
+We may want to implement an API workflow to upload the multiple parts of a product together (master product, product version, and product ingredient). These 3 parts reference each other, so we can't upload them all at once. We need to upload a CSV of one type, download a CSV with UniqueIDs of the new objects created, then upload a CSV of the next type, then go back to the first type and Modify the objects created during the first upload with references to the the new objects created in the 2nd upload
+if that makes sense. It's a bit of a manual process for now, but I think we'll be able to automate more with scripts or api workflows
+Thiago 12:25 PM
+it made sense.
+Carol Schmitz 12:25 PM
+I'm definitely open to suggestions - the process is not clearly defined yet
+Thiago 12:31 PM
+cool
+Thiago 12:46 PM
+maybe we could start by select which part of these 3 is more independent
+Carol Schmitz 12:50 PM
+Yes, I think starting with master product makes sense since it is the highest level
+Then we create product versions, linking to the already created master product
+From here we can either modify the master product by adding the list of versions just created, or create new product ingredients and associate to the product versions created
+Carol Schmitz 12:57 PM
+Then we need to go back and modify the product versions to add the list of product ingredients just created
+Thiago 3:22 PM
+Hi
+Can get the door for us
+Can you*
+Carol Schmitz 3:16 PM
+how's the subdomain going? if you're not making progress i think there are other priorities for this week we should get started on
+Thiago 3:22 PM
+it’s no going very well but the subdomain due date is for tomorrow right?
+Carol Schmitz 3:25 PM
+that's what we said yesterday. i'm still thinking through the best approach to due dates
+on the one hand they are good for motivating us to push ourselves
+on the other hand it doesn't make sense to slow development on other tasks if one is becoming a big time suck
+i think the compact email update is more important
+Carol Schmitz 3:26 PM
+and the design update for the recommendation list
+
+
+4 replies
+Last reply 2 months agoView thread
+Carol Schmitz 3:26 PM
+I also created a new task I'd like to assign to you to finish by the end of the week
+Thiago 3:37 PM
+ok, I think fuse machines could work on the subdomain, since they have more familiarity with google cloud.
+what do you think?
+Carol Schmitz 3:38 PM
+that's a decent idea
+let's discuss with them thursday
+Thiago 3:39 PM
+nice
+I would love to figure out how to set up this but its gonna take a while
+Carol Schmitz 3:41 PM
+i understand
+focus on the ingredient email update for now
+that is going to provide customer value
+Thiago 3:42 PM
+cool I’m on it,
+:+1:
+1
+
+Carol Schmitz 3:42 PM
+check out the other task in JIRA when you get a chance, should be fairly quick but you might have questions
+:+1:
+1
+
+Carol Schmitz 11:49 AM
+Good morning Thiago, how are you doing?
+Thiago 11:51 AM
+Good morning Carol, I’m ok
+how are you?
+Carol Schmitz 11:52 AM
+pretty tired tbh... these 830 am calls are rough
+but excited for the end of the sprint! we did not get everything we wanted but we made some good progress
+I wanted to check in on the email update - I think when you left last night there was an issue with the templates, will that be fixed today?
+Thiago 11:58 AM
+I fixed yesterday =] before I left.
+:tada:
+1
+
+Carol Schmitz 11:59 AM
+can you please commit the code?
+Thiago 12:00 PM
+sure but I will actually create a new repo or a new script
+This new script works with the new template a create yesterday
+Thiago 12:07 PM
+yeah I will create a new function on google cloud related to this new script.
+Carol Schmitz 12:08 PM
+perfect
+Thiago 12:09 PM
+and also I still have to run some tests on it, the version you saw yesterday was very controlled
+Carol Schmitz 12:09 PM
+sounds good
+Thiago 12:10 PM
+other than that is there something you want me to work on?
+Carol Schmitz 12:14 PM
+https://journeyfoods.atlassian.net/browse/JID-451?atlOrigin=eyJpIjoiODAwZTkzZmU1MDk3NDU5YTk5MjAwOTQzODY0YzUxNmIiLCJwIjoiaiJ9
+JID-451 Change Ingredient Insight pricing/subscription levels in dashboard
+Status: To Do
+Type: Task
+Assignee: Thiago Cavalcante
+Priority: Medium
+Added by Jira Cloud
+Carol Schmitz 12:55 PM
+I can't believe it's snowing in October
+Thiago 12:57 PM
+last day rss
+Carol Schmitz 1:03 PM
+i know but stil
+:wink:
+i'm not ready
+Carol Schmitz 1:41 PM
+are you in bubble? i don't think so but we may be reverting the app to about an hour ago
+Thiago 1:42 PM
+no I’m not thanks for asking.
+Carol Schmitz 1:43 PM
+thanks for confirming! we had a little data upload mishap :confused:
+Carol Schmitz 3:19 PM
+hi, when you're at a good stopping point, please check out the ingredient detail page on version-test. I did a little update for completeness, curious for your feedback. no rush :slightly_smiling_face:
+Carol Schmitz 4:47 PM
+Hi Thiago, we are going to remove the 'subscription paywall' blocks from the ingredient--detail page, hopefully by tomorrow. If you want to do it as part of the update to the subscription level & pricing update you are welcome to, or I will do it after you're done for the evening. Let me know if you have questions
+Thiago 5:37 PM
+Hi Carol,
+Thiago 5:38 PM
+Sorry for not replying earlier
+
+1 reply
+2 months agoView thread
+Carol Schmitz 5:38 PM
+I didn't hear from you and I didn't see you in bubble so I just started working :slightly_smiling_face:
+i finished what I was working on - if you want to see you're welcome to test on version-test
+Carol Schmitz 5:58 PM
+Oh, ok. I understand. thanks for letting me know
+I'm here if you want to talk - I have been there several times over this past year so I totally respect your decision
+:wink:
+1
+
+can you please commit your latest email script updates?
+last commit was 10/22
+Thiago 6:00 PM
+yes I will do that
+:pray:
+1
+
+thanks for understanding =]
+Carol Schmitz 6:02 PM
+of course
+Carol Schmitz 6:16 PM
+one more thing - if you have a minute to show/tell me how to trigger the new email send through google cloud, i would really appreciate it
+Thiago 6:25 PM
+of course…
+I will reach out to you in time and show you how to trigger the new script
+I just commited
+you will find a new script in the repo called compacted_emails.py
+Carol Schmitz 6:34 PM
+thanks so much, Thiago! I really appreciate it, along with all the rest of your help these past few months
+I hope you and Riana come to an agreement but if not, it has been a pleasure working with you. Maybe our paths will cross again at a javascript meetup sometime soon :slightly_smiling_face:
+:pray:
+1
+
+Take care
+Thiago 10:12 PM
+I hope so too… that we can come up with an agreement, at least an agreement that can be hold. but if not we will keep in touch.
+regardless what happen in the next days, I’m not gonna disappear and if you need help with something I will do my best to help  =].
+Carol Schmitz 10:25 PM
+I appreciate that deeply
+Carol Schmitz 12:07 PM
+when you have a moment, could you please share the cloudflare password?
+Thiago 12:09 PM
+hi here it is Winningfood1!
+Carol Schmitz 12:10 PM
+Thanks!
+I hope you have a nice weekend
+Get some rest
+:slightly_smiling_face:
+Thiago 12:11 PM
+:wink:
+Carol Schmitz 4:54 PM
+Hi Thiago, just wanted to check in on how to trigger the weekly emails. please let me know when you have a few minutes to show/explain it to me. thanks
+Thiago 4:56 PM
+Hi Carol, I didn’t not forget about you,
+Carol Schmitz 4:56 PM
+:slightly_smiling_face:
+Thiago 4:57 PM
+I probably will have to leave soon but… lets start with some testing
+Carol Schmitz 4:58 PM
+ok
+Thiago 4:58 PM
+one thing to know is I wasn’t running the function from google cloud functions,
+because of the timeout
+Carol Schmitz 4:58 PM
+ohh ok
+Thiago 4:59 PM
+so I was running from my computer.
+Carol Schmitz 4:59 PM
+ok
+Thiago 5:00 PM
+so I would tell you to make a clone from bitbucket in your local machine
+and set up a virtual environment.
+the main.py is the scripts the send one email per ingredient (edited) 
+I will have to go now
+try to run the main.py sending some emails to yourself,
+I will catch up with you latter =]
+to night.
+Carol Schmitz 5:08 PM
+thank you!
+Thiago 7:15 PM
+Hi
+Did you make it work?
+The script?
+Carol Schmitz 7:42 PM
+No, I think I found the function to call but I didn't try it with my email yet
+Carol Schmitz 7:56 PM
+do you happen to have the json file with the subscriber details handy?
+Thiago 8:16 PM
+Yes
+:heavy_check_mark:
+1
+
+Carol Schmitz 9:36 PM
+I triggered the weekly send, thanks for your help
+Thiago 9:38 PM
+Cool :wink:
+How was it to set up?
+Carol Schmitz 9:43 PM
+pretty easy
+Thiago 9:44 PM
+Nice Glad to hear that :)
+Carol Schmitz 9:44 PM
+I just copied the contents of the json into main.py as a payload variable and the called the send_automated_email_v2() function with a time tomorrow morning
+Thiago 9:45 PM
+:ok_hand: :ok_hand: :ok_hand:
+Please few free to ask me anything about the code
+Carol Schmitz 9:47 PM
+thanks, I will
+Thiago 1:25 PM
+Hi Carol good afternoon
+Carol Schmitz 1:25 PM
+Hi Thiago
+Thiago 1:27 PM
+have you been able to talk to Riana?
+Carol Schmitz 1:27 PM
+I talked with her yesterday, why do you ask?
+Thiago 1:30 PM
+nothing I was just trying to talk to her but not success, but its ok
+Carol Schmitz 1:31 PM
+oh, well we talked in the evening last night, she wasn't around during the day
+how are you doing? I haven't been asking for updates because I've assumed you aren't working
+but there are some things I could use help with later this week if you want to continue on part-time while you are negotiating with Riana
+it's up to you, I respect what you told me about scaling back but I don't know how much
+Thiago 1:40 PM
+yeah I would like to negotiate but she is not reaching back to me.
+I was hoping to have a conversation with her but all I got was a very sarcastic email from her =[
+Carol Schmitz 1:46 PM
+sarcastic how?
+Do you know what she's talking about deleting from payroll?
+Thiago 1:50 PM
+not really
+I set up the bambooHR
+added my ssn DOB
+after, I try to remove because I didn’t know I supposed to do that.
+but still there
+Carol Schmitz 1:53 PM
+ok
+Carol Schmitz 1:58 PM
+well i do not see that message as being sarcastic. what I see is someone who is low on cash until our next round of funding comes through and feels uncomfortable about you removing some info from hr (this seems a bit paranoid to me, but I see her perspective too), so she wants to pause the conversation until she has enough on hand to actually pay you, likely in late November. I don't remember everything it said, but it seemed reasonable to me (except for the passive aggressive part, I don't know what that's about)
+Thiago 2:07 PM
+I didn’t delete anything actually, all that I did was sending a request to update my infos (nobody told me I should do that in the first place so I decided to remove) but the funny part is that the request never was approved :man-shrugging:
+so I don’t understand when she says…
+Thiago 2:20 PM
+but I think you are right, maybe its just a huge misunderstanding
+Carol Schmitz 2:31 PM
+I told you she may not always pay on time, but she always pays. That has been my experience. So, if you're able to work some these next few weeks, without the guarantee of pay, then I'd be happy to have your help part time on some tasks. Otherwise I would suggest that you get some rest for a few weeks and hope to have you back later this month :slightly_smiling_face:
+Thiago 2:45 PM
+Yeah I remember that, and I still believe that I will get payed,
+Thanks for chatting =]
+Carol Schmitz 2:48 PM
+you're welcome
+Thiago 2:49 PM
+been really honest with you I’ve been holding my self to not work lol hahahaha
+I would like to keep working part-time if it’s ok.
+Carol Schmitz 2:50 PM
+I would really appreciate that
+Thiago 2:53 PM
+cool
+anything you need?
+Carol Schmitz 2:54 PM
+if you can start testing out some interactivity on the product page, that would help
+1 - change the optimization tags on each version by clicking through them. so, clicking the taste button on the current version will toggle it through low/med/high options
+:ok_hand:
+1
+
+2 - create an edit page that allows you to change the values of each field for an existing product
+i don't think these things are too complicated but i haven't had the chance to implement them in bubble yet
+Carol Schmitz 3:05 PM
+either that or google sheets integration - import/export a product or ingredient between gsheets and dashboard. this one's a bit more complex
+Thiago 3:07 PM
+hummm ok.
+lets start with the product page.
+:+1:
+1
+
+hummm one thing
+I remember I had inverted the app-dashboard putting the products above ingredients
+do you know what I saying?
+Carol Schmitz 3:12 PM
+yes
+hm
+i am seeing that now changed
+that's weird
+we should change that back
+feel free to work on that too :slightly_smiling_face:
+Thiago 3:17 PM
+ok I will do that now =]
+Carol Schmitz 3:17 PM
+thanks!
+Thiago 4:02 PM
+Done!
+Creating a savepoint this time
+:+1:
+1
+
+Carol Schmitz 11:51 AM
+Hi Thiago, just wanted you to know that I added the ability to change optimization tags on the product page yesterday. I created test-product-edit to start working on edit product capabilities, but it's not finished or tested today. I need to work on some other things this afternoon but feel free to jump in on that edit page if you're looking for something impactful to do
+Thiago 9:57 AM
+Hello Carol,
+Sorry for not replying yesterday, I saw your msg and was about to start working but I had a PTSD, I’m a lot better now =]
+Carol Schmitz 10:33 AM
+glad to hear you're feeling better
+I created the edit page yesterday
+at least started it
+I haven't figured out how to change the product ingredients amount & % yet
+:heavy_check_mark:
+1
+
+Thiago 10:39 AM
+ok.
+I will take a look on that and ask you some questions soon =]
+Carol Schmitz 10:48 AM
+:slightly_smiling_face:
+Thiago 11:26 AM
+cool,
+I was surfing in the product page and edit product
+it looks really nice,
+Carol Schmitz 11:30 AM
+thanks!
+Thiago 11:32 AM
+the amount you mention would be the serving size?
+Carol Schmitz 11:33 AM
+amount?
+ohh
+amount isnt showing on the front end
+yet
+in the ingredient list there is a % listed for each ingredient
+in the database there's a field for amount, but we aren't showing it on the product detail page currently. we need to add it. but first we need to figure out how to change % and save changes
+i think it might be related to the auto-binding feature in bubble, not sure
+does that make sense?
+Thiago 11:39 AM
+hummmmm I though it was saving already, ok
+Carol Schmitz 11:40 AM
+if you look at the save button workflow on the edit page it only changes the product values. the % values can be changed by editing the database but we want to be able to change through the UI
+Thiago 11:40 AM
+hummmmmm
+Thiago 12:45 PM
+how about we talk on hangout about this page.
+we could do a walk through very quickly.
+Thiago 1:04 PM
+where are we pulling the percentage from?
+Carol Schmitz 1:46 PM
+Hi, I can talk now if it's good for you
+you can call on slack
+Thiago 1:51 PM
+yes lest do that
+let me get my headphone
+Call
+Missed Call
+Carol Schmitz missed this call
+
+Carol Schmitz 1:55 PM
+Call
+Call Ended
+Ended at 3:03 PM - Lasted 1 hour and 7 minutes
+
+You both joined
+Carol Schmitz 2:07 PM
+https://bubble.io/page?type=page&name=app-products--edit&version=test&id=journeyfoods&tab=tabs-2
+BubbleBubble
+Bubble Editor - Journeyfoods
+Build stuff without code and launch a startup without a tech-cofounder! Bubble is a visual programing language. Instead of typing code, use a visual editor to build applications.
+Thiago 2:10 PM
+Enable auto-binding on parent element’s thing
+Auto-binding modifies a thing automatically as the user modifies the input, without using a workflow. Check this box to enable this functionality. For this to work, the input needs to be in a group or page that has a type of content defined. The thing of the parent group or page will be the thing that is modified. Also, the correct permission for this type must be set in the Privacy section in the Data Tab
+Carol Schmitz 3:49 PM
+I am working in bubble now let me know if I'm interfering
+Thiago 3:49 PM
+Okay
+Carol Schmitz 3:56 PM
+Hi Thiago, I started some of the edit product changes we talked about yesterday. It looks like you're in the app now so let me know if you have any questions
+Thiago 3:57 PM
+Hi Carol,
+yeah I’m working on the edit products page now
+test-products--edit
+quick question
+when I’m trying to change the percentage I’m getting a msg
+image.png 
+image.png
+
+
+Carol Schmitz 4:00 PM
+hm
+let me see
+this percentage?
+Screen Shot 2019-11-08 at 4.01.23 PM.png 
+Screen Shot 2019-11-08 at 4.01.23 PM.png
+
+
+Thiago 4:01 PM
+yep
+Carol Schmitz 4:04 PM
+you get the error when you preview?
+oh
+i bet it is a data privacy role issue
+Thiago 4:06 PM
+I logged in with the hello account and change the URL to test-products--edit
+Carol Schmitz 4:07 PM
+ok
+Thiago 4:07 PM
+ohhh I think ir worked now
+Carol Schmitz 4:07 PM
+Screen Shot 2019-11-08 at 4.07.27 PM.png 
+Screen Shot 2019-11-08 at 4.07.27 PM.png
+
+
+I changed the conditions for ingredient owner role
+Thiago 4:08 PM
+nice =]
+that’s weird I took a look on that but for me was already set up
+I also checked the unit checkbox
+well it’s working now so it’s good
+Carol Schmitz 4:12 PM
+great!
+nice collaboration :slightly_smiling_face:
+Thiago 4:12 PM
+=]
+Carol Schmitz 4:12 PM
+anytime you have a question like that feel free to ping me
+Thiago 4:12 PM
+:wink:
+Yeah I was about to do that when you msg me hahahahaha.
+Carol Schmitz 4:13 PM
+good timing
+how are the updates coming?
+Thiago 4:14 PM
+Now I will think in a way to change the unit I think I will need to setup a action on the workflow (edited) 
+maybe not,
+let me try something quickly
+Yep nevermind
+Thiago 4:27 PM
+so the updates are are doing fine, I was having this msgs we just solved
+and fix the layout for the amount and Unit
+I saw you added those fields.
+Cost of Goods
+Retail Cost
+Shelf Life
+Batch
+Carol Schmitz 4:38 PM
+yes
+hey i saw you moved the ticket to done
+the workflow i have been following is to move it to 'verified on dev' when it's done in version-test
+and then done when it's pushed live
+Thiago 4:42 PM
+ohhh yeah
+:man-facepalming:
+Carol Schmitz 4:43 PM
+haha its ok
+i'm still figuring out the workflow that makes the most sense so the process is flexible. it helps if we implement consistently across the team though
+Thiago 4:45 PM
+I liked the workflow you described
+:100:
+1
+
+only is done when is live
+verify on dev when the feature/change is in version-test
+:100:
+1
+
+=]
+Thiago 4:52 PM
+image.png 
+image.png
+
+
+what do you think about the trash can
+Carol Schmitz 4:52 PM
+I think it's good for v1
+we are refreshing design soon so we don't need to spend too much time worrying about how it loooks
+it communicates the functionality
+ideally there would be a 'confirm' dialog that shows up before you delete anything
+Thiago 4:56 PM
+gotcha!
+Carol Schmitz 11:16 PM
+Hey Thiago, I'm sending the emails now - hope you haven't done this
+Thiago 3:48 PM
+Hey Carol what’s up?
+Carol Schmitz 3:39 PM
+Hi Thiago, how are you?
+Thiago 12:36 PM
+Hey how is going
+sorry for not responding earlier (edited) 
+Carol Schmitz 9:38 PM
+Hi there, hope you had a great week
+Thiago 9:08 PM
+yeah was ok, how everything is going?
+Carol Schmitz 12:50 PM
+it's going
+i hope you are well
+Thiago 11:51 AM
+Merry Christmas! :wink:
+Carol Schmitz 8:09 PM
+Thanks, Thiago! Happy New Year!
+
+
+
+
+
+
+
+
+
+
+
+
+
+Message Carol Schmitz
+
+
