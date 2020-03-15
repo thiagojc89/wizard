@@ -10,7 +10,8 @@ class App extends React.Component {
     super()
     this.state = {
       qty : null,
-      openCardModal: false
+      openCardModal: false,
+      players: null
     }
   }
   handleChange = (e,{ name, value }) => {
@@ -20,6 +21,7 @@ class App extends React.Component {
     
     this.setState({ [name]: value })
   }
+  setDealer = player => this.setState({dealer:player})
   
   getPlayersName = ()=> this.setState({openCardModal: true})
   
@@ -27,7 +29,7 @@ class App extends React.Component {
 
   startGame = (players)=> {
 
-    console.log('players >> ', players);
+    // console.log('players >> ', players);
     
     this.setState({
       openCardModal: false,
@@ -42,7 +44,7 @@ class App extends React.Component {
     <div className="App">
       
           {this.state.players ? 
-            <GetDealer players={this.state.players}/>
+            <GetDealer players={this.state.players} setDealer={this.setDealer} dealer={this.state.dealer}/>
           :             
             <FormHowManyPlayers qty={this.state.qty} handleChange={this.handleChange} getPlayersName={this.getPlayersName}/>
           }
