@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-import {Button, Label, Form, Radio} from 'semantic-ui-react'
+// import {Button, Label, Form, Radio} from 'semantic-ui-react'
 import CardModal from './CardModal'
+import FormHowManyPlayers from './FormHowManyPlayers'
+import GetDealer from './GetDealer'
 
 class App extends React.Component {
   constructor(){
@@ -12,66 +14,46 @@ class App extends React.Component {
     }
   }
   handleChange = (e,{ name, value }) => {
+
+    console.log("name >>>", name);
+    console.log("value >>>", value);
     
     this.setState({ [name]: value })
   }
-  qty
-  startGame = ()=> this.setState({openCardModal: true})
+  
+  getPlayersName = ()=> this.setState({openCardModal: true})
   
   closeCardModal = ()=> this.setState({openCardModal: false})
+
+  startGame = (players)=> {
+
+    console.log('players >> ', players);
+    
+    this.setState({
+      openCardModal: false,
+      players: players
+    })
+
+  }
   
   render(){
-    console.log(this.state);
+    // console.log(this.state)
   return (
     <div className="App">
       
-          <Label> How Many Players ? </Label>   
-
-          <Form>
-            <Form.Field>
-              <Radio
-                label='3'
-                name='qty'
-                value='3'
-                checked={this.state.qty === '3'}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Radio
-                label='4'
-                name='qty'
-                value='4'
-                checked={this.state.qty === '4'}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Radio
-                label='5'
-                name='qty'
-                value='5'
-                checked={this.state.qty === '5'}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Radio
-                label='6'
-                name='qty'
-                value='6'
-                checked={this.state.qty === '6'}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-          </Form>
-    
-
-          <Button onClick={this.startGame}> Start Game </Button>
+          {this.state.players ? 
+            <GetDealer players={this.state.players}/>
+          :             
+            <FormHowManyPlayers qty={this.state.qty} handleChange={this.handleChange} getPlayersName={this.getPlayersName}/>
+          }
 
           {this.state.openCardModal
             ?
-            <CardModal qty={this.state.qty} open={this.state.openCardModal} close={this.closeCardModal}/>
+            <CardModal 
+              qty={this.state.qty} 
+              open={this.state.openCardModal} 
+              close={this.closeCardModal}
+              startGame={this.startGame}/>
             :
             null}
 

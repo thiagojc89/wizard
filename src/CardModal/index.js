@@ -2,45 +2,48 @@ import React from 'react'
 import { Modal, Card, Input, Button } from 'semantic-ui-react'
 
 class CardModal extends React.Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			cardsArray: [],
-			qty: parseInt(this.props.qty)
-		}
+
+	state = {
+		cardsArray: [],
+		playersList: {}
 	}
 	componentDidMount(){
 		this.showCards()
 	}
 	handleChange = (e)=>{
 
-    	this.setState({[e.target.name]: e.target.value})
+    	this.setState({playersList: {...this.state.playersList, [e.target.name]: e.target.value}})
 
   	}
 	showCards = ()=>{
 		const array = []
-		
-
-		for (let i = 1; i <= this.state.qty ; i++){
+		for (let i = 1; i <= parseInt(this.props.qty); i++){
 			
 			array.push(
 				<Card key={i}>
 					<Card.Content>
+
+						<Card.Header>Player {i}</Card.Header>
 				
-						<img alt="avatar" className="ui tiny centered image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg"/>
-				
+						{//<img alt="avatar" className="ui tiny centered image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg"/>
+						}
 						<Input onChange={this.handleChange} name={`player${i}`} value={this.state.player}/>
 					</Card.Content>
 				</Card>
 				)
 		}
+		console.log("this is state in showCards function >> ", this.state);
 
 		this.setState({
-			cardsArray: [...this.state.cardsArray, array]
+			cardsArray: array
 		})
 	}
+	handleBtnGo = () => {
+
+		this.props.startGame(this.state.playersList)
+	}
 	render(){
-		console.log('this is state >>> ', this.state);
+		// console.log('this is state >>> ', this.state);
 		return(
 			<React.Fragment>
 				<Modal open={this.props.open} onClose={this.props.close}>
@@ -49,7 +52,7 @@ class CardModal extends React.Component{
 					<Card.Group centered>
 						{this.state.cardsArray}
 					</Card.Group>
-					<Button content="GO!"/>
+					<Button content="GO!" onClick={this.handleBtnGo}/>
 
 					 
 				</Modal>
